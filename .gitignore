@@ -2,3 +2,6 @@
 .fuse_hidden*
 Thumbs.db
 *.log
+
+# Documento interno de handoff — não publicar (o repo é público / GitHub Pages serve tudo)
+CONTEXT.md
