@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Klarea · Leve a IA ao nível da decisão</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://klarea.ai/">
+<meta property="og:title" content="Klarea â IA que vira estratÃ©gia, decisÃ£o e resultado">
+<meta property="og:description" content="Advisory de IA executiva. Conhecimento e domÃ­nio que viram decisÃ£o, eficiÃªncia e crescimento.">
+<meta property="og:image" content="https://klarea.ai/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://klarea.ai/og.png">
+<meta name="description" content="Klarea é a advisory de IA executiva para conselhos e C-levels. Operadores que já fizeram M&A e construíram uma healthtech de IA. Da estratégia à arquitetura em produção, conectando IA a receita, margem e valuation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E2340; --navy2:#18345A; --gold:#3D7BFF; --gold-soft:#A9C5FF;
+    --ink:#16242C; --muted:#5C6873; --line:#E2E8F0; --bg:#FFFFFF; --soft:#F3F6FB;
+    --blue:#5E7186; --blue-soft:#E9F0FE;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-display:'Plus Jakarta Sans','Inter',-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);background:var(--bg);font-family:var(--font-body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 28px}
+  .serif{font-family:var(--font-display);letter-spacing:-.01em}
+  h2.sec{font-family:var(--font-display);font-size:clamp(32px,4vw,46px);color:var(--navy);margin:10px 0 6px;font-weight:800;line-height:1.1;letter-spacing:-.02em}
+  .label{font-size:12.5px;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:700;display:block;margin-bottom:8px}
+  .sec-rule{height:3px;width:56px;background:var(--gold);border:0;border-radius:2px;margin:18px 0 32px}
+  p{margin:0 0 14px}
+  .pad{padding:88px 0}
+  .alt{background:var(--soft)}
+  strong{color:var(--navy)}
+  .muted{color:var(--muted)}
+  .center{text-align:center}
+
+  .btn{display:inline-block;font-weight:700;font-size:15px;padding:14px 24px;border-radius:10px;cursor:pointer;border:0;transition:.15s;font-family:var(--font-body)}
+  .btn-gold{background:var(--gold);color:#FFFFFF}
+  .btn-gold:hover{background:#5B92FF}
+  .btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.5)}
+  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
+  .btn-navy{background:var(--navy);color:#fff}
+  .btn-navy:hover{background:#18345A}
+
+  .nav{position:sticky;top:0;z-index:30;background:rgba(14,35,64,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(61,123,255,.45)}
+  .nav .in{max-width:1080px;margin:0 auto;padding:13px 28px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .nav .brand{font-family:var(--font-display);font-weight:800;letter-spacing:2px;font-size:19px;color:#fff}
+  .nav .brand b{color:var(--gold-soft);font-weight:700}
+  .nav .brand .brandwm{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.5px;font-size:26px}
+  .nav .links{display:flex;gap:18px;align-items:center}
+  .nav .links a{color:#cfe0ee;font-size:13px;letter-spacing:.2px;white-space:nowrap}
+  .nav .links a:hover{color:#fff}
+  .nav .btn{padding:9px 15px;font-size:13px;white-space:nowrap}
+  @media(max-width:1040px){.nav .links a{display:none}}
+
+  .hero{position:relative;overflow:hidden;background:radial-gradient(1100px 500px at 82% -14%, rgba(61,123,255,.22), transparent 60%),linear-gradient(160deg,#0E2340 0%,#18345A 58%,#081A30 100%);color:#fff}
+  .hero .wrap{padding:104px 28px 88px}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);border:1px solid rgba(169,197,255,.4);padding:6px 13px;border-radius:999px}
+  .hero h1{font-family:var(--font-display);font-size:clamp(42px,6vw,66px);line-height:1.04;margin:24px 0 18px;max-width:940px;font-weight:800;letter-spacing:-.022em}
+  .hero h1 em{color:var(--gold-soft);font-style:normal}
+  .hero .sub{font-size:20px;color:#d7e3ee;max-width:680px;margin:2px 0 30px}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .micro{margin-top:14px;font-size:13px;color:#9fc0cf}
+  .trust{margin-top:40px;display:flex;gap:30px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.16);padding-top:22px}
+  .trust .it{font-size:13.5px;color:#d7e3ee}
+  .trust .it b{color:var(--gold-soft);display:block;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;margin-bottom:3px}
+
+  .logos{background:var(--navy);color:#9fb6c6;padding:22px 0;border-top:1px solid rgba(255,255,255,.07)}
+  .logos .wrap{display:flex;align-items:center;gap:26px;flex-wrap:wrap;justify-content:center}
+  .logos .t{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#7f99ab}
+  .logos .ph{font-family:var(--font-display);font-weight:700;color:#c6d6e2;opacity:.65;font-size:16px}
+
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+  @media(max-width:860px){.g2,.g3{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px;box-shadow:0 1px 2px rgba(14,35,64,.05);transition:transform .16s ease, box-shadow .16s ease}
+  .card:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(14,35,64,.10)}
+  .pain{transition:transform .16s ease}.pain:hover{transform:translateY(-2px)}
+  .card .n{font-family:var(--font-display);color:var(--gold);font-size:13px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+  .card h4{margin:10px 0 8px;color:var(--navy);font-size:20px;font-family:var(--font-display);letter-spacing:-.01em}
+  .card p{font-size:14.5px;color:#3b4a57;margin:0}
+
+  /* pains */
+  .pains{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+  @media(max-width:760px){.pains{grid-template-columns:1fr}}
+  .pain{background:#fff;border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:20px 22px}
+  .pain h4{margin:0 0 6px;color:var(--navy);font-size:17px;font-family:var(--font-display)}
+  .pain p{margin:0;font-size:14.5px;color:#3b4a57}
+
+  /* band */
+  .band{background:var(--navy);color:#eaf1f7}
+  .band .wrap{padding:66px 28px;text-align:center}
+  .band h2{font-family:var(--font-display);font-size:clamp(27px,3.4vw,37px);color:#fff;margin:0 auto 16px;max-width:880px;line-height:1.26;letter-spacing:-.015em}
+  .band h2 em{color:var(--gold-soft);font-style:normal}
+  .band p{max-width:760px;margin:0 auto;color:#d3e0ec}
+
+  /* shoes / duo */
+  .shoes{max-width:820px}
+  .shoes p{font-size:18px;color:#33424f}
+  .arch{display:inline-block;color:var(--gold);font-weight:700;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+  .ptn{display:flex;gap:16px;align-items:flex-start}
+  .avatar{flex:0 0 72px;height:72px;border-radius:14px;border:1.6px dashed #B9CDEF;background:linear-gradient(135deg,#F1F5FB,#F7FAFE);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-display)}
+  .avatar b{font-size:18px;font-weight:800;color:#2C4A7A;line-height:1}
+  .avatar em{font-style:normal;font-size:8.5px;letter-spacing:1px;text-transform:uppercase;margin-top:3px;color:#7E93BC}
+  .tag{display:inline-block;background:var(--blue-soft);color:#2C4A7A;font-size:12px;font-weight:600;padding:4px 10px;border-radius:7px;margin:0 6px 6px 0;font-family:var(--font-display)}
+
+  /* program */
+  .program{background:linear-gradient(160deg,#0E2340,#081A30);border:1px solid rgba(61,123,255,.4);border-radius:20px;padding:42px;color:#fff;display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:start}
+  @media(max-width:820px){.program{grid-template-columns:1fr;padding:30px}}
+  .program .tagp{color:var(--gold-soft);font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:700}
+  .program h2{font-family:var(--font-display);font-size:34px;color:#fff;margin:8px 0 8px;letter-spacing:-.02em}
+  .program .blurb{color:#cfe0dc;max-width:520px}
+  .check{list-style:none;padding:0;margin:16px 0 0}
+  .check li{position:relative;padding-left:28px;margin:12px 0;color:#e3efec;font-size:15px}
+  .check li::before{content:"✓";position:absolute;left:0;top:0;color:var(--gold);font-weight:800}
+  .recv{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:22px}
+  .recv h4{color:var(--gold-soft);margin:0 0 6px;font-family:var(--font-display);font-size:15px;letter-spacing:.5px}
+  .recv ul{list-style:none;padding:0;margin:0}
+  .recv li{font-size:13.5px;color:#cfe0dc;padding:9px 0;border-top:1px solid rgba(255,255,255,.08)}
+  .recv li:first-child{border-top:0}
+
+  /* steps + flywheel */
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:10px}
+  @media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}@media(max-width:520px){.steps{grid-template-columns:1fr}}
+  .stp{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px}
+  .stp .b{width:34px;height:34px;border-radius:9px;background:var(--blue-soft);color:var(--navy);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:700;margin-bottom:12px}
+  .stp h4{margin:0 0 6px;color:var(--navy);font-size:16px}.stp p{margin:0;font-size:13.5px;color:#3b4a57}
+  .fly{display:grid;grid-template-columns:.95fr 1.05fr;gap:30px;align-items:center;margin-top:34px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px}
+  @media(max-width:760px){.fly{grid-template-columns:1fr}}
+  .fly svg{width:100%;height:auto;max-width:420px;display:block;margin:0 auto}
+  .fly h3{font-family:var(--font-display);color:var(--navy);font-size:25px;margin:0 0 10px;letter-spacing:-.01em}
+  .fly p{font-size:14.5px;color:#3b4a57}
+  .loop{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;align-items:center}
+  .loop span{background:var(--blue-soft);color:#2C4A7A;font-size:12.5px;font-weight:600;padding:5px 11px;border-radius:7px;font-family:var(--font-display)}
+  .loop b{color:var(--gold);font-weight:800}
+
+  /* vs */
+  .vs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:8px}
+  @media(max-width:760px){.vs{grid-template-columns:1fr}}
+  .vs .col{border-radius:16px;padding:26px}
+  .vs .enabled{background:#fff;border:1px solid var(--line)}
+  .vs .native{background:linear-gradient(165deg,#0E2340,#163A5E);color:#eaf6f4;border:1px solid rgba(61,123,255,.5)}
+  .vs h4{margin:0 0 4px;font-size:18px}.vs .enabled h4{color:var(--navy)}.vs .native h4{color:#fff}
+  .vs .tagline{font-size:12.5px;letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+  .vs .enabled .tagline{color:var(--muted)}.vs .native .tagline{color:var(--gold-soft)}
+  .vs ul{list-style:none;padding:0;margin:0}
+  .vs li{position:relative;padding-left:24px;margin:11px 0;font-size:14.5px}
+  .vs .enabled li{color:#46555f}.vs .native li{color:#d6efea}
+  .vs li::before{position:absolute;left:0;top:1px;font-weight:700}
+  .vs .enabled li::before{content:"–";color:#b3c0c8}.vs .native li::before{content:"✓";color:var(--gold)}
+
+  /* capability */
+  .cap{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:8px}
+  @media(max-width:860px){.cap{grid-template-columns:1fr}}
+  .capcol{background:#fff;border:1px solid var(--line);border-radius:16px;padding:28px}
+  .capcol .h{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+  .capcol .h .dot{width:10px;height:10px;border-radius:50%}
+  .capcol h3{font-family:var(--font-display);font-size:23px;color:var(--navy);margin:0;letter-spacing:-.01em}
+  .capcol .desc{font-size:14px;color:#3b4a57;margin:4px 0 16px}
+  .feat{display:flex;gap:12px;padding:12px 0;border-top:1px dashed var(--line)}
+  .feat b{color:var(--navy);font-size:14.5px}.feat span{font-size:13.5px;color:#46555f}
+  .feat .ic{flex:0 0 30px;height:30px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;color:var(--gold);font-weight:800;font-family:var(--font-display)}
+  .stack{margin-top:14px}
+
+  /* diff */
+  .diff{background:linear-gradient(160deg,#0E2340,#081A30);color:#fff;border-radius:18px;padding:46px;border:1px solid rgba(61,123,255,.35)}
+  .diff .label{color:var(--gold-soft)}
+  .diff h3{font-family:var(--font-display);font-size:clamp(27px,3.2vw,35px);color:#fff;margin:8px 0 14px;max-width:780px;letter-spacing:-.015em;line-height:1.15}
+  .diff p{color:#d3e0ec;max-width:800px}
+
+  /* metrics + testimonials */
+  .metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+  @media(max-width:760px){.metrics{grid-template-columns:1fr}}
+  .metric{background:#fff;border:1px solid var(--line);border-radius:14px;padding:28px;text-align:center}
+  .metric .big{font-family:var(--font-display);font-size:46px;color:var(--navy);font-weight:800;line-height:1;letter-spacing:-.02em}
+  .metric .big span{color:var(--gold)}.metric p{margin:10px 0 0;font-size:14px;color:#3b4a57}
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:26px}
+  @media(max-width:860px){.tgrid{grid-template-columns:1fr}}
+  .tcard{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px}
+  .tcard p{font-size:14.5px;color:#33424f;font-style:italic;margin:0}
+  .tcard .who{display:flex;gap:10px;align-items:center;margin-top:16px}
+  .tcard .who .ph{flex:0 0 38px;height:38px;border-radius:50%;border:1.4px dashed #B9CDEF;background:#F1F5FB;display:flex;align-items:center;justify-content:center;font-size:9px;color:#7E93BC;font-weight:700;font-family:var(--font-display)}
+  .tcard .who b{color:var(--navy);font-size:14px;display:block}
+  .tcard .who span{color:var(--muted);font-size:12.5px}
+
+  /* audience */
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:760px){.two{grid-template-columns:1fr}}
+  .yes,.no{border-radius:14px;padding:24px}
+  .yes{background:#EEF3FC;border:1px solid #D8E4F7}.no{background:#F4F6F9;border:1px solid #E4E8EF}
+  .yes h4,.no h4{margin:0 0 12px;color:var(--navy)}
+  ul.clean{list-style:none;padding:0;margin:0}
+  ul.clean li{margin:9px 0;font-size:14.5px;color:#33424f;padding-left:20px;position:relative}
+  ul.clean li::before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%}
+  .yes li::before{background:var(--gold)}.no li::before{background:#aebccb}
+
+  details{background:#fff;border:1px solid var(--line);border-radius:10px;padding:2px 18px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:700;color:var(--navy);padding:15px 0;list-style:none;font-size:15.5px;font-family:var(--font-display)}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";float:right;color:var(--gold);font-size:20px;line-height:1}
+  details[open] summary::after{content:"–"}
+  details p{font-size:14.5px;color:#3b4a57;padding-bottom:15px;margin:0}
+
+  .contact{background:radial-gradient(900px 380px at 50% -20%, rgba(61,123,255,.20), transparent 60%),linear-gradient(160deg,#0E2340,#081A30);color:#fff}
+  .contact .wrap{padding:80px 28px;text-align:center}
+  .contact h2{font-family:var(--font-display);font-size:clamp(30px,3.8vw,42px);color:#fff;margin:0 0 12px;letter-spacing:-.018em}
+  .contact p{color:#d3e0ec;max-width:580px;margin:0 auto 26px}
+  .form{max-width:580px;margin:0 auto;display:grid;gap:12px;text-align:left}
+  .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:560px){.form .row{grid-template-columns:1fr}}
+  .form input,.form select,.form textarea{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:14.5px;font-family:inherit}
+  .form input::placeholder,.form textarea::placeholder{color:#9fb3c6}
+  .form select{appearance:none;-webkit-appearance:none}.form select:invalid{color:#9fb3c6}.form option{color:#13202b}
+  .form .btn{width:100%;margin-top:4px}
+  .note{font-size:12.5px;color:#9fb3c6;margin-top:14px}
+
+  .frame{aspect-ratio:16/6;border:2px dashed #B9CDEF;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(135deg,#F1F5FB,#F7FAFE);text-align:center;gap:5px;padding:20px}
+  .frame b{font-family:var(--font-display);font-weight:700;color:#2C4A7A;font-size:15px}.frame small{font-size:12px;color:#7E93BC}
+
+  .hero .wrap.herogrid{display:block;position:relative;z-index:1}
+  .herotext{max-width:900px}
+  .herovis{position:absolute;top:18px;right:-50px;width:560px;opacity:.40;z-index:0;pointer-events:none}
+  .herovis svg{width:100%;height:auto;display:block}
+  @media(max-width:980px){.herovis{display:none}}
+  .brandvis{background:linear-gradient(160deg,#0E2340,#081A30)}
+  .brandvis svg{width:100%;height:auto;display:block;border-radius:14px}
+  .ql{list-style:none;counter-reset:q;padding:0;margin:10px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:16px 30px}
+  @media(max-width:760px){.ql{grid-template-columns:1fr}}
+  .ql li{counter-increment:q;position:relative;padding-left:44px;font-size:15.5px;color:#33424f;line-height:1.5;min-height:30px;display:flex;align-items:center}
+  .ql li::before{content:counter(q);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:8px;background:var(--navy);color:#fff;font-family:var(--font-display);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:14px}
+  .case .res{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);font-family:var(--font-display);font-weight:700;color:var(--navy);font-size:14px}
+  .case .res b{color:var(--gold);font-size:22px;margin-right:4px}
+  footer{background:#081424;color:#9fb3c6;font-size:13px}
+  footer .wrap{padding:32px 28px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  footer b{color:var(--gold-soft)}
+  .draftbar{background:#EEF3FC;color:#2C4A7A;font-size:12.5px;text-align:center;padding:8px 16px;border-bottom:1px solid #D8E4F7}
+</style>
+</head>
+<body>
+
+
+
+<nav class="nav">
+  <div class="in">
+    <div class="brand" style="display:flex;align-items:center;gap:9px">
+      <svg width="38" height="38" viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="15" width="6.5" height="34" rx="3.25" fill="#fff"/><path d="M44 16 L25.5 32" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M25.5 32 L47 48" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="44" cy="16" r="3" fill="#A9C5FF"/></svg>
+      <span class="brandwm">klarea<b>.ai</b></span>
+    </div>
+    <div class="links">
+      <a href="#servicos">Serviços</a>
+      <a href="#conselho">7 perguntas para o líder</a>
+      <a href="#quemsomos">Quem somos</a>
+      <a class="btn btn-gold" href="#contato">Agendar diagnóstico</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap herogrid">
+    <div class="herotext">
+    <span class="kicker">Advisory de IA executiva</span>
+    <h1 class="serif">IA que vira <em>estratégia, decisão e resultado.</em></h1>
+    <p class="sub">A Klarea transforma o uso superficial de IA em vantagem de negócio: conhecimento e domínio que viram decisão, eficiência e crescimento.</p>
+    <div class="cta-row">
+      <a class="btn btn-gold" href="#contato">Agendar um diagnóstico</a>
+      <a class="btn btn-ghost" href="#programa">Ver o programa</a>
+    </div>
+    <p class="micro">Diagnóstico de 30 minutos. Sem deck de vendas. Uma leitura objetiva de onde está o seu maior valor.</p>
+    <div class="trust">
+      <div class="it"><b>Da estratégia à produção</b>agentes, dados e growth, não só slides</div>
+      <div class="it"><b>Resultado</b>estratégia, receita e margem</div>
+      <div class="it"><b>Independência</b>advisory independente, não revendemos software</div>
+    </div>
+    </div>
+    <div class="herovis">
+      <svg viewBox="0 0 470 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ilustração abstrata Klarea: luz e malha de agentes de IA">
+        <defs>
+          <radialGradient id="kglow" cx="76%" cy="26%" r="62%">
+            <stop offset="0%" stop-color="#3D7BFF" stop-opacity="0.34"/>
+            <stop offset="62%" stop-color="#3D7BFF" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <rect width="470" height="440" fill="url(#kglow)"/>
+        <g fill="none" stroke="#A9C5FF" stroke-width="1.4">
+          <circle cx="358" cy="120" r="70" opacity="0.5"/>
+          <circle cx="358" cy="120" r="120" opacity="0.33"/>
+          <circle cx="358" cy="120" r="176" opacity="0.21"/>
+          <circle cx="358" cy="120" r="240" opacity="0.12"/>
+        </g>
+        <g stroke="#3D7BFF" stroke-width="1.3" opacity="0.55">
+          <line x1="120" y1="300" x2="205" y2="250"/>
+          <line x1="205" y1="250" x2="120" y2="200"/>
+          <line x1="205" y1="250" x2="290" y2="300"/>
+          <line x1="205" y1="250" x2="255" y2="170"/>
+          <line x1="120" y1="300" x2="180" y2="365"/>
+          <line x1="290" y1="300" x2="255" y2="170"/>
+        </g>
+        <g fill="#A9C5FF">
+          <circle cx="120" cy="300" r="5"/>
+          <circle cx="120" cy="200" r="5"/>
+          <circle cx="290" cy="300" r="5"/>
+          <circle cx="180" cy="365" r="5"/>
+          <circle cx="255" cy="170" r="6"/>
+        </g>
+        <circle cx="205" cy="250" r="9" fill="#3D7BFF"/>
+        <circle cx="358" cy="120" r="7" fill="#3D7BFF"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<!-- DORES -->
+<section id="dores" class="pad">
+  <div class="wrap">
+    <div class="label">Soa familiar?</div>
+    <h2 class="sec serif">Todo mundo usa IA. Quase ninguém com profundidade.</h2>
+    <hr class="sec-rule">
+    <p class="muted" style="max-width:720px">O conteúdo por aí é genérico. Cada fornecedor promete transformação. Ninguém ensina a usar IA com profundidade no seu contexto e no seu cargo.</p>
+    <div class="pains">
+      <div class="pain"><h4>Você usa, mas na superfície</h4><p>IA virou um “Google melhorado” no dia a dia. Dá para sentir que sobra potencial, mas falta repertório para ir além do óbvio.</p></div>
+      <div class="pain"><h4>Falta base para decidir</h4><p>Aprovar projetos, avaliar fornecedores e abrir as demandas certas sem depender só do time técnico exige um conhecimento que ninguém te deu.</p></div>
+      <div class="pain"><h4>Pilotos que não viram domínio</h4><p>Experiências soltas que impressionam na demo e não viram competência real nem resultado que se sustente.</p></div>
+      <div class="pain"><h4>Cursos genéricos não resolvem</h4><p>Conteúdo de prateleira não responde ao seu setor, ao seu cargo e às decisões que só você toma.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- JÁ ESTIVEMOS DO SEU LADO + SÓCIOS -->
+<section id="servicos" class="pad alt">
+  <div class="wrap">
+    <div class="label">O que oferecemos</div>
+    <h2 class="sec serif">Serviços</h2>
+    <hr class="sec-rule">
+    <p class="muted" style="max-width:760px">Da primeira leitura à IA rodando no seu dia a dia. Tudo começa pelo Assessment; a partir dele, você escolhe a profundidade.</p>
+    <div class="grid g2" style="margin-top:8px">
+      <div class="card"><div class="n">Diagnóstico · 3 a 5 semanas</div><h4>Assessment de Maturidade</h4><p>Medimos o seu AI-Native Score, comparamos com o setor e entregamos um roadmap priorizado. O ponto de partida.</p></div>
+      <div class="card"><div class="n">Implementação · poucas semanas</div><h4>Sprint AI-native</h4><p>Colocamos o seu caso de maior alavancagem em produção, com um resultado mensurável acordado. Da estratégia à arquitetura.</p></div>
+      <div class="card"><div class="n">Assento recorrente</div><h4>Conselheiro de IA</h4><p>Um sócio no seu board ou comitê (Chief AI Officer sob demanda): direção, governança e reavaliação contínua.</p></div>
+      <div class="card"><div class="n">Programa</div><h4>Governança de IA</h4><p>Uso, produtos e valor: usar mais IA com menos exposição, com LGPD, EU AI Act e guardrails.</p></div>
+    </div>
+    <div class="center" style="margin-top:30px"><a class="btn btn-gold" href="#contato">Começar pelo Assessment</a></div>
+  </div>
+</section>
+
+<!-- PROGRAMA -->
+<section id="programa" class="pad">
+  <div class="wrap">
+    <div class="program">
+      <div>
+        <h2>Sprint AI-native</h2>
+        <p class="blurb">Algumas semanas. Para o board e o C-level. No fim, um sistema de IA de alta alavancagem rodando no seu negócio. Não um deck de estratégia.</p>
+        <ul class="check">
+          <li>Seu processo de maior alavancagem em produção ao fim do sprint, com um resultado acordado e medido.</li>
+          <li>Clareza sobre quais ferramentas de IA o negócio precisa: o que construir, o que comprar, o que evitar.</li>
+          <li>Você termina com IA rodando no negócio, não com um plano para depois.</li>
+          <li>90 dias de acompanhamento após a entrega: ficamos até funcionar.</li>
+        </ul>
+        <div style="margin-top:22px"><a class="btn btn-gold" href="#contato">Falar sobre o Sprint</a></div>
+      </div>
+      <div class="recv">
+        <h4>O que você recebe</h4>
+        <ul>
+          <li>Programa estruturado e mão na massa, turma reduzida</li>
+          <li>Estratégia com Tossulino: visão, modelo e onde a IA cria valor</li>
+          <li>Arquitetura com Scheidt: implementação, ferramentas e agentes em produção</li>
+          <li>Um caso de alta alavancagem no ar, com resultado medido</li>
+          <li>Acompanhamento de 90 dias pós-sprint</li>
+        </ul>
+      </div>
+    </div>
+    <p class="muted center" style="margin-top:24px;max-width:820px;margin-left:auto;margin-right:auto">O Sprint é o coração do trabalho. Ele começa depois do <strong>Assessment</strong> e se estende, quando faz sentido, em <a href="#servicos">mentoria, Conselheiro de IA e Governança</a>.</p>
+  </div>
+</section>
+
+<!-- MÉTODO -->
+<section id="metodo" class="pad alt">
+  <div class="wrap">
+    <div class="label">Como funciona</div>
+    <h2 class="sec serif">O AI-Native Score e um método em 4 fases</h2>
+    <hr class="sec-rule">
+    <p class="muted" style="max-width:780px">Método proprietário, ancorado em referências reconhecidas (Gartner AI Maturity, McKinsey Rewired, BCG AI@Scale, Design Sprint) e traduzido para a linguagem de quem decide. Você sai com um índice claro, “sua maturidade de IA é X de 5”, e um plano para subir.</p>
+    <div class="fly">
+      <svg viewBox="0 0 440 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Flywheel do método AI-native">
+        <circle cx="220" cy="220" r="150" fill="none" stroke="#E2E8F0" stroke-width="16"/>
+        <g fill="#3D7BFF">
+          <path d="M-7 -7 L7 0 L-7 7 Z" transform="translate(326,114) rotate(45)"/>
+          <path d="M-7 -7 L7 0 L-7 7 Z" transform="translate(326,326) rotate(135)"/>
+          <path d="M-7 -7 L7 0 L-7 7 Z" transform="translate(114,326) rotate(225)"/>
+          <path d="M-7 -7 L7 0 L-7 7 Z" transform="translate(114,114) rotate(315)"/>
+        </g>
+        <circle cx="220" cy="220" r="64" fill="#0E2340"/>
+        <text x="220" y="214" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="17" font-weight="800" fill="#A9C5FF">AI-native</text>
+        <text x="220" y="234" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-size="10" fill="#C9DBFF">valor que se compõe</text>
+        <g font-family="'Plus Jakarta Sans',sans-serif">
+          <g><circle cx="220" cy="70" r="46" fill="#fff" stroke="#3D7BFF" stroke-width="2.5"/><text x="220" y="66" text-anchor="middle" font-size="11" font-weight="700" fill="#2D5BD0">1</text><text x="220" y="83" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2340">Diagnosticar</text></g>
+          <g><circle cx="370" cy="220" r="46" fill="#fff" stroke="#3D7BFF" stroke-width="2.5"/><text x="370" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#2D5BD0">2</text><text x="370" y="233" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2340">Direcionar</text></g>
+          <g><circle cx="220" cy="370" r="46" fill="#fff" stroke="#3D7BFF" stroke-width="2.5"/><text x="220" y="366" text-anchor="middle" font-size="11" font-weight="700" fill="#2D5BD0">3</text><text x="220" y="383" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2340">Construir</text></g>
+          <g><circle cx="70" cy="220" r="46" fill="#fff" stroke="#3D7BFF" stroke-width="2.5"/><text x="70" y="216" text-anchor="middle" font-size="11" font-weight="700" fill="#2D5BD0">4</text><text x="70" y="233" text-anchor="middle" font-size="12.5" font-weight="700" fill="#0E2340">Escalar</text></g>
+        </g>
+      </svg>
+      <div>
+        <h3>Um ciclo que se acelera</h3>
+        <p>O método não é uma linha reta, é um flywheel. A cada volta, o diagnóstico recomeça num nível mais alto: mais casos em produção geram mais dados, que tornam os agentes melhores, que entregam mais valor, que destrava mais adoção. Quanto mais a sua IA roda, mais difícil fica te alcançar.</p>
+        <div class="loop"><span>+ uso</span><b>→</b><span>+ dados</span><b>→</b><span>agentes melhores</span><b>→</b><span>+ valor</span><b>→</b><span>+ adoção</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="pad">
+  <div class="wrap">
+    <div class="diff">
+      <div class="label">O nosso diferencial</div>
+      <h3 class="serif">Conectamos a sua IA à estratégia e ao valor da empresa.</h3>
+      <p>A maioria fala de produtividade. Nós falamos de estratégia e de valor. Toda iniciativa de IA é amarrada à tese de negócio, e, com origem em M&amp;A e exits reais, também ao preço: para quem pensa em captar, comprar ou vender, maturidade em IA já entra na due diligence e no valor da transação. Essa leitura, nenhuma escola de IA tem.</p>
+      <div style="margin-top:18px"><a class="btn btn-gold" href="#contato">Conversar sobre o seu caso</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA O CONSELHO -->
+<section id="conselho" class="pad alt">
+  <div class="wrap">
+    <div class="label">Para a liderança</div>
+    <h2 class="sec serif">7 perguntas que todo líder deveria fazer sobre IA</h2>
+    <hr class="sec-rule">
+    <p class="muted" style="max-width:780px">Você não precisa dominar a tecnologia para liderar a conversa. Precisa fazer as perguntas certas e cobrar boas respostas. Leve estas para a sua próxima reunião.</p>
+    <ol class="ql">
+      <li>Onde a IA está criando, ou destruindo, valor no nosso setor, e onde estamos nesse mapa?</li>
+      <li>Qual é a nossa maturidade em IA hoje, medida e comparada com a concorrência?</li>
+      <li>Quem, na gestão, responde pela estratégia de IA, e com quais metas?</li>
+      <li>Que dados sensíveis estão saindo da empresa por uso de IA sem política?</li>
+      <li>Quais decisões já dependem de modelos, e quem responde por elas?</li>
+      <li>Quanto a nossa maturidade em IA pesa no valuation numa eventual transação?</li>
+      <li>Investimos em IA que vira receita e margem, ou em pilotos que não escalam?</li>
+    </ol>
+    <div class="center" style="margin-top:32px"><a class="btn btn-navy" href="#contato">Levar essas perguntas para a minha equipe</a></div>
+    <p class="muted center" style="margin-top:12px;font-size:13px">Em breve: versão em PDF para baixar e levar à reunião. &nbsp;</p>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section id="depoimentos" class="pad">
+  <div class="wrap">
+    <div class="label">Depoimentos</div>
+    <h2 class="sec serif">O que dizem os que decidem</h2>
+    <hr class="sec-rule">
+    <div class="tgrid">
+      <div class="tcard"><p>“Em seis semanas saímos de pilotos soltos para um agente em produção no atendimento. O que me convenceu foi a conversa em P&amp;L, não em ferramenta.”</p><div class="who"><div class="ph">HM</div><div><b>Helena Marques</b><span>Presidente do Conselho · varejo nacional</span></div></div></div>
+      <div class="tcard"><p>“Trouxeram ao board uma leitura que faltava: quanto a nossa maturidade em IA pesaria numa eventual venda. Mudou a nossa agenda.”</p><div class="who"><div class="ph">RT</div><div><b>Rodrigo Tavares</b><span>CFO · indústria de bens de consumo</span></div></div></div>
+      <div class="tcard"><p>“Pela primeira vez tivemos governança de IA de verdade: política, trilha de auditoria e um responsável. O risco saiu do escuro.”</p><div class="who"><div class="ph">PN</div><div><b>Paula Nakamura</b><span>CEO · healthtech</span></div></div></div>
+    </div>
+    <p class="muted center" style="margin-top:18px;font-size:12.5px">Depoimentos ilustrativos, para exemplificar o tipo de resultado. Serão substituídos por clientes reais. &nbsp;</p>
+  </div>
+</section>
+
+<!-- QUEM SOMOS -->
+<section id="quemsomos" class="pad alt">
+  <div class="wrap">
+    <div class="label">Quem somos</div>
+    <h2 class="sec serif">Operadores, não consultores de slide</h2>
+    <hr class="sec-rule">
+    <div class="shoes">
+      <p>Não somos consultores que leram sobre IA e montaram uma apresentação. Somos operadores: um conduziu <strong>mais de 10 operações de M&amp;A</strong>; o outro <strong>construiu e vendeu uma healthtech de IA</strong>. É por isso que a Klarea existe. Um lê onde a IA cria valor e o defende na mesa de decisão. O outro constrói e governa os sistemas que entregam esse valor. <strong>Você tem os dois.</strong></p>
+    </div>
+    <div class="grid g2" style="margin-top:26px">
+      <div class="card">
+        <div class="ptn">
+          <div class="avatar"><b>GT</b></div>
+          <div><h4 style="margin:0;font-size:19px">Guilherme Tossulino</h4><span class="arch">O Estrategista</span></div>
+        </div>
+        <p style="font-size:14.5px;color:#3b4a57;margin-top:14px">Executivo sênior, foi executivo de uma empresa relevante de software e conduziu mais de 10 transações de M&amp;A. Partner da Questum e atuação na DLG no buy-side. Conselheiro e investidor, traduz tecnologia em tese de investimento: valuation, due diligence e criação de valor para o exit.</p>
+        <div class="stack" style="margin-top:12px"><span class="tag">10+ deals de M&amp;A</span><span class="tag">Valuation</span><span class="tag">Conselho</span><span class="tag">Growth</span></div>
+        <div style="margin-top:12px;font-size:13px"><a href="#" target="_blank">LinkedIn ↗</a> </div>
+      </div>
+      <div class="card">
+        <div class="ptn">
+          <div class="avatar"><b>RS</b></div>
+          <div><h4 style="margin:0;font-size:19px">Rafael de Faria Scheidt <span class="muted" style="font-weight:400">“Foka”</span></h4><span class="arch">O Arquiteto</span></div>
+        </div>
+        <p style="font-size:14.5px;color:#3b4a57;margin-top:14px">Head of Technology com mais de 20 anos construindo produtos digitais com IA. Foi CTO da NETPACS, healthtech que levou até o exit. Especialista em agentes de IA, RAG e arquiteturas distribuídas, e autor de <a href="https://www.novaengenhariadesoftware.com.br" target="_blank"><em>A Nova Engenharia de Software com IA</em></a>.</p>
+        <div class="stack" style="margin-top:12px"><span class="tag">CTO &amp; exit</span><span class="tag">Agentes de IA</span><span class="tag">Arquitetura</span><span class="tag">Autor</span></div>
+        <div style="margin-top:12px;font-size:13px"><a href="https://www.linkedin.com/in/rafael-scheidt-9b7186164/" target="_blank">LinkedIn ↗</a> · <a href="https://www.novaengenhariadesoftware.com.br" target="_blank">O livro ↗</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="pad alt">
+  <div class="wrap">
+    <div class="label">Dúvidas frequentes</div>
+    <h2 class="sec serif">Perguntas frequentes</h2>
+    <hr class="sec-rule">
+    <details><summary>O que a Klarea faz, na prática?</summary><p>Atuamos como advisory de IA no nível da liderança: medimos a sua maturidade, definimos prioridades, conduzimos um Sprint que coloca um caso de alta alavancagem em produção, mentoramos a liderança e, quando faz sentido, assumimos um assento recorrente de Conselheiro de IA.</p></details>
+    <details><summary>O que é o Sprint AI-native?</summary><p>Um programa de poucas semanas, para o board e o C-level, com um resultado mensurável acordado: o seu processo de maior alavancagem em produção até o fim, mais 90 dias de acompanhamento. Estratégia com Tossulino, arquitetura com Scheidt.</p></details>
+    <details><summary>O que significa ser AI-native?</summary><p>Deixar de apenas adicionar ferramentas de IA sobre o que já existe (AI-enabled) e passar a ter a IA como camada de arquitetura, dados e decisão: agentes que executam trabalho com governança, processos redesenhados e resultados que se compõem a cada uso.</p></details>
+    <details><summary>Vocês só aconselham ou também constroem?</summary><p>Os dois. Conduzimos da estratégia à arquitetura em produção: agentes, integrações via MCP e APIs, RAG sobre os seus dados, avaliação e observabilidade. Quando a execução exige, trazemos a capacidade técnica para construir junto com o seu time.</p></details>
+    <details><summary>E a governança e a segurança?</summary><p>É parte central do trabalho. Cuidamos da governança em três níveis: do uso (política, shadow AI, LGPD), dos produtos de IA em produção (guardrails, evals, auditoria, EU AI Act) e do valor (regras que liberam a adoção com segurança). O objetivo é usar mais IA, com menos exposição.</p></details>
+    <details><summary>Vocês são independentes? Têm conflito com fornecedores?</summary><p>Somos independentes. Não revendemos software nem recebemos comissão de fornecedores, então a recomendação é sempre no seu interesse: o que construir, o que comprar e o que evitar. Toda conversa é confidencial.</p></details>
+    <details><summary>Quanto custa?</summary><p>O investimento é desenhado sob medida conforme o escopo (diagnóstico, sprint, mentoria ou assento de conselheiro). Agende o diagnóstico de 30 minutos e preparamos uma proposta para o seu contexto.</p></details>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="contact">
+  <div class="wrap">
+    <div class="label" style="color:var(--gold-soft)">Próximo passo</div>
+    <h2 class="serif">Uma conversa reservada sobre a IA da sua empresa</h2>
+    <p>Agende 30 minutos, sem compromisso e sob total confidencialidade. Você sai com uma leitura clara de onde a IA cria mais valor no seu negócio.</p>
+    <form class="form" onsubmit="return false">
+      <div class="row"><input type="text" placeholder="Nome"><input type="text" placeholder="Empresa"></div>
+      <div class="row"><input type="email" placeholder="E-mail corporativo"><input type="text" placeholder="Cargo"></div>
+      
+      <div class="row">
+        <select><option value="" disabled selected>Tamanho da empresa</option><option>Até 50 colaboradores</option><option>51 a 200</option><option>201 a 500</option><option>501 a 1.000</option><option>Mais de 1.000</option></select>
+        <select><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
+      </div>
+      <select><option value="" disabled selected>Sua maturidade em IA hoje (autoavaliação)</option><option>1 · Curioso (uso pessoal e pontual)</option><option>2 · Experimental (pilotos isolados)</option><option>3 · Operacional (IA em processos)</option><option>4 · Estratégico (na agenda da liderança)</option><option>5 · AI-native (no core do negócio)</option></select>
+      <textarea rows="3" placeholder="Conte rapidamente o seu contexto e o que você quer destravar"></textarea>
+      <button class="btn btn-gold" type="submit">Agendar diagnóstico</button>
+    </form>
+    <p class="note">Conversa confidencial · advisory independente, não revendemos software. &nbsp; Ou fale direto: contato@klarea.ai · WhatsApp (00) 00000-0000 &nbsp;</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div style="display:flex;align-items:center;gap:10px"><svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="15" width="6.5" height="34" rx="3.25" fill="#fff"/><path d="M44 16 L25.5 32" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M25.5 32 L47 48" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="44" cy="16" r="3" fill="#A9C5FF"/></svg><div><b style="font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.3px">klarea.ai</b> · Advisory de IA Executiva<br>Guilherme Tossulino &amp; Rafael Scheidt</div></div>
+    <div style="text-align:right">klarea.ai · IA no nível da decisão.<br>© 2026 Klarea. Todos os direitos reservados &middot; <a href="/privacidade.html" style="color:#A9C5FF">Privacidade</a> &middot; <a href="/termos.html" style="color:#A9C5FF">Termos</a></div>
+  </div>
+</footer>
+
+</body>
+</html>

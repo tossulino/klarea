@@ -1,0 +1,19 @@
+<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Klarea">
+  <defs>
+    <linearGradient id="kArm" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6FA0FF"/>
+      <stop offset="1" stop-color="#2D6BFF"/>
+    </linearGradient>
+    <radialGradient id="kGlow" cx="72%" cy="22%" r="62%">
+      <stop offset="0" stop-color="#3D7BFF" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#3D7BFF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="64" height="64" rx="18" fill="#0E2340"/>
+  <rect width="64" height="64" rx="18" fill="url(#kGlow)"/>
+  <circle cx="44" cy="16" r="7.5" fill="#A9C5FF" opacity="0.30"/>
+  <rect x="18" y="15" width="6.5" height="34" rx="3.25" fill="#FFFFFF"/>
+  <path d="M44 16 L25.5 32" fill="none" stroke="url(#kArm)" stroke-width="7" stroke-linecap="round"/>
+  <path d="M25.5 32 L47 48" fill="none" stroke="url(#kArm)" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="44" cy="16" r="3" fill="#CFE0FF"/>
+</svg>
