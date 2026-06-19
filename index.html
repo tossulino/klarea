@@ -219,6 +219,7 @@
   .contact h2{font-family:var(--font-display);font-size:clamp(30px,3.8vw,42px);color:#fff;margin:0 0 12px;letter-spacing:-.018em}
   .contact p{color:#d3e0ec;max-width:580px;margin:0 auto 26px}
   .form{max-width:580px;margin:0 auto;display:grid;gap:12px;text-align:left}
+  .form-status{margin:6px 0 0;font-size:14.5px;font-weight:600;text-align:center}
   .form .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   @media(max-width:560px){.form .row{grid-template-columns:1fr}}
   .form input,.form select,.form textarea{width:100%;padding:13px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);color:#fff;font-size:14.5px;font-family:inherit}
@@ -523,17 +524,22 @@
     <div class="label" style="color:var(--gold-soft)">Próximo passo</div>
     <h2 class="serif">Uma conversa reservada sobre a IA da sua empresa</h2>
     <p>Agende 30 minutos, sem compromisso e sob total confidencialidade. Você sai com uma leitura clara de onde a IA cria mais valor no seu negócio.</p>
-    <form class="form" onsubmit="return false">
-      <div class="row"><input type="text" placeholder="Nome"><input type="text" placeholder="Empresa"></div>
-      <div class="row"><input type="email" placeholder="E-mail corporativo"><input type="text" placeholder="Cargo"></div>
-      
+    <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89">
+      <input type="hidden" name="subject" value="Novo contato pelo site klarea.ai">
+      <input type="hidden" name="from_name" value="Site Klarea.ai">
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+      <div class="row"><input type="text" name="Nome" placeholder="Nome" required><input type="text" name="Empresa" placeholder="Empresa"></div>
+      <div class="row"><input type="email" name="E-mail" placeholder="E-mail corporativo" required><input type="text" name="Cargo" placeholder="Cargo"></div>
+
       <div class="row">
-        <select><option value="" disabled selected>Tamanho da empresa</option><option>Até 50 colaboradores</option><option>51 a 200</option><option>201 a 500</option><option>501 a 1.000</option><option>Mais de 1.000</option></select>
-        <select><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
+        <select name="Tamanho da empresa"><option value="" disabled selected>Tamanho da empresa</option><option>Até 50 colaboradores</option><option>51 a 200</option><option>201 a 500</option><option>501 a 1.000</option><option>Mais de 1.000</option></select>
+        <select name="Segmento"><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
       </div>
-      <select><option value="" disabled selected>Sua maturidade em IA hoje (autoavaliação)</option><option>1 · Curioso (uso pessoal e pontual)</option><option>2 · Experimental (pilotos isolados)</option><option>3 · Operacional (IA em processos)</option><option>4 · Estratégico (na agenda da liderança)</option><option>5 · AI-native (no core do negócio)</option></select>
-      <textarea rows="3" placeholder="Conte rapidamente o seu contexto e o que você quer destravar"></textarea>
+      <select name="Maturidade em IA"><option value="" disabled selected>Sua maturidade em IA hoje (autoavaliação)</option><option>1 · Curioso (uso pessoal e pontual)</option><option>2 · Experimental (pilotos isolados)</option><option>3 · Operacional (IA em processos)</option><option>4 · Estratégico (na agenda da liderança)</option><option>5 · AI-native (no core do negócio)</option></select>
+      <textarea name="Mensagem" rows="3" placeholder="Conte rapidamente o seu contexto e o que você quer destravar"></textarea>
       <button class="btn btn-gold" type="submit">Agendar diagnóstico</button>
+      <p class="form-status" id="formStatus" role="status" aria-live="polite" style="display:none"></p>
     </form>
     <p class="note">Conversa confidencial · advisory independente, não revendemos software. &nbsp; Ou fale direto: contato@klarea.ai &nbsp;</p>
     <div class="wa-cta">
@@ -558,6 +564,43 @@
     <div style="text-align:right">klarea.ai · IA no nível da decisão.<br>© 2026 Klarea. Todos os direitos reservados &middot; <a href="/privacidade.html" style="color:#A9C5FF">Privacidade</a> &middot; <a href="/termos.html" style="color:#A9C5FF">Termos</a></div>
   </div>
 </footer>
+
+<script>
+(function(){
+  var form = document.getElementById('leadForm');
+  if(!form) return;
+  var status = document.getElementById('formStatus');
+  var btn = form.querySelector('button[type="submit"]');
+  var btnText = btn ? btn.textContent : '';
+  function show(msg, ok){
+    status.textContent = msg;
+    status.style.display = 'block';
+    status.style.color = ok ? '#A9C5FF' : '#ffb4b4';
+  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    if(btn){ btn.disabled = true; btn.textContent = 'Enviando...'; }
+    show('', true);
+    fetch(form.action, {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    }).then(function(r){ return r.json(); })
+    .then(function(data){
+      if(data.success){
+        form.reset();
+        show('Recebemos seu contato. Retornamos em breve para agendar.', true);
+      } else {
+        show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp abaixo.', false);
+      }
+    }).catch(function(){
+      show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp abaixo.', false);
+    }).finally(function(){
+      if(btn){ btn.disabled = false; btn.textContent = btnText; }
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
