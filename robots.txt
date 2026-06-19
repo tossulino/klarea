@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://klarea.ai/sitemap.xml
