@@ -1,20 +1,21 @@
 # Klarea
 
-> Klarea é uma advisory de IA executiva para conselhos, C-levels e investidores. Leva conhecimento e domínio de inteligência artificial para quem decide, transformando o uso superficial de IA em vantagem de negócio: decisão, eficiência e crescimento. Diferencial exclusivo: conecta IA à estratégia e ao valor da empresa com lente de M&A e valuation.
+> Klarea é uma advisory de IA executiva para conselhos, C-levels e investidores. Leva conhecimento e domínio de inteligência artificial para quem decide, transformando o uso superficial de IA em vantagem de negócio: decisão, eficiência e crescimento. Diferencial: conecta a IA à execução da estratégia do negócio, da primeira leitura à arquitetura em produção.
 
 ## O que a Klarea é (e o que não é)
 
 - É uma advisory independente: não revende software, não tem conflito de interesse, conversas confidenciais.
 - NÃO é escola de IA. NÃO é software house.
-- Conecta IA à estratégia, à decisão e ao valor do negócio (receita, margem, valuation).
+- Conecta a IA à execução da estratégia do negócio: decisão, eficiência e crescimento.
 
 ## Sócios
 
-- Guilherme Tossulino — Estratégia, M&A e valuation. Executivo sênior, conduziu mais de 10 transações de M&A. LinkedIn: https://www.linkedin.com/in/tossulino/
+- Guilherme Tossulino — Estratégia e execução. Executivo sênior de tecnologia e conselheiro, especialista em levar estratégia à prática com IA. LinkedIn: https://www.linkedin.com/in/tossulino/
 - Rafael Scheidt — Engenharia de software e IA. CTO e exit na NETPACS (healthtech). Autor de "A Nova Engenharia de Software com IA". LinkedIn: https://www.linkedin.com/in/rafael-scheidt-9b7186164/
 
 ## Serviços
 
+- Mentoria de Fluência Executiva: porta de entrada, sem compromisso. IA aplicada às rotinas reais do executivo, 1 a 1.
 - Assessment de Maturidade: mede o AI-Native Score, compara com o setor e entrega um roadmap priorizado.
 - Sprint AI-native: implementação de casos de IA em produção.
 - Conselheiro de IA: assento de conselho e mentoria executiva.
@@ -27,6 +28,7 @@ Conselheiros, C-level, diretores, investidores, executivos e gerentes de médias
 ## Páginas
 
 - Site principal: https://klarea.ai/
+- AI-Native Score (autodiagnóstico): https://klarea.ai/diagnostico.html
 - Política de Privacidade: https://klarea.ai/privacidade.html
 - Termos de Uso: https://klarea.ai/termos.html
 

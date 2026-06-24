@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BY0EFHP73W"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-BY0EFHP73W');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI-Native Score · Klarea</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="apple-touch-icon" href="/favicon.png">
+<link rel="canonical" href="https://klarea.ai/diagnostico.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Klarea">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://klarea.ai/diagnostico.html">
+<meta property="og:title" content="AI-Native Score — descubra a maturidade de IA do seu negócio">
+<meta property="og:description" content="Autodiagnóstico de 2 minutos. Onde a sua empresa está na jornada de IA e o próximo passo para subir de nível.">
+<meta property="og:image" content="https://klarea.ai/og.png">
+<meta name="description" content="AI-Native Score da Klarea: autodiagnóstico de 2 minutos que mede a maturidade de IA do seu negócio e mostra o próximo passo para subir de nível.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0E2340; --navy2:#18345A; --gold:#3D7BFF; --gold-soft:#A9C5FF;
+    --ink:#16242C; --muted:#5C6873; --line:#E2E8F0; --bg:#FFFFFF; --soft:#F3F6FB;
+    --blue:#5E7186; --blue-soft:#E9F0FE;
+    --font-body:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --font-display:'Plus Jakarta Sans','Inter',-apple-system,"Segoe UI",sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);background:var(--soft);font-family:var(--font-body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:var(--blue);text-decoration:none}
+  .wrap{max-width:760px;margin:0 auto;padding:0 24px}
+  .serif{font-family:var(--font-display);letter-spacing:-.01em}
+  .btn{display:inline-block;font-weight:700;font-size:15px;padding:14px 24px;border-radius:10px;cursor:pointer;border:0;transition:.15s;font-family:var(--font-body)}
+  .btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#5B92FF}
+  .btn-ghost{background:transparent;color:var(--navy);border:1px solid var(--line)}.btn-ghost:hover{border-color:var(--gold)}
+  .btn[disabled]{opacity:.45;cursor:not-allowed}
+  .muted{color:var(--muted)}.center{text-align:center}
+
+  .nav{position:sticky;top:0;z-index:30;background:rgba(14,35,64,.97);backdrop-filter:blur(6px);border-bottom:1px solid rgba(61,123,255,.45)}
+  .nav .in{max-width:760px;margin:0 auto;padding:13px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .nav .brand{font-family:'Space Grotesk',sans-serif;font-weight:700;letter-spacing:-.5px;font-size:24px;color:#fff;display:flex;align-items:center;gap:9px}
+  .nav .brand b{color:var(--gold-soft);font-weight:700}
+  .nav .links a{color:#cfe0ee;font-size:13px}.nav .links a:hover{color:#fff}
+
+  .head{background:radial-gradient(900px 380px at 80% -20%, rgba(61,123,255,.22), transparent 60%),linear-gradient(160deg,#0E2340,#081A30);color:#fff}
+  .head .wrap{padding:54px 24px 40px}
+  .kicker{display:inline-block;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-soft);border:1px solid rgba(169,197,255,.4);padding:6px 13px;border-radius:999px}
+  .head h1{font-family:var(--font-display);font-size:clamp(30px,5vw,44px);line-height:1.08;margin:20px 0 14px;font-weight:800;letter-spacing:-.02em}
+  .head h1 em{color:var(--gold-soft);font-style:normal}
+  .head p{color:#d7e3ee;max-width:560px;margin:0}
+
+  .panel{background:#fff;border:1px solid var(--line);border-radius:16px;padding:30px;margin:-26px auto 0;position:relative;box-shadow:0 10px 30px rgba(14,35,64,.08)}
+  .prog{height:6px;background:var(--soft);border-radius:99px;overflow:hidden;margin-bottom:6px}
+  .prog i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .25s ease}
+  .progtxt{font-size:12.5px;color:var(--muted);letter-spacing:.4px;margin-bottom:22px;font-weight:600}
+  .q .qn{font-family:var(--font-display);color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+  .q h2{font-family:var(--font-display);color:var(--navy);font-size:23px;margin:8px 0 20px;letter-spacing:-.01em;line-height:1.2}
+  .opts{display:grid;gap:10px}
+  .opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;background:#fff;border:1.5px solid var(--line);border-radius:11px;padding:15px 16px;cursor:pointer;font:inherit;color:var(--ink);transition:.13s}
+  .opt:hover{border-color:var(--gold-soft);background:#FAFCFF}
+  .opt.sel{border-color:var(--gold);background:var(--blue-soft)}
+  .opt .dot{flex:0 0 20px;height:20px;border-radius:50%;border:2px solid #C3D2E6;margin-top:1px;transition:.13s}
+  .opt.sel .dot{border-color:var(--gold);background:var(--gold);box-shadow:inset 0 0 0 3px #fff}
+  .opt span{font-size:15px}
+  .navrow{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px}
+
+  /* resultado */
+  .scorewrap{text-align:center}
+  .ring{width:170px;height:170px;margin:6px auto 4px;position:relative}
+  .ring svg{transform:rotate(-90deg)}
+  .ring .lbl{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .lbl b{font-family:var(--font-display);font-size:44px;color:var(--navy);font-weight:800;line-height:1}
+  .ring .lbl small{font-size:12px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+  .lvlname{font-family:var(--font-display);font-size:26px;color:var(--navy);font-weight:800;margin:6px 0 2px;letter-spacing:-.01em}
+  .lvltag{display:inline-block;font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .diag{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:20px;margin:22px 0;text-align:left}
+  .diag h3{font-family:var(--font-display);color:var(--navy);font-size:15px;margin:0 0 8px;letter-spacing:.3px}
+  .diag p{margin:0;font-size:14.5px;color:#3b4a57}
+  .next{display:flex;gap:14px;align-items:flex-start;background:linear-gradient(160deg,#0E2340,#081A30);color:#fff;border-radius:12px;padding:20px;text-align:left;margin-bottom:22px}
+  .next .ic{flex:0 0 40px;height:40px;border-radius:10px;background:rgba(61,123,255,.25);display:flex;align-items:center;justify-content:center;color:var(--gold-soft);font-weight:800;font-family:var(--font-display)}
+  .next b{color:var(--gold-soft);font-family:var(--font-display);font-size:15px}
+  .next p{margin:4px 0 0;font-size:14px;color:#d3e0ec}
+
+  .form{display:grid;gap:11px;text-align:left;margin-top:8px}
+  .form .row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+  @media(max-width:520px){.form .row{grid-template-columns:1fr}}
+  .form input,.form select{width:100%;padding:12px 13px;border-radius:9px;border:1.5px solid var(--line);background:#fff;color:var(--ink);font-size:14.5px;font-family:inherit}
+  .form select:invalid{color:#9aa6b2}
+  .form-status{font-size:14px;font-weight:600;text-align:center;margin:2px 0 0}
+  .scale{display:flex;justify-content:space-between;margin:26px 0 0;gap:6px}
+  .scale .s{flex:1;text-align:center;font-size:10.5px;color:var(--muted);position:relative;padding-top:14px}
+  .scale .s::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:11px;height:11px;border-radius:50%;background:var(--line)}
+  .scale .s.on::before{background:var(--gold)}
+  .scale .s.on{color:var(--navy);font-weight:700}
+  footer{color:var(--muted);font-size:12.5px;text-align:center;padding:30px 24px 40px}
+  footer a{color:var(--blue)}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="in">
+    <a class="brand" href="/">
+      <svg width="34" height="34" viewBox="0 0 64 64" aria-hidden="true"><rect x="18" y="15" width="6.5" height="34" rx="3.25" fill="#fff"/><path d="M44 16 L25.5 32" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><path d="M25.5 32 L47 48" stroke="#3D7BFF" stroke-width="7" stroke-linecap="round" fill="none"/><circle cx="44" cy="16" r="3" fill="#A9C5FF"/></svg>
+      <span>klarea<b>.ai</b></span>
+    </a>
+    <div class="links"><a href="/">← Voltar ao site</a></div>
+  </div>
+</nav>
+
+<header class="head">
+  <div class="wrap">
+    <span class="kicker">AI-Native Score</span>
+    <h1 class="serif">Onde a sua empresa está na <em>jornada de IA?</em></h1>
+    <p>Oito perguntas, dois minutos. Você recebe um índice de 1 a 5, o que ele significa e o próximo passo para subir de nível. Responda pensando no negócio, não em você.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="panel" id="panel">
+    <!-- QUIZ -->
+    <div id="quiz">
+      <div class="prog"><i id="progBar"></i></div>
+      <div class="progtxt" id="progTxt">Pergunta 1 de 8</div>
+      <div class="q">
+        <div class="qn" id="qDim"></div>
+        <h2 id="qText"></h2>
+        <div class="opts" id="opts"></div>
+      </div>
+      <div class="navrow">
+        <button class="btn btn-ghost" id="backBtn" type="button">Voltar</button>
+        <button class="btn btn-gold" id="nextBtn" type="button" disabled>Próxima</button>
+      </div>
+    </div>
+
+    <!-- RESULTADO -->
+    <div id="result" style="display:none">
+      <div class="scorewrap">
+        <div class="ring">
+          <svg width="170" height="170" viewBox="0 0 170 170">
+            <circle cx="85" cy="85" r="74" fill="none" stroke="#E2E8F0" stroke-width="14"/>
+            <circle id="ringArc" cx="85" cy="85" r="74" fill="none" stroke="#3D7BFF" stroke-width="14" stroke-linecap="round" stroke-dasharray="465" stroke-dashoffset="465"/>
+          </svg>
+          <div class="lbl"><b id="scoreNum">0</b><small>de 5</small></div>
+        </div>
+        <span class="lvltag" id="lvlTag"></span>
+        <div class="lvlname" id="lvlName"></div>
+        <div class="scale" id="scale"></div>
+      </div>
+      <div class="diag"><h3>O que isso diz sobre o seu negócio</h3><p id="diagText"></p></div>
+      <div class="next"><div class="ic">→</div><div><b>Próximo passo recomendado</b><p id="nextText"></p></div></div>
+
+      <h3 class="serif" style="color:var(--navy);font-size:19px;margin:0 0 4px">Quer o relatório completo e o benchmark do seu setor?</h3>
+      <p class="muted" style="font-size:14px;margin:0 0 4px">Enviamos a leitura detalhada e uma agenda de 30 minutos, sem compromisso.</p>
+      <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89">
+        <input type="hidden" name="subject" value="Novo AI-Native Score pelo site klarea.ai">
+        <input type="hidden" name="from_name" value="Autodiagnóstico Klarea.ai">
+        <input type="hidden" name="AI-Native Score" id="hiddenScore" value="">
+        <input type="hidden" name="Respostas" id="hiddenAnswers" value="">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+        <div class="row"><input type="text" name="Nome" placeholder="Nome" required><input type="text" name="Empresa" placeholder="Empresa"></div>
+        <div class="row"><input type="email" name="E-mail" placeholder="E-mail corporativo" required><input type="text" name="Cargo" placeholder="Cargo"></div>
+        <select name="Segmento" required><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
+        <button class="btn btn-gold" type="submit">Receber meu relatório</button>
+        <p class="form-status" id="formStatus" style="display:none"></p>
+      </form>
+      <div class="center" style="margin-top:14px"><button class="btn btn-ghost" id="redo" type="button">Refazer o diagnóstico</button></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  klarea.ai · Advisory de IA Executiva &nbsp;·&nbsp; <a href="/">Início</a> &nbsp;·&nbsp; <a href="/#contato">Falar com um sócio</a><br>
+  Resultado indicativo, para orientar a conversa. O Assessment completo aprofunda cada dimensão.
+</footer>
+
+<script>
+(function(){
+  var QUESTIONS = [
+    {dim:"Estratégia", q:"No seu negócio, a IA hoje está...", opts:[
+      ["Fora do radar da liderança",1],
+      ["Em conversas informais, sem dono",2],
+      ["Em alguns processos, caso a caso",3],
+      ["Na agenda formal da liderança, com metas",4],
+      ["No centro da estratégia e do modelo de negócio",5]]},
+    {dim:"Patrocínio", q:"Quem puxa a IA dentro do negócio?", opts:[
+      ["Ninguém em específico",1],
+      ["Quem se interessa, de forma isolada",2],
+      ["A área de TI, num plano técnico",3],
+      ["Um executivo com mandato e orçamento",4],
+      ["A liderança máxima, como prioridade declarada",5]]},
+    {dim:"Casos em produção", q:"Processos relevantes rodando com IA hoje:", opts:[
+      ["Nenhum",1],
+      ["Testes e demos que não viraram rotina",2],
+      ["Um ou dois processos de apoio",3],
+      ["Vários processos relevantes",4],
+      ["IA integrada ao core, ponta a ponta",5]]},
+    {dim:"Dados", q:"Os dados para alimentar IA estão...", opts:[
+      ["Espalhados e sem organização",1],
+      ["Em planilhas e sistemas isolados",2],
+      ["Centralizados em parte",3],
+      ["Organizados e acessíveis",4],
+      ["Estruturados e prontos, com governança de dados",5]]},
+    {dim:"Governança", q:"Política de uso de IA, LGPD e guardrails:", opts:[
+      ["Não existe; cada um usa como quer",1],
+      ["Conversamos, mas nada formal",2],
+      ["Regras básicas em algumas áreas",3],
+      ["Política formal e em uso",4],
+      ["Governança completa: política, auditoria e responsável",5]]},
+    {dim:"Letramento", q:"A liderança sabe o que pedir à IA?", opts:[
+      ["Não, é um tema distante",1],
+      ["Há curiosidade, mas falta repertório",2],
+      ["Uso pessoal básico",3],
+      ["Sabe abrir boas demandas e cobrar",4],
+      ["Domina o suficiente para dar a direção",5]]},
+    {dim:"Resultado", q:"A IA hoje gera...", opts:[
+      ["Nenhum resultado mensurável",1],
+      ["Economia de tempo pontual",2],
+      ["Ganhos de produtividade em algumas áreas",3],
+      ["Impacto em eficiência e custo, medido",4],
+      ["Receita e margem atribuíveis à IA",5]]},
+    {dim:"Adoção", q:"No dia a dia das equipes, a IA é...", opts:[
+      ["Praticamente ausente",1],
+      ["Usada por poucos entusiastas",2],
+      ["Comum em algumas áreas",3],
+      ["Adotada de forma ampla",4],
+      ["Parte de como o trabalho é feito",5]]}
+  ];
+
+  var LEVELS = {
+    1:{tag:"Nível 1 de 5", name:"Curioso", diag:"A IA ainda é uso pessoal e pontual. Falta dono, direção e ligação com a estratégia. O risco maior aqui não é fazer errado, é ficar parado enquanto o setor anda.", next:"Comece pela Mentoria de Fluência Executiva: a IA nas suas rotinas reais, para você sentir o ganho e aprender a pedir. É daqui que nascem os projetos certos."},
+    2:{tag:"Nível 2 de 5", name:"Experimental", diag:"Existem pilotos e entusiasmo, mas soltos: impressionam na demo e não viram competência nem resultado que se sustente. Falta priorização e patrocínio com poder de decisão.", next:"Faça o Assessment de Maturidade: medimos onde está o maior valor, comparamos com o setor e entregamos um roadmap priorizado, com um dono claro."},
+    3:{tag:"Nível 3 de 5", name:"Operacional", diag:"A IA já está em processos, mas o valor ainda é difuso e a governança corre atrás. O salto agora é transformar uso em resultado de negócio medido.", next:"Rode um Sprint AI-native: colocamos o seu caso de maior alavancagem em produção, com um resultado acordado e medido, e 90 dias de acompanhamento."},
+    4:{tag:"Nível 4 de 5", name:"Estratégico", diag:"A IA está na agenda da liderança e já entrega resultado. O desafio passa a ser escala com segurança: governança, novos casos e direção contínua.", next:"Estruture Governança de IA e considere um assento de Conselheiro de IA: mais casos no ar, com menos exposição e direção a cada ciclo."},
+    5:{tag:"Nível 5 de 5", name:"AI-native", diag:"A IA está no core e o valor se compõe a cada uso. A vantagem agora é manter o ritmo: quanto mais a sua IA roda, mais difícil fica te alcançar.", next:"Um Conselheiro de IA no board mantém a leitura externa, a governança e a reavaliação contínua para você não perder a dianteira."}
+  };
+
+  var idx=0, answers=new Array(QUESTIONS.length).fill(null);
+  var quiz=document.getElementById('quiz'), result=document.getElementById('result');
+  var qDim=document.getElementById('qDim'), qText=document.getElementById('qText'), opts=document.getElementById('opts');
+  var progBar=document.getElementById('progBar'), progTxt=document.getElementById('progTxt');
+  var backBtn=document.getElementById('backBtn'), nextBtn=document.getElementById('nextBtn');
+
+  function render(){
+    var Q=QUESTIONS[idx];
+    qDim.textContent=Q.dim;
+    qText.textContent=Q.q;
+    opts.innerHTML='';
+    Q.opts.forEach(function(o,i){
+      var b=document.createElement('button');
+      b.type='button'; b.className='opt'+(answers[idx]===i?' sel':'');
+      b.innerHTML='<span class="dot"></span><span>'+o[0]+'</span>';
+      b.onclick=function(){ answers[idx]=i; render(); };
+      opts.appendChild(b);
+    });
+    progBar.style.width=((idx)/QUESTIONS.length*100)+'%';
+    progTxt.textContent='Pergunta '+(idx+1)+' de '+QUESTIONS.length;
+    backBtn.style.visibility = idx===0 ? 'hidden':'visible';
+    nextBtn.disabled = answers[idx]===null;
+    nextBtn.textContent = idx===QUESTIONS.length-1 ? 'Ver meu score' : 'Próxima';
+  }
+
+  nextBtn.onclick=function(){
+    if(answers[idx]===null) return;
+    if(idx<QUESTIONS.length-1){ idx++; render(); }
+    else finish();
+  };
+  backBtn.onclick=function(){ if(idx>0){ idx--; render(); } };
+
+  function finish(){
+    var sum=0;
+    answers.forEach(function(a,i){ sum+=QUESTIONS[i].opts[a][1]; });
+    var avg=sum/QUESTIONS.length;
+    var level=Math.max(1,Math.min(5,Math.round(avg)));
+    var L=LEVELS[level];
+
+    quiz.style.display='none';
+    result.style.display='block';
+    progBar.style.width='100%';
+
+    document.getElementById('scoreNum').textContent=avg.toFixed(1);
+    document.getElementById('lvlTag').textContent=L.tag;
+    document.getElementById('lvlName').textContent=L.name;
+    document.getElementById('diagText').textContent=L.diag;
+    document.getElementById('nextText').textContent=L.next;
+
+    var circ=465, off=circ-(avg/5)*circ;
+    var arc=document.getElementById('ringArc');
+    setTimeout(function(){ arc.style.transition='stroke-dashoffset .9s ease'; arc.style.strokeDashoffset=off; },60);
+
+    var scale=document.getElementById('scale'); scale.innerHTML='';
+    ['Curioso','Experimental','Operacional','Estratégico','AI-native'].forEach(function(n,i){
+      var s=document.createElement('div'); s.className='s'+((i+1)===level?' on':''); s.textContent=n; scale.appendChild(s);
+    });
+
+    document.getElementById('hiddenScore').value=avg.toFixed(1)+' / 5 ('+L.name+')';
+    document.getElementById('hiddenAnswers').value=QUESTIONS.map(function(Q,i){return Q.dim+': '+Q.opts[answers[i]][0]+' ('+Q.opts[answers[i]][1]+')';}).join(' | ');
+    if(typeof gtag==='function'){ gtag('event','ai_native_score',{score:avg.toFixed(1),level:L.name}); }
+    result.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+
+  document.getElementById('redo').onclick=function(){
+    idx=0; answers=new Array(QUESTIONS.length).fill(null);
+    result.style.display='none'; quiz.style.display='block'; render();
+    document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});
+  };
+
+  // lead form
+  var form=document.getElementById('leadForm'), status=document.getElementById('formStatus');
+  var btn=form.querySelector('button[type="submit"]'), btnText=btn.textContent;
+  function show(msg,ok){ status.textContent=msg; status.style.display='block'; status.style.color= ok?'#2D7D46':'#c0392b'; }
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    btn.disabled=true; btn.textContent='Enviando...';
+    fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(d.success){ form.reset(); show('Recebemos. Enviamos o relatório e retornamos para agendar.',true);} else { show('Não foi possível enviar agora. Tente novamente.',false);} })
+      .catch(function(){ show('Não foi possível enviar agora. Tente novamente.',false); })
+      .finally(function(){ btn.disabled=false; btn.textContent=btnText; });
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
