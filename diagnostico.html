@@ -143,6 +143,29 @@
       </div>
     </div>
 
+    <!-- CAPTURA (antes do resultado) -->
+    <div id="gate" style="display:none">
+      <div class="q">
+        <div class="qn">Quase lá</div>
+        <h2>Seu AI-Native Score está pronto.</h2>
+      </div>
+      <p class="muted" style="margin:-8px 0 18px">Diga para onde enviamos a sua nota e o relatório com o próximo passo. O resultado aparece na tela em seguida.</p>
+      <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89">
+        <input type="hidden" name="subject" value="Novo AI-Native Score pelo site klarea.ai">
+        <input type="hidden" name="from_name" value="Autodiagnóstico Klarea.ai">
+        <input type="hidden" name="AI-Native Score" id="hiddenScore" value="">
+        <input type="hidden" name="Respostas" id="hiddenAnswers" value="">
+        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
+        <div class="row"><input type="text" name="Nome" placeholder="Nome" required><input type="text" name="Empresa" placeholder="Empresa" required></div>
+        <div class="row"><input type="email" name="E-mail" placeholder="E-mail corporativo" required><input type="text" name="Cargo" placeholder="Cargo" required></div>
+        <select name="Segmento" required><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
+        <button class="btn btn-gold" type="submit">Ver meu score</button>
+        <p class="form-status" id="formStatus" style="display:none"></p>
+      </form>
+      <p style="font-size:11.5px;color:var(--muted);text-align:center;margin:12px 0 0">Conversa confidencial. Você recebe a nota por e-mail. Sem spam. <a href="/privacidade.html">Privacidade</a>.</p>
+    </div>
+
     <!-- RESULTADO -->
     <div id="result" style="display:none">
       <div class="scorewrap">
@@ -160,22 +183,11 @@
       <div class="diag"><h3>O que isso diz sobre o seu negócio</h3><p id="diagText"></p></div>
       <div class="next"><div class="ic">→</div><div><b>Próximo passo recomendado</b><p id="nextText"></p></div></div>
 
-      <h3 class="serif" style="color:var(--navy);font-size:19px;margin:0 0 4px">Quer o relatório completo e o benchmark do seu setor?</h3>
-      <p class="muted" style="font-size:14px;margin:0 0 4px">Enviamos a leitura detalhada e uma agenda de 30 minutos, sem compromisso.</p>
-      <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
-        <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89">
-        <input type="hidden" name="subject" value="Novo AI-Native Score pelo site klarea.ai">
-        <input type="hidden" name="from_name" value="Autodiagnóstico Klarea.ai">
-        <input type="hidden" name="AI-Native Score" id="hiddenScore" value="">
-        <input type="hidden" name="Respostas" id="hiddenAnswers" value="">
-        <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-        <div class="row"><input type="text" name="Nome" placeholder="Nome" required><input type="text" name="Empresa" placeholder="Empresa"></div>
-        <div class="row"><input type="email" name="E-mail" placeholder="E-mail corporativo" required><input type="text" name="Cargo" placeholder="Cargo"></div>
-        <select name="Segmento" required><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
-        <button class="btn btn-gold" type="submit">Receber meu relatório</button>
-        <p class="form-status" id="formStatus" style="display:none"></p>
-      </form>
-      <div class="center" style="margin-top:14px"><button class="btn btn-ghost" id="redo" type="button">Refazer o diagnóstico</button></div>
+      <p class="muted" id="sentNote" style="font-size:13.5px;text-align:center;margin:6px 0 18px"></p>
+      <div class="center" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <a class="btn btn-gold" href="/#contato">Agendar 30 minutos</a>
+        <button class="btn btn-ghost" id="redo" type="button">Refazer o diagnóstico</button>
+      </div>
     </div>
   </section>
 </main>
@@ -268,65 +280,87 @@
     progTxt.textContent='Pergunta '+(idx+1)+' de '+QUESTIONS.length;
     backBtn.style.visibility = idx===0 ? 'hidden':'visible';
     nextBtn.disabled = answers[idx]===null;
-    nextBtn.textContent = idx===QUESTIONS.length-1 ? 'Ver meu score' : 'Próxima';
+    nextBtn.textContent = idx===QUESTIONS.length-1 ? 'Ver meu resultado' : 'Próxima';
   }
 
   nextBtn.onclick=function(){
     if(answers[idx]===null) return;
     if(idx<QUESTIONS.length-1){ idx++; render(); }
-    else finish();
+    else computeAndGate();
   };
   backBtn.onclick=function(){ if(idx>0){ idx--; render(); } };
 
-  function finish(){
+  var gate=document.getElementById('gate');
+  var R=null;
+
+  function computeAndGate(){
     var sum=0;
     answers.forEach(function(a,i){ sum+=QUESTIONS[i].opts[a][1]; });
     var avg=sum/QUESTIONS.length;
     var level=Math.max(1,Math.min(5,Math.round(avg)));
-    var L=LEVELS[level];
+    R={avg:avg, level:level, L:LEVELS[level]};
+
+    document.getElementById('hiddenScore').value=avg.toFixed(1)+' / 5 ('+R.L.name+')';
+    document.getElementById('hiddenAnswers').value=QUESTIONS.map(function(Q,i){return Q.dim+': '+Q.opts[answers[i]][0]+' ('+Q.opts[answers[i]][1]+')';}).join(' | ');
+    if(typeof gtag==='function'){ gtag('event','ai_native_score_completed',{score:avg.toFixed(1),level:R.L.name}); }
 
     quiz.style.display='none';
-    result.style.display='block';
+    gate.style.display='block';
     progBar.style.width='100%';
+    document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});
+  }
 
-    document.getElementById('scoreNum').textContent=avg.toFixed(1);
-    document.getElementById('lvlTag').textContent=L.tag;
-    document.getElementById('lvlName').textContent=L.name;
-    document.getElementById('diagText').textContent=L.diag;
-    document.getElementById('nextText').textContent=L.next;
+  function revealResult(){
+    if(!R) return;
+    gate.style.display='none';
+    result.style.display='block';
 
-    var circ=465, off=circ-(avg/5)*circ;
+    document.getElementById('scoreNum').textContent=R.avg.toFixed(1);
+    document.getElementById('lvlTag').textContent=R.L.tag;
+    document.getElementById('lvlName').textContent=R.L.name;
+    document.getElementById('diagText').textContent=R.L.diag;
+    document.getElementById('nextText').textContent=R.L.next;
+
+    var circ=465, off=circ-(R.avg/5)*circ;
     var arc=document.getElementById('ringArc');
+    arc.style.strokeDashoffset=465;
     setTimeout(function(){ arc.style.transition='stroke-dashoffset .9s ease'; arc.style.strokeDashoffset=off; },60);
 
     var scale=document.getElementById('scale'); scale.innerHTML='';
     ['Curioso','Experimental','Operacional','Estratégico','AI-native'].forEach(function(n,i){
-      var s=document.createElement('div'); s.className='s'+((i+1)===level?' on':''); s.textContent=n; scale.appendChild(s);
+      var s=document.createElement('div'); s.className='s'+((i+1)===R.level?' on':''); s.textContent=n; scale.appendChild(s);
     });
 
-    document.getElementById('hiddenScore').value=avg.toFixed(1)+' / 5 ('+L.name+')';
-    document.getElementById('hiddenAnswers').value=QUESTIONS.map(function(Q,i){return Q.dim+': '+Q.opts[answers[i]][0]+' ('+Q.opts[answers[i]][1]+')';}).join(' | ');
-    if(typeof gtag==='function'){ gtag('event','ai_native_score',{score:avg.toFixed(1),level:L.name}); }
+    if(typeof gtag==='function'){ gtag('event','ai_native_score',{score:R.avg.toFixed(1),level:R.L.name}); }
     result.scrollIntoView({behavior:'smooth',block:'start'});
   }
 
   document.getElementById('redo').onclick=function(){
-    idx=0; answers=new Array(QUESTIONS.length).fill(null);
-    result.style.display='none'; quiz.style.display='block'; render();
+    idx=0; answers=new Array(QUESTIONS.length).fill(null); R=null;
+    result.style.display='none'; gate.style.display='none'; quiz.style.display='block'; render();
     document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});
   };
 
-  // lead form
+  // captura: envia a nota por e-mail e só então revela o resultado
   var form=document.getElementById('leadForm'), status=document.getElementById('formStatus');
   var btn=form.querySelector('button[type="submit"]'), btnText=btn.textContent;
+  var sentNote=document.getElementById('sentNote');
   function show(msg,ok){ status.textContent=msg; status.style.display='block'; status.style.color= ok?'#2D7D46':'#c0392b'; }
   form.addEventListener('submit',function(e){
     e.preventDefault();
     btn.disabled=true; btn.textContent='Enviando...';
     fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
       .then(function(r){return r.json();})
-      .then(function(d){ if(d.success){ form.reset(); show('Recebemos. Enviamos o relatório e retornamos para agendar.',true);} else { show('Não foi possível enviar agora. Tente novamente.',false);} })
-      .catch(function(){ show('Não foi possível enviar agora. Tente novamente.',false); })
+      .then(function(d){
+        if(d.success){
+          if(sentNote) sentNote.textContent='Enviamos a sua nota e o relatório para o seu e-mail.';
+          form.reset();
+          revealResult();
+        } else {
+          show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.',false);
+        }
+      })
+      .catch(function(){ show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.',false); })
       .finally(function(){ btn.disabled=false; btn.textContent=btnText; });
   });
 
