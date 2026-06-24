@@ -18,7 +18,6 @@
 - Mentoria de Fluência Executiva: porta de entrada, sem compromisso. IA aplicada às rotinas reais do executivo, 1 a 1.
 - Assessment de Maturidade: mede o AI-Native Score, compara com o setor e entrega um roadmap priorizado.
 - Sprint AI-native: implementação de casos de IA em produção.
-- Conselheiro de IA: assento de conselho e mentoria executiva.
 - Governança de IA: uso, produtos e valor com LGPD, EU AI Act e guardrails.
 
 ## Público
