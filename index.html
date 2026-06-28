@@ -128,6 +128,9 @@
   .avatar{flex:0 0 72px;height:72px;border-radius:14px;border:1.6px dashed #B9CDEF;background:linear-gradient(135deg,#F1F5FB,#F7FAFE);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:var(--font-display)}
   .avatar b{font-size:18px;font-weight:800;color:#2C4A7A;line-height:1}
   .avatar em{font-style:normal;font-size:8.5px;letter-spacing:1px;text-transform:uppercase;margin-top:3px;color:#7E93BC}
+  .avatar.photo{border:1px solid var(--line);background:none;overflow:hidden;padding:0}
+  .avatar.photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.02);transition:filter .25s ease}
+  .avatar.photo:hover img{filter:grayscale(0)}
   .tag{display:inline-block;background:var(--blue-soft);color:#2C4A7A;font-size:12px;font-weight:600;padding:4px 10px;border-radius:7px;margin:0 6px 6px 0;font-family:var(--font-display)}
 
   /* program */
@@ -523,20 +526,23 @@
   </div>
 </section>
 
-<!-- DEPOIMENTOS -->
+<!-- DEPOIMENTOS · ocultado a pedido (depoimentos ilustrativos). Para reexibir, remova os marcadores de comentário abaixo. -->
+<!--
 <section id="depoimentos" class="pad">
   <div class="wrap">
     <div class="label">Casos</div>
     <h2 class="sec serif">O que a IA já entrega na prática</h2>
     <hr class="sec-rule">
     <div class="metrics">
-      <div class="metric"><div class="big">5 dias <span>→ min</span></div><p>Normalização de dados financeiros que consumia uma semana de um analista, entregue por IA para validação.</p></div>
+      <div class="metric"><div class="big">5 dias <span>&rarr; min</span></div><p>Normalização de dados financeiros que consumia uma semana de um analista, entregue por IA para validação.</p></div>
       <div class="metric"><div class="big">2 <span>propostas</span></div><p>Pipeline parado reaquecido em meia hora: contatos reativados, conversas retomadas, propostas geradas.</p></div>
       <div class="metric"><div class="big">24/7</div><p>Reuniões e repositórios monitorados por agentes, com alertas e CRM atualizado sem trabalho manual.</p></div>
     </div>
     <p class="muted center" style="margin-top:18px;font-size:12.5px">Exemplos reais de automações em operação no nosso dia a dia e no de quem orientamos. &nbsp;</p>
   </div>
 </section>
+-->
+
 
 <!-- QUEM SOMOS -->
 <section id="quemsomos" class="pad alt">
@@ -550,7 +556,7 @@
     <div class="grid g2" style="margin-top:26px">
       <div class="card">
         <div class="ptn">
-          <div class="avatar"><b>GT</b></div>
+          <div class="avatar photo"><img src="/img/guilherme-tossulino.jpg" alt="Guilherme Tossulino" width="72" height="72" loading="lazy"></div>
           <div><h4 style="margin:0;font-size:19px">Guilherme Tossulino</h4><span class="arch">O Estrategista</span></div>
         </div>
         <p style="font-size:14.5px;color:#3b4a57;margin-top:14px">Executivo sênior em tecnologia e conselheiro. Especialista em traduzir estratégia em execução: define para onde o negócio vai e conecta as ferramentas, IA inclusive, que fazem a estratégia acontecer. Partner da Questum, atua em growth e criação de valor.</p>
@@ -559,7 +565,7 @@
       </div>
       <div class="card">
         <div class="ptn">
-          <div class="avatar"><b>RS</b></div>
+          <div class="avatar photo"><img src="/img/rafael-scheidt.jpg" alt="Rafael Scheidt" width="72" height="72" loading="lazy"></div>
           <div><h4 style="margin:0;font-size:19px">Rafael de Faria Scheidt <span class="muted" style="font-weight:400">“Foka”</span></h4><span class="arch">O Arquiteto</span></div>
         </div>
         <p style="font-size:14.5px;color:#3b4a57;margin-top:14px">Head of Technology com mais de 20 anos construindo produtos digitais com IA. Foi CTO da NETPACS, healthtech que levou até o exit. Especialista em agentes de IA, RAG e arquiteturas distribuídas, e autor de <a href="https://www.novaengenhariadesoftware.com.br" target="_blank"><em>A Nova Engenharia de Software com IA</em></a>.</p>
