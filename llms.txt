@@ -30,6 +30,7 @@ Conselheiros, C-level, diretores, investidores, executivos e gerentes de médias
 - AI-Native Score (autodiagnóstico): https://klarea.ai/diagnostico.html
 - Conteúdos (artigos e materiais): https://klarea.ai/conteudos.html
   - Artigo "IA não é estratégia. É meio.": https://klarea.ai/artigos/ia-nao-e-estrategia-e-meio.html
+  - Artigo "Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria": https://klarea.ai/artigos/sua-empresa-e-mesmo-ai-native.html
 - Política de Privacidade: https://klarea.ai/privacidade.html
 - Termos de Uso: https://klarea.ai/termos.html
 
