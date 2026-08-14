@@ -1,6 +1,6 @@
 # Klarea
 
-> Klarea é uma consultoria executiva de IA (advisory) para conselhos, C-levels e investidores. Da leitura estratégica à operação: agentes e automações rodando no negócio, com governança e resultado medido. Tese: o que separa quem opera IA de quem só testa não é o modelo, é o que está ao redor dele (estratégia, governança, execução). O cliente não termina com um plano; termina com IA operando.
+> Klarea é uma consultoria de IA para quem decide: donos de empresa, diretores, gestores, executivos, conselhos e investidores. Da leitura estratégica à operação: agentes e automações rodando no negócio, com governança e resultado medido. Tese: o que separa quem opera IA de quem só testa não é o modelo, é o que está ao redor dele (estratégia, governança, execução). O cliente não termina com um plano; termina com IA operando.
 
 ## O que a Klarea é (e o que não é)
 
@@ -15,14 +15,14 @@
 
 ## Como trabalha (jornada em 4 fases)
 
-- Fase 1 · Fluência: Mentoria de Fluência Executiva, 1 a 1, IA aplicada às rotinas reais do líder. Porta de entrada pessoal.
+- Fase 1 · Fluência: Mentoria de Fluência em IA, 1 a 1, IA aplicada às rotinas reais do líder. Porta de entrada pessoal.
 - Fase 2 · Diagnóstico: Assessment de Maturidade — AI-Native Score em 8 dimensões, comparação com o setor, roadmap priorizado por ROI.
 - Fase 3 · Operação: Sprint AI-native — o caso de maior alavancagem em produção, com resultado acordado e medido. Não é POC; é operação viva.
 - Fase 4 · Escala contínua: governança (LGPD, EU AI Act, guardrails), medição de ROI e novos casos do roadmap a cada ciclo. Relação contínua, não projeto com fim.
 
 ## Público
 
-Conselheiros, C-level, diretores, investidores, executivos e gerentes de médias e grandes corporações.
+Donos de empresa, diretores, gestores, executivos, conselheiros e investidores de médias e grandes empresas, incluindo setores tradicionais (indústria, distribuição, serviços).
 
 ## Páginas
 
