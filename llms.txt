@@ -16,7 +16,7 @@
 ## Como trabalha (jornada em 4 fases)
 
 - Fase 1 · Fluência: Mentoria de Fluência em IA, 1 a 1, IA aplicada às rotinas reais do líder. Porta de entrada pessoal.
-- Fase 2 · Diagnóstico: Diagnóstico de Maturidade — AI-Native Score em 8 dimensões, comparação com o setor, roadmap priorizado por ROI.
+- Fase 2 · Diagnóstico: Diagnóstico de Maturidade — Índice de Maturidade em IA em 8 dimensões, comparação com o setor, plano priorizado por ROI.
 - Fase 3 · Operação: Implantação de IA — o caso de maior alavancagem em produção, com resultado acordado e medido. Não é POC; é operação viva.
 - Fase 4 · Escala contínua: governança (LGPD, EU AI Act, guardrails), medição de ROI e novos casos do roadmap a cada ciclo. Relação contínua, não projeto com fim.
 
@@ -27,7 +27,7 @@ Donos de empresa, diretores, gestores, executivos, conselheiros e investidores d
 ## Páginas
 
 - Site principal: https://klarea.ai/
-- AI-Native Score (autodiagnóstico): https://klarea.ai/diagnostico.html
+- Índice de Maturidade em IA (autodiagnóstico, ex-AI-Native Score): https://klarea.ai/diagnostico.html
 - Conteúdos (artigos e materiais): https://klarea.ai/conteudos.html
   - Artigo "IA não é estratégia. É meio.": https://klarea.ai/artigos/ia-nao-e-estrategia-e-meio.html
   - Artigo "Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria": https://klarea.ai/artigos/sua-empresa-e-mesmo-ai-native.html
