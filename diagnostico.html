@@ -404,6 +404,7 @@
         if(d.success){
           if(sentNote) sentNote.textContent='Enviamos a sua nota e o relatório para o seu e-mail.';
           form.reset();
+          if(typeof gtag==='function'){ gtag('event','generate_lead',{origem:'ai_native_score'}); }
           revealResult();
         } else {
           show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.',false);

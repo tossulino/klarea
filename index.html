@@ -661,6 +661,7 @@
     .then(function(data){
       if(data.success){
         form.reset();
+        if(typeof gtag==='function'){ gtag('event','generate_lead',{origem:'formulario_contato'}); }
         show('Recebemos seu contato. Retornamos em breve para agendar.', true);
       } else {
         show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp abaixo.', false);
