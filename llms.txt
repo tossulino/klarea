@@ -1,10 +1,10 @@
 # Klarea
 
-> Klarea é uma advisory de IA executiva para conselhos, C-levels e investidores. Da leitura estratégica à operação: agentes e automações rodando no negócio, com governança e resultado medido. Tese: o que separa quem opera IA de quem só testa não é o modelo, é o que está ao redor dele (estratégia, governança, execução). O cliente não termina com um plano; termina com IA operando.
+> Klarea é uma consultoria executiva de IA (advisory) para conselhos, C-levels e investidores. Da leitura estratégica à operação: agentes e automações rodando no negócio, com governança e resultado medido. Tese: o que separa quem opera IA de quem só testa não é o modelo, é o que está ao redor dele (estratégia, governança, execução). O cliente não termina com um plano; termina com IA operando.
 
 ## O que a Klarea é (e o que não é)
 
-- É uma advisory independente: não vende plataforma, não revende software, não tem conflito de interesse, conversas confidenciais. Implanta sobre a stack que fizer sentido para o cliente.
+- É uma consultoria independente: não vende plataforma, não revende software, não tem conflito de interesse, conversas confidenciais. Implanta sobre a stack que fizer sentido para o cliente.
 - NÃO é escola de IA. NÃO é software house.
 - Conecta a IA à execução da estratégia e leva até a operação: decisão, eficiência e crescimento, com resultado medido.
 
@@ -37,3 +37,7 @@ Conselheiros, C-level, diretores, investidores, executivos e gerentes de médias
 ## Contato
 
 - Formulário e WhatsApp disponíveis em https://klarea.ai/#contato
+
+## Para quem não é empresa de tecnologia
+
+A Klarea atende também (e principalmente) setores tradicionais: indústria, distribuição e serviços. O cliente não precisa ter equipe de tecnologia — a engenharia é da Klarea; o conhecimento do negócio é do cliente. Foco: governança de IA, agentes de IA integrados aos sistemas existentes (ERP, CRM, planilhas) e projetos com resultado medido.
