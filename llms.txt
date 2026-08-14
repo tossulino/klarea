@@ -11,7 +11,7 @@
 ## Sócios
 
 - Guilherme Tossulino — Estratégia e execução. Executivo sênior de tecnologia e conselheiro, especialista em levar estratégia à prática com IA. LinkedIn: https://www.linkedin.com/in/tossulino/
-- Rafael Scheidt — Engenharia de software e IA. CTO e exit na NETPACS (healthtech). Autor de "A Nova Engenharia de Software com IA". LinkedIn: https://www.linkedin.com/in/rafael-scheidt-9b7186164/
+- Rafael Scheidt — Engenharia de software e IA. CTO na NETPACS, empresa de tecnologia em saúde que ajudou a construir e vender. Autor de "A Nova Engenharia de Software com IA". LinkedIn: https://www.linkedin.com/in/rafael-scheidt-9b7186164/
 
 ## Como trabalha (jornada em 4 fases)
 
