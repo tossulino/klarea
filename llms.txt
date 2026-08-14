@@ -16,8 +16,8 @@
 ## Como trabalha (jornada em 4 fases)
 
 - Fase 1 · Fluência: Mentoria de Fluência em IA, 1 a 1, IA aplicada às rotinas reais do líder. Porta de entrada pessoal.
-- Fase 2 · Diagnóstico: Assessment de Maturidade — AI-Native Score em 8 dimensões, comparação com o setor, roadmap priorizado por ROI.
-- Fase 3 · Operação: Sprint AI-native — o caso de maior alavancagem em produção, com resultado acordado e medido. Não é POC; é operação viva.
+- Fase 2 · Diagnóstico: Diagnóstico de Maturidade — AI-Native Score em 8 dimensões, comparação com o setor, roadmap priorizado por ROI.
+- Fase 3 · Operação: Implantação de IA — o caso de maior alavancagem em produção, com resultado acordado e medido. Não é POC; é operação viva.
 - Fase 4 · Escala contínua: governança (LGPD, EU AI Act, guardrails), medição de ROI e novos casos do roadmap a cada ciclo. Relação contínua, não projeto com fim.
 
 ## Público
@@ -41,3 +41,12 @@ Donos de empresa, diretores, gestores, executivos, conselheiros e investidores d
 ## Para quem não é empresa de tecnologia
 
 A Klarea atende também (e principalmente) setores tradicionais: indústria, distribuição e serviços. O cliente não precisa ter equipe de tecnologia — a engenharia é da Klarea; o conhecimento do negócio é do cliente. Foco: governança de IA, agentes de IA integrados aos sistemas existentes (ERP, CRM, planilhas) e projetos com resultado medido.
+
+## Soluções (o que a Klarea constrói)
+
+- Agentes de IA na operação: atendimento, vendas, financeiro, compras, rodando 24/7 com supervisão humana.
+- IA sobre os sistemas atuais: orquestradores e integrações por cima de ERP, CRM, planilhas e e-mail, inclusive sistemas legados. Sem trocar o que funciona.
+- Software sob medida com IA: aplicações enxutas construídas em semanas, integradas ao que existe.
+- Central de IA da empresa: ambiente único e seguro para as equipes usarem IA, com controle de acesso, custo e auditoria.
+- Atendimento com IA no WhatsApp: resposta imediata ao cliente, com transferência para humanos.
+- Governança de IA: política de uso, limites de segurança, auditoria e LGPD.
