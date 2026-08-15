@@ -26,6 +26,15 @@ A Klarea tem competências para executar qualquer projeto de IA. Três frentes d
 
 Diagnóstico de Maturidade (Índice de Maturidade em IA em 8 dimensões, priorização por retorno) → Implantação de IA (o caso de maior alavancagem em operação, em semanas; não é piloto, é operação viva) → escala contínua (governança, medição de retorno e novos casos a cada ciclo). O cliente entra pela porta que o problema pede.
 
+## Princípios de execução (valem em qualquer frente, vão em todo contrato)
+
+1. O que construímos é do cliente: código, integrações, prompts e avaliações ficam com ele.
+2. Sucesso definido antes do código: métrica, base de comparação e prazo acordados antes de construir.
+3. Sem comissão de ferramenta: o cliente contrata os provedores direto; a recomendação é técnica, não comercial.
+4. Sem amarras de fornecedor: arquitetura preparada para trocar de modelo e plataforma.
+5. Supervisão humana onde importa: agentes com limites, registro e aprovação humana no que é crítico.
+6. Ficamos até funcionar: 90 dias de acompanhamento após a entrada em operação.
+
 ## Público
 
 Donos de empresa, diretores, gestores, executivos, conselheiros e investidores de médias e grandes empresas, incluindo setores tradicionais (indústria, distribuição, serviços).
