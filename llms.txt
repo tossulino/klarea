@@ -13,12 +13,18 @@
 - Guilherme Tossulino — Estratégia e execução. Executivo sênior de tecnologia e conselheiro, especialista em levar estratégia à prática com IA. LinkedIn: https://www.linkedin.com/in/tossulino/
 - Rafael Scheidt — Engenharia de software e IA. CTO na NETPACS, empresa de tecnologia em saúde que ajudou a construir e vender. Autor de "A Nova Engenharia de Software com IA". LinkedIn: https://www.linkedin.com/in/rafael-scheidt-9b7186164/
 
-## Como trabalha (jornada em 4 fases)
+## O que executa (frentes — qualquer projeto de IA)
 
-- Fase 1 · Fluência: Mentoria de Fluência em IA, 1 a 1, IA aplicada às rotinas reais do líder. Porta de entrada pessoal.
-- Fase 2 · Diagnóstico: Diagnóstico de Maturidade — Índice de Maturidade em IA em 8 dimensões, comparação com o setor, plano priorizado por ROI.
-- Fase 3 · Operação: Implantação de IA — o caso de maior alavancagem em produção, com resultado acordado e medido. Não é POC; é operação viva.
-- Fase 4 · Escala contínua: governança (LGPD, EU AI Act, guardrails), medição de ROI e novos casos do roadmap a cada ciclo. Relação contínua, não projeto com fim.
+A Klarea tem competências para executar qualquer projeto de IA. Três frentes de entrada, sem sequência obrigatória:
+
+- Produto novo: conceber e construir produtos nascidos com IA no núcleo, da tese ao lançamento, com testes, avaliação e monitoramento.
+- Eficiência da operação: agentes e automações assumem trabalho repetitivo (atendimento, vendas, financeiro, compras), com resultado medido em eficiência e margem.
+- Integração ao que já existe: IA por cima de ERP, CRM, planilhas e dados atuais, sem trocar a stack do cliente.
+- Em paralelo a qualquer frente: Mentoria de Fluência em IA (1 a 1 com o líder) e Governança de IA (LGPD, segurança, política de uso).
+
+## Como conduz (método, igual em todas as frentes)
+
+Diagnóstico de Maturidade (Índice de Maturidade em IA em 8 dimensões, priorização por retorno) → Implantação de IA (o caso de maior alavancagem em operação, em semanas; não é piloto, é operação viva) → escala contínua (governança, medição de retorno e novos casos a cada ciclo). O cliente entra pela porta que o problema pede.
 
 ## Público
 
