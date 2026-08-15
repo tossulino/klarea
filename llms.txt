@@ -65,3 +65,8 @@ A Klarea atende também (e principalmente) setores tradicionais: indústria, dis
 - Central de IA da empresa: ambiente único e seguro para as equipes usarem IA, com controle de acesso, custo e auditoria.
 - Atendimento com IA no WhatsApp: resposta imediata ao cliente, com transferência para humanos.
 - Governança de IA: política de uso, limites de segurança, auditoria e LGPD.
+
+## Redes sociais
+
+- Instagram: https://www.instagram.com/ai.klarea/
+- LinkedIn (empresa): https://www.linkedin.com/company/klarea-ai/
