@@ -108,6 +108,14 @@
   .next b{color:var(--gold-soft);font-family:var(--font-display);font-size:15px}
   .next p{margin:4px 0 0;font-size:14px;color:#d3e0ec}
 
+  /* prévia da nota no gate: entrega antes de pedir */
+  .gatescore{display:flex;align-items:center;gap:18px;background:linear-gradient(160deg,#0E2340,#081A30);color:#fff;border-radius:12px;padding:20px 22px;margin-bottom:22px}
+  .gatescore b{font-family:var(--font-display);font-size:46px;font-weight:800;line-height:1;color:var(--gold-soft)}
+  .gatescore .of{font-size:12px;color:#9db2c9;letter-spacing:1px;text-transform:uppercase;display:block;margin-top:4px}
+  .gatescore .lvltag{color:var(--gold-soft)}
+  .gatescore .gatelvl{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.01em;margin-top:2px}
+  @media(max-width:420px){.gatescore{gap:14px;padding:18px}.gatescore b{font-size:38px}.gatescore .gatelvl{font-size:19px}}
+
   .form{display:grid;gap:11px;text-align:left;margin-top:8px}
   .form .row{display:grid;grid-template-columns:1fr 1fr;gap:11px}
   @media(max-width:520px){.form .row{grid-template-columns:1fr}}
@@ -162,11 +170,18 @@
 
     <!-- CAPTURA (antes do resultado) -->
     <div id="gate" style="display:none">
-      <div class="q">
-        <div class="qn">Quase lá</div>
-        <h2>Seu Índice de Maturidade em IA está pronto.</h2>
+      <div class="gatescore">
+        <div><b id="gateNum">0</b><span class="of">de 5</span></div>
+        <div>
+          <span class="lvltag" id="gateTag"></span>
+          <div class="gatelvl" id="gateLvl"></div>
+        </div>
       </div>
-      <p class="muted" style="margin:-8px 0 18px">Diga para onde enviamos a sua nota e o relatório com o próximo passo. O resultado aparece na tela em seguida.</p>
+      <div class="q">
+        <div class="qn">Falta uma coisa</div>
+        <h2>Para onde enviamos o seu perfil completo?</h2>
+      </div>
+      <p class="muted" style="margin:-8px 0 18px">O relatório abre a sua nota nas 8 dimensões, aponta onde está o gargalo que segura o conjunto e o próximo passo recomendado. Só o e-mail é obrigatório.</p>
       <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
         <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89">
         <input type="hidden" name="subject" value="Novo Índice de Maturidade pelo site klarea.ai">
@@ -174,10 +189,10 @@
         <input type="hidden" name="Índice de Maturidade" id="hiddenScore" value="">
         <input type="hidden" name="Respostas" id="hiddenAnswers" value="">
         <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" aria-hidden="true">
-        <div class="row"><input type="text" name="Nome" placeholder="Nome" required><input type="text" name="Empresa" placeholder="Empresa" required></div>
-        <div class="row"><input type="email" name="E-mail" placeholder="E-mail corporativo" required><input type="text" name="Cargo" placeholder="Cargo" required></div>
-        <select name="Segmento" required><option value="" disabled selected>Segmento</option><option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option><option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option><option>Serviços</option><option>Outro</option></select>
-        <button class="btn btn-gold" type="submit">Ver meu índice</button>
+        <input type="email" name="E-mail" placeholder="E-mail corporativo" required autocomplete="email">
+        <div class="row"><input type="text" name="Empresa" placeholder="Empresa (opcional)" autocomplete="organization"><input type="text" name="Cargo" placeholder="Cargo (opcional)" autocomplete="organization-title"></div>
+        <select name="Tamanho da empresa"><option value="" disabled selected>Tamanho da empresa (opcional)</option><option>Até 50 funcionários</option><option>51 a 200</option><option>201 a 1.000</option><option>1.001 a 5.000</option><option>Mais de 5.000</option></select>
+        <button class="btn btn-gold" type="submit">Ver meu perfil completo</button>
         <p class="form-status" id="formStatus" style="display:none"></p>
       </form>
       <p style="font-size:11.5px;color:var(--muted);text-align:center;margin:12px 0 0">Conversa confidencial. Você recebe a nota por e-mail. Sem spam. <a href="/privacidade.html">Privacidade</a>.</p>
@@ -280,6 +295,10 @@
     5:{tag:"Nível 5 de 5", name:"Nativo em IA", diag:"A IA está no centro do negócio e o valor se compõe a cada uso. A vantagem agora é manter o ritmo: quanto mais a sua IA roda, mais difícil fica te alcançar.", next:"Sustente a escala: governança forte, medição de retorno e novos casos a cada ciclo, para você não perder a dianteira."}
   };
 
+  // instrumentação do funil: sem isso não dá para saber em que etapa a pessoa desiste
+  function track(name,params){ if(typeof gtag==='function'){ gtag('event',name,params||{}); } }
+  var started=false;
+
   var idx=0, answers=new Array(QUESTIONS.length).fill(null);
   var quiz=document.getElementById('quiz'), result=document.getElementById('result');
   var qDim=document.getElementById('qDim'), qText=document.getElementById('qText'), opts=document.getElementById('opts');
@@ -295,7 +314,10 @@
       var b=document.createElement('button');
       b.type='button'; b.className='opt'+(answers[idx]===i?' sel':'');
       b.innerHTML='<span class="dot"></span><span>'+o[0]+'</span>';
-      b.onclick=function(){ answers[idx]=i; render(); };
+      b.onclick=function(){
+        if(!started){ started=true; track('quiz_start'); }
+        answers[idx]=i; render();
+      };
       opts.appendChild(b);
     });
     progBar.style.width=((idx)/QUESTIONS.length*100)+'%';
@@ -307,7 +329,7 @@
 
   nextBtn.onclick=function(){
     if(answers[idx]===null) return;
-    if(idx<QUESTIONS.length-1){ idx++; render(); }
+    if(idx<QUESTIONS.length-1){ idx++; track('quiz_progress',{pergunta:idx+1}); render(); }
     else computeAndGate();
   };
   backBtn.onclick=function(){ if(idx>0){ idx--; render(); } };
@@ -325,9 +347,16 @@
     document.getElementById('hiddenScore').value=avg.toFixed(1)+' / 5 ('+R.L.name+')';
     document.getElementById('hiddenAnswers').value=QUESTIONS.map(function(Q,i){return Q.dim+': '+Q.opts[answers[i]][0]+' ('+Q.opts[answers[i]][1]+')';}).join(' | ');
     if(typeof gtag==='function'){ gtag('event','ai_native_score_completed',{score:avg.toFixed(1),level:R.L.name}); }
+    track('quiz_completed',{score:avg.toFixed(1),level:R.L.name});
+
+    // a nota aparece antes do pedido de e-mail: quem já viu o valor entrega o contato
+    document.getElementById('gateNum').textContent=avg.toFixed(1);
+    document.getElementById('gateTag').textContent=R.L.tag;
+    document.getElementById('gateLvl').textContent=R.L.name;
 
     quiz.style.display='none';
     gate.style.display='block';
+    track('gate_view',{level:R.L.name});
     progBar.style.width='100%';
     document.getElementById('panel').scrollIntoView({behavior:'smooth',block:'start'});
   }
@@ -398,6 +427,7 @@
   function show(msg,ok){ status.textContent=msg; status.style.display='block'; status.style.color= ok?'#2D7D46':'#c0392b'; }
   form.addEventListener('submit',function(e){
     e.preventDefault();
+    track('lead_submit');
     btn.disabled=true; btn.textContent='Enviando...';
     fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
       .then(function(r){return r.json();})
