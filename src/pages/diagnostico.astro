@@ -1,0 +1,336 @@
+---
+import Page from '../layouts/Page.astro';
+---
+<Page
+  title="Índice de Maturidade em IA · Klarea"
+  description="Índice de Maturidade em IA da Klarea: autodiagnóstico de 2 minutos que mede a maturidade de IA do seu negócio e mostra o próximo passo para subir de nível."
+  canonical="https://klarea.ai/diagnostico.html"
+  active="metodo"
+  heading="Tire a IA da sua empresa amanhã. O que para?"
+  lede='Se a resposta é "nada", você tem ferramenta, não estratégia. Oito perguntas, dois minutos: um índice de 1 a 5, o seu perfil em 8 dimensões e o próximo passo para subir de nível. Responda pensando no negócio, não em você.'
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <div class="panel" id="panel">
+        <div class="prog"><i id="progBar"></i></div>
+
+        <div class="panel-in">
+          <!-- etapa 1: perguntas -->
+          <div id="quiz">
+            <p class="prog-txt" id="progTxt">Pergunta 1 de 8</p>
+            <p class="q-dim" id="qDim"></p>
+            <h2 class="q-text" id="qText"></h2>
+            <div class="opts" id="opts"></div>
+            <div class="quiz-nav">
+              <button class="btn btn-ghost" type="button" id="backBtn">Voltar</button>
+              <button class="btn" type="button" id="nextBtn">Próxima</button>
+            </div>
+          </div>
+
+          <!-- etapa 2: a nota aparece antes do pedido de e-mail -->
+          <div id="gate" style="display:none">
+            <div class="score">
+              <svg class="ring" viewBox="0 0 160 160" aria-hidden="true">
+                <circle class="bg" cx="80" cy="80" r="74" />
+              </svg>
+              <div>
+                <div><span class="num" id="gateNum">0</span><span class="of">de 5</span></div>
+                <div class="tag" id="gateTag"></div>
+                <div class="lvl" id="gateLvl"></div>
+              </div>
+            </div>
+
+            <h3 style="margin-top:30px">Falta uma coisa: para onde enviamos o seu perfil completo?</h3>
+            <p class="prose" style="max-width:62ch">
+              O relatório abre a sua nota nas 8 dimensões, aponta onde está o gargalo que segura o conjunto e o próximo
+              passo recomendado. Só o e-mail é obrigatório.
+            </p>
+
+            <form class="form form-light" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+              <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89" />
+              <input type="hidden" name="subject" value="Novo Índice de Maturidade pelo site klarea.ai" />
+              <input type="hidden" name="from_name" value="Autodiagnóstico Klarea.ai" />
+              <input type="hidden" name="Índice de Maturidade" id="hiddenScore" value="" />
+              <input type="hidden" name="Respostas" id="hiddenAnswers" value="" />
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+              <label><span>E-mail corporativo</span><input type="email" name="E-mail" required placeholder="voce@empresa.com.br" autocomplete="email" /></label>
+              <label><span>Empresa</span><input type="text" name="Empresa" placeholder="Razão social ou marca" autocomplete="organization" /></label>
+              <label><span>Cargo</span><input type="text" name="Cargo" placeholder="Conselheiro, CEO, diretor" autocomplete="organization-title" /></label>
+              <label>
+                <span>Tamanho da empresa (opcional)</span>
+                <select name="Tamanho da empresa">
+                  <option>Até 50 funcionários</option><option>51 a 200</option>
+                  <option>201 a 1.000</option><option>1.001 a 5.000</option><option>Mais de 5.000</option>
+                </select>
+              </label>
+              <button class="btn submit" type="submit">Ver meu perfil completo</button>
+            </form>
+            <p class="status" id="formStatus"></p>
+            <p class="fine">
+              Conversa confidencial. Você recebe a nota por e-mail. Sem spam.{' '}
+              <a href="/privacidade.html" style="color:var(--course-ink)">Privacidade</a>.
+            </p>
+          </div>
+
+          <!-- etapa 3: resultado -->
+          <div id="result" style="display:none">
+            <div class="score">
+              <svg class="ring" viewBox="0 0 160 160" aria-hidden="true">
+                <circle class="bg" cx="80" cy="80" r="74" />
+                <circle class="arc" id="ringArc" cx="80" cy="80" r="74" />
+              </svg>
+              <div>
+                <div><span class="num" id="scoreNum">0</span><span class="of">de 5</span></div>
+                <div class="tag" id="lvlTag"></div>
+                <div class="lvl" id="lvlName"></div>
+              </div>
+            </div>
+
+            <div class="scale" id="scale"></div>
+            <p class="fine" id="sentNote"></p>
+
+            <h3 style="margin-top:34px">Seu perfil nas 8 dimensões</h3>
+            <div class="dimrows" id="dimRows"></div>
+            <p class="prose" id="gapText" style="max-width:68ch"></p>
+
+            <h3 style="margin-top:34px">O que isso diz sobre o seu negócio</h3>
+            <p class="prose" id="diagText" style="max-width:68ch"></p>
+
+            <h3 style="margin-top:30px">Próximo passo recomendado</h3>
+            <p class="prose" id="nextText" style="max-width:68ch"></p>
+
+            <div class="quiz-nav" style="justify-content:flex-start">
+              <a class="btn" href="/#contato">Agendar 30 minutos</a>
+              <button class="btn btn-ghost" type="button" id="redo">Refazer o diagnóstico</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      var QUESTIONS = [
+        {dim:"Estratégia", q:"No seu negócio, a IA hoje está...", opts:[
+          ["Fora do radar da liderança",1],
+          ["Em conversas informais, sem dono",2],
+          ["Em alguns processos, caso a caso",3],
+          ["Na agenda formal da liderança, com metas",4],
+          ["No centro da estratégia e do modelo de negócio",5]]},
+        {dim:"Patrocínio", q:"Quem puxa a IA dentro do negócio?", opts:[
+          ["Ninguém em específico",1],
+          ["Quem se interessa, de forma isolada",2],
+          ["A área de TI, num plano técnico",3],
+          ["Um responsável com mandato e orçamento",4],
+          ["O dono ou a liderança máxima, como prioridade declarada",5]]},
+        {dim:"Casos em operação", q:"Processos relevantes rodando com IA hoje:", opts:[
+          ["Nenhum",1],
+          ["Testes e demonstrações que não viraram rotina",2],
+          ["Um ou dois processos de apoio",3],
+          ["Vários processos relevantes",4],
+          ["IA integrada ao centro do negócio, ponta a ponta",5]]},
+        {dim:"Dados", q:"Os dados para alimentar IA estão...", opts:[
+          ["Espalhados e sem organização",1],
+          ["Em planilhas e sistemas isolados",2],
+          ["Centralizados em parte",3],
+          ["Organizados e acessíveis",4],
+          ["Estruturados e prontos, com governança de dados",5]]},
+        {dim:"Governança", q:"Política de uso de IA, LGPD e limites de segurança:", opts:[
+          ["Não existe; cada um usa como quer",1],
+          ["Conversamos, mas nada formal",2],
+          ["Regras básicas em algumas áreas",3],
+          ["Política formal e em uso",4],
+          ["Governança completa: política, auditoria e responsável",5]]},
+        {dim:"Fluência", q:"A liderança sabe o que pedir à IA?", opts:[
+          ["Não, é um tema distante",1],
+          ["Há curiosidade, mas falta repertório",2],
+          ["Uso pessoal básico",3],
+          ["Sabe abrir boas demandas e cobrar",4],
+          ["Domina o suficiente para dar a direção",5]]},
+        {dim:"Resultado", q:"A IA hoje gera...", opts:[
+          ["Nenhum resultado mensurável",1],
+          ["Economia de tempo pontual",2],
+          ["Ganhos de produtividade em algumas áreas",3],
+          ["Impacto em eficiência e custo, medido",4],
+          ["Receita e margem atribuíveis à IA",5]]},
+        {dim:"Adoção", q:"No dia a dia das equipes, a IA é...", opts:[
+          ["Praticamente ausente",1],
+          ["Usada por poucos entusiastas",2],
+          ["Comum em algumas áreas",3],
+          ["Adotada de forma ampla",4],
+          ["Parte de como o trabalho é feito",5]]}
+      ];
+
+      var LEVELS = {
+        1:{tag:"Nível 1 de 5", name:"Curioso", diag:"A IA ainda é uso pessoal e pontual. Falta dono, direção e ligação com a estratégia. O risco maior aqui não é fazer errado, é ficar parado enquanto o setor anda.", next:"Comece pela Mentoria de Fluência em IA: a IA nas suas rotinas reais, para você sentir o ganho e aprender a pedir. É daqui que nascem os projetos certos."},
+        2:{tag:"Nível 2 de 5", name:"Experimental", diag:"Existem pilotos e entusiasmo, mas soltos: impressionam na apresentação e não viram competência nem resultado que se sustente. Falta priorização e patrocínio com poder de decisão. E uma ressalva honesta: nem toda empresa precisa de IA no centro de tudo. A decisão é onde colocar. O que não dá é decidir sem mapa.", next:"Faça o Diagnóstico de Maturidade: medimos onde está o maior valor, comparamos com o setor e priorizamos por retorno, com um dono claro."},
+        3:{tag:"Nível 3 de 5", name:"Operacional", diag:"A IA já está em processos, mas o valor ainda é difuso e a governança corre atrás. O salto agora é transformar uso em resultado de negócio medido. E sem dogma: nem toda frente precisa de IA no centro. A decisão é onde concentrar, e isso pede mapa, não intuição.", next:"Hora da Implantação de IA: o seu caso de maior alavancagem em operação, com resultado acordado e medido, e 90 dias de acompanhamento. Não é piloto. É operação viva."},
+        4:{tag:"Nível 4 de 5", name:"Estratégico", diag:"A IA está na agenda da liderança e já entrega resultado. O desafio passa a ser escala com segurança: governança, novos casos e direção contínua.", next:"Hora de escalar: governança, medição de retorno e novos casos do plano a cada ciclo. Mais IA no ar, com menos exposição."},
+        5:{tag:"Nível 5 de 5", name:"Nativo em IA", diag:"A IA está no centro do negócio e o valor se compõe a cada uso. A vantagem agora é manter o ritmo: quanto mais a sua IA roda, mais difícil fica te alcançar.", next:"Sustente a escala: governança forte, medição de retorno e novos casos a cada ciclo, para você não perder a dianteira."}
+      };
+
+      // instrumentação do funil: sem isso não dá para saber em que etapa a pessoa desiste
+      function track(name, params) { if (typeof gtag === 'function') { gtag('event', name, params || {}); } }
+      var started = false;
+
+      var idx = 0, answers = new Array(QUESTIONS.length).fill(null);
+      var quiz = document.getElementById('quiz'), result = document.getElementById('result');
+      var qDim = document.getElementById('qDim'), qText = document.getElementById('qText'), opts = document.getElementById('opts');
+      var progBar = document.getElementById('progBar'), progTxt = document.getElementById('progTxt');
+      var backBtn = document.getElementById('backBtn'), nextBtn = document.getElementById('nextBtn');
+
+      function render() {
+        var Q = QUESTIONS[idx];
+        qDim.textContent = Q.dim;
+        qText.textContent = Q.q;
+        opts.innerHTML = '';
+        Q.opts.forEach(function (o, i) {
+          var b = document.createElement('button');
+          b.type = 'button'; b.className = 'opt' + (answers[idx] === i ? ' sel' : '');
+          b.setAttribute('aria-pressed', answers[idx] === i ? 'true' : 'false');
+          b.innerHTML = '<span class="dot"></span><span></span>';
+          b.lastChild.textContent = o[0];
+          b.onclick = function () {
+            if (!started) { started = true; track('quiz_start'); }
+            answers[idx] = i; render();
+          };
+          opts.appendChild(b);
+        });
+        progBar.style.width = ((idx) / QUESTIONS.length * 100) + '%';
+        progTxt.textContent = 'Pergunta ' + (idx + 1) + ' de ' + QUESTIONS.length;
+        backBtn.style.visibility = idx === 0 ? 'hidden' : 'visible';
+        nextBtn.disabled = answers[idx] === null;
+        nextBtn.textContent = idx === QUESTIONS.length - 1 ? 'Ver meu resultado' : 'Próxima';
+      }
+
+      nextBtn.onclick = function () {
+        if (answers[idx] === null) return;
+        if (idx < QUESTIONS.length - 1) { idx++; track('quiz_progress', { pergunta: idx + 1 }); render(); }
+        else computeAndGate();
+      };
+      backBtn.onclick = function () { if (idx > 0) { idx--; render(); } };
+
+      var gate = document.getElementById('gate');
+      var R = null;
+
+      function computeAndGate() {
+        var sum = 0;
+        answers.forEach(function (a, i) { sum += QUESTIONS[i].opts[a][1]; });
+        var avg = sum / QUESTIONS.length;
+        var level = Math.max(1, Math.min(5, Math.round(avg)));
+        R = { avg: avg, level: level, L: LEVELS[level] };
+
+        document.getElementById('hiddenScore').value = avg.toFixed(1) + ' / 5 (' + R.L.name + ')';
+        document.getElementById('hiddenAnswers').value = QUESTIONS.map(function (Q, i) {
+          return Q.dim + ': ' + Q.opts[answers[i]][0] + ' (' + Q.opts[answers[i]][1] + ')';
+        }).join(' | ');
+        if (typeof gtag === 'function') { gtag('event', 'ai_native_score_completed', { score: avg.toFixed(1), level: R.L.name }); }
+        track('quiz_completed', { score: avg.toFixed(1), level: R.L.name });
+
+        // a nota aparece antes do pedido de e-mail: quem já viu o valor entrega o contato
+        document.getElementById('gateNum').textContent = avg.toFixed(1);
+        document.getElementById('gateTag').textContent = R.L.tag;
+        document.getElementById('gateLvl').textContent = R.L.name;
+
+        quiz.style.display = 'none';
+        gate.style.display = 'block';
+        track('gate_view', { level: R.L.name });
+        progBar.style.width = '100%';
+        document.getElementById('panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      function revealResult() {
+        if (!R) return;
+        gate.style.display = 'none';
+        result.style.display = 'block';
+
+        document.getElementById('scoreNum').textContent = R.avg.toFixed(1);
+        document.getElementById('lvlTag').textContent = R.L.tag;
+        document.getElementById('lvlName').textContent = R.L.name;
+        document.getElementById('diagText').textContent = R.L.diag;
+        document.getElementById('nextText').textContent = R.L.next;
+
+        var circ = 465, off = circ - (R.avg / 5) * circ;
+        var arc = document.getElementById('ringArc');
+        arc.style.strokeDashoffset = 465;
+        setTimeout(function () { arc.style.transition = 'stroke-dashoffset .9s cubic-bezier(.16,1,.3,1)'; arc.style.strokeDashoffset = off; }, 60);
+
+        var scale = document.getElementById('scale'); scale.innerHTML = '';
+        ['Curioso', 'Experimental', 'Operacional', 'Estratégico', 'Nativo em IA'].forEach(function (n, i) {
+          var s = document.createElement('div');
+          s.className = 's' + ((i + 1) === R.level ? ' on' : '');
+          s.textContent = n; scale.appendChild(s);
+        });
+
+        // perfil nas 8 dimensões: o desequilíbrio importa mais que a média
+        var vals = QUESTIONS.map(function (Q, i) { return Q.opts[answers[i]][1]; });
+        var mx = Math.max.apply(null, vals), mn = Math.min.apply(null, vals);
+        var hiIdx = vals.indexOf(mx), loIdx = vals.indexOf(mn);
+        var rows = document.getElementById('dimRows'); rows.innerHTML = '';
+        var fills = [];
+        QUESTIONS.forEach(function (Q, i) {
+          var cls = 'dimrow';
+          if (mx !== mn && vals[i] === mx) cls += ' hi';
+          if (mx !== mn && i === loIdx) cls += ' lo';
+          var row = document.createElement('div'); row.className = cls;
+          var chip = (mx !== mn && i === hiIdx) ? '<span class="dimchip hi">forte</span>'
+                   : (mx !== mn && i === loIdx) ? '<span class="dimchip lo">prioridade</span>' : '';
+          row.innerHTML = '<span class="nm">' + Q.dim + chip + '</span><div class="dimbar"><i></i></div><span class="vl">' + vals[i] + '</span>';
+          rows.appendChild(row);
+          fills.push({ el: row.querySelector('.dimbar i'), w: (vals[i] / 5 * 100) });
+        });
+        setTimeout(function () { fills.forEach(function (f) { f.el.style.width = f.w + '%'; }); }, 120);
+
+        var gap = document.getElementById('gapText');
+        if (mx === mn) {
+          gap.innerHTML = 'Perfil equilibrado: as 8 dimensões no mesmo nível. Equilíbrio compõe. O próximo passo é subir o conjunto, não uma frente isolada.';
+        } else if (mx - mn >= 2) {
+          gap.innerHTML = 'Sua base mais forte é <b>' + QUESTIONS[hiIdx].dim + ' (' + mx + ' de 5)</b>. Sua prioridade é <b>' + QUESTIONS[loIdx].dim + ' (' + mn + ' de 5)</b>. A média de ' + R.avg.toFixed(1) + ' esconde isso: é na dimensão fraca que a conta desmonta. Equilíbrio compõe. Desequilíbrio cria atrito.';
+        } else {
+          gap.innerHTML = 'Sua base mais forte é <b>' + QUESTIONS[hiIdx].dim + ' (' + mx + ' de 5)</b> e a mais fraca é <b>' + QUESTIONS[loIdx].dim + ' (' + mn + ' de 5)</b>. As dimensões andam juntas, e é assim que devem subir: equilíbrio compõe.';
+        }
+
+        if (typeof gtag === 'function') { gtag('event', 'ai_native_score', { score: R.avg.toFixed(1), level: R.L.name }); }
+        result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+
+      document.getElementById('redo').onclick = function () {
+        idx = 0; answers = new Array(QUESTIONS.length).fill(null); R = null;
+        result.style.display = 'none'; gate.style.display = 'none'; quiz.style.display = 'block'; render();
+        document.getElementById('panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
+
+      // captura: envia a nota por e-mail e só então revela o resultado
+      var form = document.getElementById('leadForm'), status = document.getElementById('formStatus');
+      var btn = form.querySelector('button[type="submit"]'), btnText = btn.textContent;
+      var sentNote = document.getElementById('sentNote');
+      function show(msg, ok) { status.textContent = msg; status.style.display = 'block'; status.style.color = ok ? '#1F6B39' : '#A32718'; }
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        track('lead_submit');
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d.success) {
+              if (sentNote) sentNote.textContent = 'Enviamos a sua nota e o relatório para o seu e-mail.';
+              form.reset();
+              if (typeof gtag === 'function') {
+                gtag('event', 'generate_lead', { origem: 'ai_native_score' });
+                gtag('event', 'conversion', { send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE', value: 1.0, currency: 'BRL' });
+              }
+              revealResult();
+            } else {
+              show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.', false);
+            }
+          })
+          .catch(function () { show('Não foi possível enviar agora. Tente novamente ou fale pelo WhatsApp.', false); })
+          .finally(function () { btn.disabled = false; btn.textContent = btnText; });
+      });
+
+      render();
+    })();
+  </script>
+</Page>

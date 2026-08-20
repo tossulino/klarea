@@ -1,0 +1,33 @@
+---
+// Barra de margem da carta: fica no topo o tempo todo, para a navegação não
+// desaparecer depois da primeira dobra. O deslocamento das âncoras vive em
+// --header-h (world.css), então o título da seção nunca fica embaixo dela.
+const { active = '' } = Astro.props;
+
+const links = [
+  { href: '/#executamos', id: 'executamos', label: 'O que executamos' },
+  { href: '/#solucoes', id: 'solucoes', label: 'Soluções' },
+  { href: '/#metodo', id: 'metodo', label: 'Maturidade em IA' },
+  { href: '/conteudos.html', id: 'conteudos', label: 'Conteúdos' },
+  { href: '/#quemsomos', id: 'quemsomos', label: 'Quem somos' },
+];
+---
+<header class="site-header on-dense">
+  <div class="sheet site-header-in">
+    <a class="wordmark" href="/" aria-label="Klarea, página inicial">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 2v20" stroke="#FFFFFF" stroke-width="3" />
+        <path d="M19 3 8 12l11 9" stroke="#3D7BFF" stroke-width="3" stroke-linejoin="round" />
+      </svg>
+      <span>klarea<i>.ai</i></span>
+    </a>
+
+    <nav aria-label="Principal">
+      {links.map((l) => (
+        <a href={l.href} aria-current={active === l.id ? 'page' : undefined}>{l.label}</a>
+      ))}
+    </nav>
+
+    <a class="cta" href="/#contato">Agendar diagnóstico</a>
+  </div>
+</header>

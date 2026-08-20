@@ -1,0 +1,195 @@
+---
+import Page from '../layouts/Page.astro';
+
+const artigos = [
+  {
+    kind: 'Maturidade',
+    t: 'Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria',
+    d: 'Tire a IA da sua empresa amanhã. O que para? A média esconde o risco: o que define a sua maturidade é a dimensão mais fraca, não a mais forte. Equilíbrio compõe. Desequilíbrio cria atrito.',
+    meta: 'Por Guilherme Tossulino · 5 min',
+    href: '/artigos/sua-empresa-e-mesmo-ai-native.html',
+  },
+  {
+    kind: 'Estratégia',
+    t: 'IA não é estratégia. É meio.',
+    d: 'IA virou a bala de prata dos conselhos. Não é. É uma das ferramentas mais poderosas para executar a estratégia. Quem confunde o meio com o fim decide errado, e isso custa caro.',
+    meta: 'Por Guilherme Tossulino · 4 min',
+    href: '/artigos/ia-nao-e-estrategia-e-meio.html',
+  },
+];
+---
+<Page
+  title="Conteúdos · Klarea"
+  description="Conteúdos da Klarea: artigos produzidos pelos sócios e materiais ricos para download sobre IA, estratégia, execução e governança para quem decide."
+  canonical="https://klarea.ai/conteudos.html"
+  active="conteudos"
+  heading="IA que executa a sua estratégia."
+  lede="Artigos dos sócios e materiais para levar à mesa. Sem hype, com a leitura de quem executa estratégia e constrói os sistemas que a entregam."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Escritos pelos sócios</h2>
+      <div class="cards">
+        {artigos.map((a) => (
+          <a class="card" href={a.href}>
+            <span class="kind">{a.kind}</span>
+            <h3>{a.t}</h3>
+            <p>{a.d}</p>
+            <span class="go">{a.meta} →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Conteúdos ricos para levar à mesa</h2>
+
+      <div class="controls">
+        <article class="control-row">
+          <svg class="sym" viewBox="0 0 60 60" width="60" height="60" aria-hidden="true">
+            <path class="stroke" d="M30 12 L46 44 L14 44 Z" />
+          </svg>
+          <div>
+            <span class="kind">PDF · pronto para a reunião</span>
+            <h3>7 perguntas que todo líder deveria fazer sobre IA</h3>
+          </div>
+          <div>
+            <p>
+              Um guia direto para levar à próxima reunião de conselho. As perguntas certas para cobrar boas respostas,
+              sem precisar dominar a tecnologia.
+            </p>
+            <div class="actions" style="margin-top:18px">
+              <button
+                class="btn dl"
+                type="button"
+                data-file="/Klarea-7-perguntas-IA.pdf"
+                data-title="7 perguntas que todo líder deveria fazer sobre IA"
+              >Baixar o PDF</button>
+              <a class="btn btn-ghost" href="/7-perguntas/">Ler online</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="control-row">
+          <svg class="sym" viewBox="0 0 60 60" width="60" height="60" aria-hidden="true">
+            <circle class="stroke" cx="30" cy="30" r="19" stroke-dasharray="5 5" />
+          </svg>
+          <div>
+            <span class="kind">Em produção</span>
+            <h3>Mais materiais a caminho</h3>
+          </div>
+          <div>
+            <p>
+              Frameworks, checklists e o guia completo do Índice de Maturidade em IA.
+              Quer ser avisado? <a href="/#contato" style="color:var(--course-ink);font-weight:500">Deixe seu contato</a>.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- modal de download -->
+  <div class="modal" id="dlModal" role="dialog" aria-modal="true" aria-labelledby="dlTitle">
+    <div class="modal-box">
+      <button class="modal-close" id="dlClose" type="button" aria-label="Fechar">×</button>
+      <span class="kind">Download gratuito</span>
+      <h2 id="dlTitle">Material</h2>
+      <p>Diga para onde enviamos. Você recebe o material na hora e fica por dentro dos próximos conteúdos. Sem spam.</p>
+
+      <form class="form form-light" id="dlForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89" />
+        <input type="hidden" name="subject" value="Novo download de material pelo site klarea.ai" />
+        <input type="hidden" name="from_name" value="Materiais Klarea.ai" />
+        <input type="hidden" name="Material" id="dlMaterial" value="" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <label><span>Nome</span><input type="text" name="Nome" required placeholder="Como te chamamos" autocomplete="name" /></label>
+        <label><span>E-mail corporativo</span><input type="email" name="E-mail" required placeholder="voce@empresa.com.br" autocomplete="email" /></label>
+        <label><span>Empresa</span><input type="text" name="Empresa" placeholder="Razão social ou marca" autocomplete="organization" /></label>
+        <label>
+          <span>Seu cargo</span>
+          <select name="Cargo">
+            <option>Conselheiro(a)</option><option>CEO / Presidente</option>
+            <option>C-level (CFO, COO, CTO...)</option><option>Diretor(a)</option>
+            <option>Gerente</option><option>Outro</option>
+          </select>
+        </label>
+        <button class="btn submit" type="submit">Receber o material</button>
+      </form>
+      <p class="status" id="dlStatus"></p>
+      <p class="fine">
+        Ao baixar, você concorda em receber conteúdos da Klarea. <a href="/privacidade.html" style="color:var(--course-ink)">Privacidade</a>.
+      </p>
+    </div>
+  </div>
+
+  <script is:inline>
+    (function () {
+      var modal = document.getElementById('dlModal');
+      var form = document.getElementById('dlForm'), status = document.getElementById('dlStatus');
+      var btn = form.querySelector('button[type="submit"]'), btnText = btn.textContent;
+      var currentFile = null, lastFocus = null;
+
+      function open(file, title) {
+        currentFile = file;
+        lastFocus = document.activeElement;
+        document.getElementById('dlTitle').textContent = title;
+        document.getElementById('dlMaterial').value = title;
+        status.style.display = 'none';
+        modal.classList.add('open');
+        setTimeout(function () { form.querySelector('input[name="Nome"]').focus(); }, 50);
+      }
+      function close() {
+        modal.classList.remove('open');
+        btn.disabled = false; btn.textContent = btnText;
+        if (lastFocus && lastFocus.focus) lastFocus.focus();
+      }
+
+      Array.prototype.forEach.call(document.querySelectorAll('.dl'), function (b) {
+        b.addEventListener('click', function () { open(b.getAttribute('data-file'), b.getAttribute('data-title')); });
+      });
+      document.getElementById('dlClose').addEventListener('click', close);
+      modal.addEventListener('click', function (e) { if (e.target === modal) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal.classList.contains('open')) close();
+      });
+
+      function show(msg, ok) {
+        status.textContent = msg;
+        status.style.display = 'block';
+        status.style.color = ok ? '#1F6B39' : '#A32718';
+      }
+      function triggerDownload(file) {
+        var a = document.createElement('a');
+        a.href = file; a.download = '';
+        document.body.appendChild(a); a.click(); document.body.removeChild(a);
+      }
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        var file = currentFile;
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d.success) {
+              if (typeof gtag === 'function') {
+                gtag('event', 'material_download', { material: document.getElementById('dlMaterial').value });
+              }
+              show('Pronto! O download vai começar. Enviamos uma cópia para o seu e-mail.', true);
+              triggerDownload(file);
+              setTimeout(close, 2200);
+              form.reset();
+            } else {
+              show('Não foi possível enviar agora. Tente novamente.', false);
+            }
+          })
+          .catch(function () { show('Não foi possível enviar agora. Tente novamente.', false); })
+          .finally(function () { btn.disabled = false; btn.textContent = btnText; });
+      });
+    })();
+  </script>
+</Page>

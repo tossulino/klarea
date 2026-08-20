@@ -1,0 +1,16 @@
+7-perguntas/index.html
+CNAME
+Klarea-7-perguntas-IA.pdf
+Klarea-Guia-Maturidade-IA.pdf
+artigos/ia-nao-e-estrategia-e-meio.html
+artigos/sua-empresa-e-mesmo-ai-native.html
+conteudos.html
+diagnostico.html
+guia/ebook.html
+guia/index.html
+index.html
+llms.txt
+privacidade.html
+robots.txt
+sitemap.xml
+termos.html

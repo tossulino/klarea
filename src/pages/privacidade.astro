@@ -1,0 +1,43 @@
+---
+import Page from '../layouts/Page.astro';
+
+const secoes = [
+  { t: '1. Quem somos', p: ['Esta política se aplica ao site klarea.ai, operado por Guilherme Tossulino e Rafael Scheidt. Contato: pelo formulário em klarea.ai ou pelo WhatsApp informado no site.'] },
+  { t: '2. Dados que coletamos', p: ['Coletamos apenas os dados que você nos fornece pelo formulário de contato: nome, e-mail corporativo, empresa, cargo, tamanho da empresa, segmento, autoavaliação de maturidade em IA e a mensagem enviada. Podemos coletar dados de navegação anônimos por meio de ferramentas de análise.'] },
+  { t: '3. Para que usamos', p: ['Usamos os dados para responder ao seu contato, agendar e conduzir o diagnóstico, e enviar comunicações relacionadas aos nossos serviços. Não vendemos seus dados.'] },
+  { t: '4. Base legal', p: ['Tratamos os dados com base no seu consentimento e no legítimo interesse de responder a uma solicitação comercial iniciada por você.'] },
+  { t: '5. Compartilhamento', p: ['Podemos usar prestadores de serviço (hospedagem, formulários, agendamento, e-mail) que processam dados em nosso nome, sob obrigações de confidencialidade. Não compartilhamos seus dados para fins de publicidade de terceiros.'] },
+  { t: '6. Retenção', p: ['Mantemos os dados pelo tempo necessário ao atendimento e às obrigações legais. Você pode solicitar a exclusão a qualquer momento.'] },
+  { t: '7. Seus direitos', p: ['Conforme a LGPD, você pode confirmar o tratamento, acessar, corrigir, anonimizar, portar ou excluir seus dados, e revogar o consentimento. Para exercer, entre em contato pelo formulário em klarea.ai ou pelo WhatsApp informado no site.'] },
+  { t: '8. Cookies', p: ['O site pode usar cookies de análise para entender o uso das páginas. Você pode bloqueá-los nas configurações do navegador.'] },
+  { t: '9. Alterações', p: ['Podemos atualizar esta política. A data no topo indica a versão vigente.'] },
+];
+---
+<Page
+  title="Política de Privacidade · Klarea"
+  description="Política de Privacidade da Klarea: como tratamos seus dados conforme a LGPD."
+  canonical="https://klarea.ai/privacidade.html"
+  heading="Política de Privacidade"
+  lede="Última atualização: junho de 2026."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <div class="oob" style="margin-top:0">
+        <span class="kind">Aviso</span>
+        <p>
+          Modelo inicial. Antes de publicar, complete os dados da empresa e valide com assessoria jurídica.
+          A Klarea respeita a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).
+        </p>
+      </div>
+
+      <div class="doc" style="margin-top:38px">
+        {secoes.map((s) => (
+          <>
+            <h2>{s.t}</h2>
+            {s.p.map((t) => <p>{t}</p>)}
+          </>
+        ))}
+      </div>
+    </div>
+  </section>
+</Page>

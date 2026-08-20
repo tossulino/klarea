@@ -1,0 +1,199 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const dimensoes = [
+  { n: '01', t: 'Estratégia', q: 'No seu negócio, a IA hoje está...',
+    e: ['Fora do radar da liderança','Em conversas informais, sem dono','Em alguns processos, caso a caso','Na agenda formal da liderança, com metas','No centro da estratégia e do modelo de negócio'],
+    nota: 'Enquanto a IA não tiver dono na mesa da liderança, ela compete com o urgente. E perde todo dia.' },
+  { n: '02', t: 'Patrocínio', q: 'Quem puxa a IA dentro do negócio?',
+    e: ['Ninguém em específico','Quem se interessa, de forma isolada','A área de TI, num plano técnico','Um responsável com mandato e orçamento','O dono ou a liderança máxima, como prioridade declarada'],
+    nota: 'IA delegada só para a TI vira projeto técnico. Projeto técnico não muda o P&L.' },
+  { n: '03', t: 'Casos em operação', q: 'Processos relevantes rodando com IA hoje:',
+    e: ['Nenhum','Testes e demonstrações que não viraram rotina','Um ou dois processos de apoio','Vários processos relevantes','IA integrada ao centro do negócio, ponta a ponta'],
+    nota: 'Demonstração impressiona uma vez. Operação entrega todo mês. São coisas diferentes.' },
+  { n: '04', t: 'Dados', q: 'Os dados para alimentar IA estão...',
+    e: ['Espalhados e sem organização','Em planilhas e sistemas isolados','Centralizados em parte','Organizados e acessíveis','Estruturados e prontos, com governança de dados'],
+    nota: 'Não existe IA boa sobre dado ruim. Mas também não é preciso arrumar tudo antes de começar: arrume o que o primeiro caso exige.' },
+  { n: '05', t: 'Governança', q: 'Política de uso de IA, LGPD e limites de segurança:',
+    e: ['Não existe; cada um usa como quer','Conversamos, mas nada formal','Regras básicas em algumas áreas','Política formal e em uso','Governança completa: política, auditoria e responsável'],
+    nota: 'Sem regra, a IA entra pela porta dos fundos. E o dado sensível sai junto.' },
+  { n: '06', t: 'Fluência', q: 'A liderança sabe o que pedir à IA?',
+    e: ['Não, é um tema distante','Há curiosidade, mas falta repertório','Uso pessoal básico','Sabe abrir boas demandas e cobrar','Domina o suficiente para dar a direção'],
+    nota: 'Quem não sabe pedir, não sabe cobrar. E acaba aceitando qualquer entrega como boa.' },
+  { n: '07', t: 'Resultado', q: 'A IA hoje gera...',
+    e: ['Nenhum resultado mensurável','Economia de tempo pontual','Ganhos de produtividade em algumas áreas','Impacto em eficiência e custo, medido','Receita e margem atribuíveis à IA'],
+    nota: 'Tempo economizado que não vira capacidade nova nem custo menor é só sensação de produtividade.' },
+  { n: '08', t: 'Adoção', q: 'No dia a dia das equipes, a IA é...',
+    e: ['Praticamente ausente','Usada por poucos entusiastas','Comum em algumas áreas','Adotada de forma ampla','Parte de como o trabalho é feito'],
+    nota: 'Adoção não se anuncia, se projeta. Se depende de boa vontade, ela para na primeira semana cheia.' },
+];
+
+const niveis = [
+  { n: '1', t: 'Curioso', d: 'A IA ainda é uso pessoal e pontual. Falta dono, direção e ligação com a estratégia. O risco maior aqui não é fazer errado, é ficar parado enquanto o setor anda.',
+    passo: 'Comece pela Mentoria de Fluência em IA: a IA nas suas rotinas reais, para você sentir o ganho e aprender a pedir. É daqui que nascem os projetos certos.' },
+  { n: '2', t: 'Experimental', d: 'Existem pilotos e entusiasmo, mas soltos: impressionam na apresentação e não viram competência nem resultado que se sustente. Falta priorização e patrocínio com poder de decisão.',
+    passo: 'Faça o Diagnóstico de Maturidade: medimos onde está o maior valor, comparamos com o setor e priorizamos por retorno, com um dono claro.' },
+  { n: '3', t: 'Operacional', d: 'A IA já está em processos, mas o valor ainda é difuso e a governança corre atrás. O salto agora é transformar uso em resultado de negócio medido.',
+    passo: 'Hora da Implantação de IA: o seu caso de maior alavancagem em operação, com resultado acordado e medido, e 90 dias de acompanhamento. Não é piloto. É operação viva.' },
+  { n: '4', t: 'Estratégico', d: 'A IA está na agenda da liderança e já entrega resultado. O desafio passa a ser escala com segurança: governança, novos casos e direção contínua.',
+    passo: 'Hora de escalar: governança, medição de retorno e novos casos do plano a cada ciclo. Mais IA no ar, com menos exposição.' },
+  { n: '5', t: 'Nativo em IA', d: 'A IA está no centro do negócio e o valor se compõe a cada uso. A vantagem agora é manter o ritmo: quanto mais a sua IA roda, mais difícil fica te alcançar.',
+    passo: 'Sustente a escala: governança forte, medição de retorno e novos casos a cada ciclo, para você não perder a dianteira.' },
+];
+
+const gargalos = [
+  { t: 'Dados sem dono', d: 'Existe estratégia, existe patrocínio, e o projeto para porque ninguém consegue dizer qual é a base correta. Sintoma: toda reunião técnica vira uma discussão sobre planilha.' },
+  { t: 'Patrocínio sem mandato', d: 'Alguém foi nomeado responsável por IA, mas sem orçamento e sem poder de mudar processo. Sintoma: muita apresentação, nenhuma mudança em como o trabalho é feito.' },
+  { t: 'Fluência parada na base', d: 'A liderança usa IA para escrever e-mail e acha que conhece o assunto. Sintoma: as demandas que chegam ao time técnico são vagas, e qualquer entrega passa.' },
+  { t: 'Resultado não medido', d: 'Todo mundo jura que ganhou tempo, e nada aparece em custo, capacidade ou receita. Sintoma: quando o orçamento aperta, IA é a primeira linha cortada.' },
+];
+---
+<Page
+  title="Guia: as 8 dimensões da maturidade em IA · Klarea"
+  description="As 8 dimensões que decidem se a IA da sua empresa vira resultado ou vira demonstração, com os 5 níveis de cada uma e o próximo passo concreto."
+  canonical="https://klarea.ai/guia/ebook.html"
+  robots="noindex,follow"
+  heading="Todo mundo testa IA. Quase ninguém opera."
+  lede="As 8 dimensões que decidem se a IA da sua empresa vira resultado ou vira demonstração. Com os 5 níveis de cada uma, o que trava em cada estágio e o próximo passo concreto."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>O modelo não é o diferencial. O entorno é.</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Toda empresa hoje tem acesso ao mesmo modelo. A mesma API, o mesmo copiloto, a mesma assinatura. Se a vantagem
+          estivesse na tecnologia, ela duraria uma semana.
+        </p>
+        <p>
+          O que separa quem opera IA de quem só testa é o que está ao redor do modelo: quem patrocina, que dado alimenta,
+          que regra governa, quem sabe pedir, o que é medido e quanto disso virou rotina. São oito dimensões.
+          <b>Nenhuma delas é o modelo.</b>
+        </p>
+        <blockquote>
+          <p>Se você tirasse a IA da sua empresa amanhã, o que pararia? Se a resposta é “nada”, você tem ferramenta, não estratégia.</p>
+        </blockquote>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:34px">
+        <article class="cell">
+          <span class="kind">Como usar</span>
+          <h3>Responda pelo pior caso</h3>
+          <p>
+            Leia as oito dimensões pensando no negócio, não em você. Marque o estágio que descreve a sua empresa hoje,
+            não onde ela quer estar. Depois some, divida por oito e leia o nível correspondente. Responda pelo pior caso,
+            não pela melhor área.
+          </p>
+        </article>
+        <article class="cell">
+          <span class="kind">Um aviso honesto</span>
+          <h3>Nível 5 não é meta universal</h3>
+          <p>
+            Este guia não vende urgência. Subir de nível custa dinheiro, atenção e política interna. O objetivo é você
+            saber exatamente onde está e escolher, com clareza, quais dimensões merecem investimento neste ciclo.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Oito dimensões. Nenhuma delas é o modelo.</h2>
+      {dimensoes.map((d) => (
+        <div style="margin-top:36px;border-top:2px solid var(--line-strong);padding-top:20px">
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+            <span class="qn cond" style="font-size:24px;color:var(--course-ink)">{d.n}</span>
+            <h3>{d.t}</h3>
+          </div>
+          <p class="prose" style="margin-top:8px">{d.q}</p>
+          <ol class="qlist" style="max-width:72ch;margin-top:18px">
+            {d.e.map((e, i) => (
+              <li><span class="qn">{i + 1}</span><span>{e}</span></li>
+            ))}
+          </ol>
+          <div class="oob" style="margin-top:18px"><p>{d.nota}</p></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Os cinco níveis de maturidade.</h2>
+      <p class="prose">
+        A média das oito dimensões coloca a empresa em um destes níveis. Ele não é um rótulo, é um diagnóstico do que
+        está travando o conjunto.
+      </p>
+      <div class="controls">
+        {niveis.map((n) => (
+          <article class="control-row">
+            <svg class="sym" viewBox="0 0 60 60" width="60" height="60" aria-hidden="true">
+              <circle class="stroke" cx="30" cy="30" r="19" />
+              <text class="n" x="30" y="38" text-anchor="middle">{n.n}</text>
+            </svg>
+            <div>
+              <span class="kind">Nível {n.n} de 5</span>
+              <h3>{n.t}</h3>
+            </div>
+            <div>
+              <p>{n.d}</p>
+              <p style="margin-top:12px;color:var(--ink)"><b style="font-weight:600">O próximo passo:</b> {n.passo}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div class="oob">
+        <span class="kind">O erro mais comum depois de um diagnóstico</span>
+        <p>
+          Atacar as oito frentes ao mesmo tempo. Não funciona: dilui orçamento, cansa o time e não produz nenhuma prova.
+          <b style="color:var(--ink);font-weight:600"> Escolha um movimento e faça ele inteiro.</b>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-slow">
+    <div class="sheet">
+      <h2>A média engana. Olhe a dimensão mais baixa.</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Uma empresa com nota 4 em Estratégia, Patrocínio e Casos, mas nota 1 em Dados, não é nível 3. Ela é uma
+          empresa nível 1 em Dados com três dimensões esperando. O gargalo define o teto do conjunto.
+        </p>
+        <blockquote><p>A média diz em que conversa você está. A menor nota diz o que comprar primeiro.</p></blockquote>
+      </div>
+
+      <h3 style="margin-top:34px">Os quatro gargalos que mais aparecem</h3>
+      <div class="grid grid-2" style="margin-top:20px">
+        {gargalos.map((g) => (
+          <article class="cell"><h3>{g.t}</h3><p>{g.d}</p></article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Pontue a sua empresa. Dez minutos.</h2>
+      <p class="prose">
+        Para cada dimensão, escreva o número do estágio (1 a 5) que descreve a empresa hoje. Some tudo e divida por oito.
+        A menor nota do quadro é a dimensão que define o seu teto.
+      </p>
+      <ol class="qlist" style="max-width:76ch">
+        {dimensoes.map((d) => (
+          <li>
+            <span class="qn">{d.n}</span>
+            <span><b style="font-weight:600;color:var(--ink)">{d.t}.</b> {d.q}</span>
+          </li>
+        ))}
+      </ol>
+      <div class="actions">
+        <a class="btn" href="/diagnostico.html">Calcular a minha nota em 2 minutos</a>
+        <a class="btn btn-ghost" href="/Klarea-Guia-Maturidade-IA.pdf">Baixar o PDF</a>
+      </div>
+      <p class="fine">
+        © 2026 Klarea · Advisory de IA Executiva. Este guia pode ser compartilhado internamente na sua empresa.
+      </p>
+    </div>
+  </section>
+</Page>

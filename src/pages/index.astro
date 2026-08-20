@@ -1,0 +1,472 @@
+---
+import Base from '../layouts/Base.astro';
+import Terrain from '../components/Terrain.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/world.css';
+
+const WA_G = 'https://wa.me/5548984015857?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Klarea.ai';
+const WA_R = 'https://wa.me/5548991618180?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20Klarea.ai';
+
+const frentes = [
+  { c: 'A', kind: 'Frente · Produto novo', t: 'Criar um produto com IA',
+    d: 'Da tese ao lançamento: concebemos e construímos produtos nascidos com IA no núcleo, com testes, avaliação e monitoramento desde o primeiro dia.' },
+  { c: 'B', kind: 'Frente · Operação', t: 'Tornar a operação eficiente',
+    d: 'Agentes e automações assumem o trabalho repetitivo que consome o seu time: atendimento, vendas, financeiro, compras. Resultado em eficiência e margem, medido.' },
+  { c: 'C', kind: 'Frente · Integração', t: 'Levar IA ao que já existe',
+    d: 'IA por cima do ERP, do CRM, das planilhas e dos dados que você já tem. Sem trocar o que funciona, sem projeto de anos.' },
+];
+
+const dores = [
+  { t: 'Você usa, mas na superfície', d: 'IA virou um “Google melhorado” no dia a dia. Dá para sentir que sobra potencial, mas falta repertório para ir além do óbvio.' },
+  { t: 'A cobrança chegou até você', d: 'Sócios, conselho ou matriz: alguém cobra uma posição sobre IA e a resposta ainda é vaga. Falta um mapa: maturidade, prioridades e quem responde pelo quê.' },
+  { t: 'O concorrente anunciou IA', d: 'Você não sabe dizer se é vantagem real ou teatro. Menos ainda quanto tempo tem para responder.' },
+  { t: 'Pilotos que não viram operação', d: 'Testes que impressionam na demonstração e morrem antes do uso real. O que separa quem opera de quem testa não é o modelo: é o que está ao redor dele.' },
+];
+
+const solucoes = [
+  { kind: '24/7 · com supervisão', t: 'Agentes de IA na operação', d: 'Atendimento, vendas, financeiro, compras: o trabalho repetitivo executado por agentes todos os dias, com gente supervisionando o que importa.' },
+  { kind: 'ERP · CRM · planilhas', t: 'IA sobre os seus sistemas atuais', d: 'Orquestradores e integrações por cima do ERP, do CRM, das planilhas e do e-mail que você já tem. Sem trocar de sistema, sem projeto de anos.' },
+  { kind: 'Construído em semanas', t: 'Software sob medida com IA', d: 'Quando falta a ferramenta certa, construímos: aplicações enxutas, desenhadas para o seu processo e integradas ao que existe.' },
+  { kind: 'Uso seguro pelas equipes', t: 'Central de IA da empresa', d: 'Um lugar único para as suas equipes usarem IA no dia a dia, com controle de acesso, custo e auditoria. Fim do uso escondido e sem regra.' },
+  { kind: 'Resposta imediata', t: 'Atendimento com IA no WhatsApp', d: 'Seu cliente atendido na hora, no canal que ele já usa, com transferência para uma pessoa quando a conversa exige.' },
+  { kind: 'Política · LGPD · segurança', t: 'Governança de IA', d: 'Regras claras para usar mais IA com menos risco: política de uso, limites de segurança, auditoria e adequação à LGPD.' },
+];
+
+const principios = [
+  { n: '01', kind: 'Propriedade', t: 'O que construímos é seu', d: 'Código, integrações, prompts e avaliações nascem no seu repositório e ficam com você quando o trabalho termina. Sem caixa-preta, sem aluguel de conhecimento.' },
+  { n: '02', kind: 'Critério', t: 'Sucesso definido antes do código', d: 'Antes de construir, acordamos o que é "funcionou": a métrica, a base de comparação e o prazo. A medição é entregue junto com a solução.' },
+  { n: '03', kind: 'Independência', t: 'Sem comissão de ferramenta', d: 'Você contrata os provedores direto e paga o preço deles. Não revendemos, não comissionamos. A recomendação é técnica, não comercial.' },
+  { n: '04', kind: 'Arquitetura', t: 'Sem amarras de fornecedor', d: 'Construímos para trocar de modelo e de plataforma quando fizer sentido para o seu negócio. A decisão fica com você, sempre.' },
+  { n: '05', kind: 'Segurança', t: 'Supervisão humana onde importa', d: 'Agentes operam com limites, registro de cada ação e gente aprovando o que é crítico. Mais IA no ar, com menos exposição.' },
+  { n: '06', kind: 'Permanência', t: 'Ficamos até funcionar', d: 'A entrega não é o último dia do projeto. São 90 dias de acompanhamento depois da entrada em operação, com ajuste fino e medição.' },
+];
+
+const perguntasLider = [
+  'Onde a IA está criando, ou destruindo, valor no nosso setor, e onde estamos nesse mapa?',
+  'Qual é a nossa maturidade em IA hoje, medida e comparada com a concorrência?',
+  'Quem, na gestão, responde pela estratégia de IA, e com quais metas?',
+  'Que dados sensíveis estão saindo da empresa por uso de IA sem política?',
+  'Quais decisões já dependem de modelos, e quem responde por elas?',
+  'Como a IA muda o nosso modelo de negócio e a nossa vantagem competitiva?',
+  'Investimos em IA que vira receita e margem, ou em pilotos que não escalam?',
+];
+
+const faq = [
+  { q: 'O que a Klarea faz, na prática?', a: 'Executamos qualquer projeto de IA, em três frentes: criar um produto novo, tornar a operação eficiente ou levar IA aos sistemas que você já usa. O método é o mesmo em todas: diagnóstico que prioriza por retorno, implantação em semanas e escala contínua com governança. Você não termina com um plano. Termina com IA operando.' },
+  { q: 'Como funciona a Implantação de IA?', a: 'Um projeto de poucas semanas, para quem decide: dono, diretor ou conselho, com um resultado mensurável acordado: o seu processo de maior alavancagem em produção até o fim, mais 90 dias de acompanhamento. Estratégia com Tossulino, arquitetura com Scheidt.' },
+  { q: 'O que significa ter a IA no centro do negócio?', a: 'Em bom português: deixar de só colocar ferramentas de IA por cima do que já existe e passar a ter a IA dentro do jeito como a empresa funciona. Agentes que executam trabalho com regras claras, processos redesenhados e resultados que crescem a cada uso.' },
+  { q: 'Vocês só aconselham ou também constroem?', a: 'Os dois. Conduzimos da estratégia até a IA funcionando: agentes de IA conectados aos sistemas que você já usa (ERP, CRM, planilhas, e-mail), respostas baseadas nos seus próprios dados e acompanhamento contínuo do que a IA faz. Quando a execução exige, construímos junto com o seu time.' },
+  { q: 'Não somos uma empresa de tecnologia. Faz sentido para nós?', a: 'É onde a IA mais rende. Indústria, distribuição, serviços: processos repetitivos, papel e retrabalho são o melhor terreno para agentes de IA. Você não precisa ter equipe de tecnologia. A engenharia é nossa. O conhecimento do negócio é seu.' },
+  { q: 'E a governança e a segurança?', a: 'É parte central do trabalho. Cuidamos de três frentes: o uso da IA pelas pessoas (política clara, LGPD, fim do uso sem controle), a IA em operação (limites de segurança, testes e auditoria) e as regras que liberam a adoção com tranquilidade. O objetivo é usar mais IA, com menos exposição.' },
+  { q: 'Vocês são independentes? Vendem plataforma?', a: 'Somos independentes e não vendemos plataforma. Implantamos sobre a stack que fizer sentido para o seu caso, sem comissão de fornecedor, então a recomendação é sempre no seu interesse: o que construir, o que comprar e o que evitar. Toda conversa é confidencial.' },
+  { q: 'Atendem empresas de que porte?', a: 'O trabalho rende mais em médias e grandes empresas: onde há processos, dados e uma liderança cobrada por resultado. A Mentoria de Fluência em IA, por ser individual, é aberta a líderes de qualquer contexto.' },
+  { q: 'Quanto custa?', a: 'O investimento é desenhado sob medida conforme o escopo (diagnóstico, implantação, mentoria ou governança). Agende o diagnóstico de 30 minutos e preparamos uma proposta para o seu contexto.' },
+];
+
+const fases = [
+  { n: '1', t: 'Diagnosticar', d: 'índice de 1 a 5', x: 70, y: 208 },
+  { n: '2', t: 'Direcionar', d: 'prioriza por retorno', x: 300, y: 218 },
+  { n: '3', t: 'Construir', d: 'implanta em semanas', x: 530, y: 146 },
+  { n: '4', t: 'Escalar', d: 'governança contínua', x: 760, y: 104 },
+];
+---
+<Base>
+  <SiteHeader />
+
+  <!-- ============ ABERTURA ============ -->
+  <header class="band band-dense on-dense" style="position:relative;overflow:hidden;padding-block:0">
+    <Terrain />
+    <div class="sheet" style="position:relative;z-index:2">
+      <div id="topo" class="hero-inner">
+        <h1>IA que <em>executa</em> a sua estratégia</h1>
+        <p class="lede">
+          Da leitura estratégica à operação: agentes e automações rodando no seu negócio, com governança e resultado medido.{' '}
+          <b>Você não termina com um plano. Termina com IA operando.</b>
+        </p>
+        <div class="actions">
+          <a class="btn" href="#contato">Agendar um diagnóstico</a>
+          <a class="btn btn-ghost" href="/diagnostico.html">Medir minha maturidade em IA · 2 min</a>
+        </div>
+        <p class="fine">Diagnóstico de 30 minutos. Sem apresentação de vendas. Uma leitura objetiva de onde a IA cria mais valor no seu negócio.</p>
+
+        <dl class="legend">
+          <div>
+            <dt><span class="chip" style="background:#FFFFFF"></span>Operação viva</dt>
+            <dd>não é piloto nem slide: IA processando trabalho real</dd>
+          </div>
+          <div>
+            <dt><span class="chip" style="background:#A9C5FF"></span>Resultado medido</dt>
+            <dd>eficiência, receita e margem, acordados antes</dd>
+          </div>
+          <div>
+            <dt><span class="chip" style="background:transparent;border-style:dashed"></span>Independência</dt>
+            <dd>não vendemos plataforma: implantamos o que fizer sentido</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ DORES ============ -->
+  <section class="band band-open" id="dores">
+    <div class="sheet">
+      <h2>Todo mundo testa IA. Quase ninguém opera.</h2>
+      <p class="prose">
+        O conteúdo por aí é genérico. Cada fornecedor promete transformação. E a cobrança por resultado com IA só cresce,
+        no seu cargo e na sua empresa. Vale dobrado para setores tradicionais: indústria, distribuição e serviços,
+        onde processo repetitivo é o dia inteiro.
+      </p>
+      <div class="grid grid-2">
+        {dores.map((d) => (
+          <article class="cell">
+            <h3>{d.t}</h3>
+            <p>{d.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ O QUE EXECUTAMOS ============ -->
+  <section class="band band-runnable" id="executamos">
+    <div class="sheet">
+      <h2>Qualquer projeto de IA. Da ideia à operação.</h2>
+      <p class="prose">
+        Não somos uma esteira com um produto só. Somos uma dupla com as competências para executar o projeto de IA que a
+        sua estratégia pedir. Três frentes de entrada, o mesmo padrão: em operação, com governança e resultado medido.
+      </p>
+
+      <div class="controls">
+        {frentes.map((f) => (
+          <article class="control-row">
+            <svg class="sym" viewBox="0 0 60 60" width="60" height="60" aria-hidden="true">
+              <circle class="stroke" cx="30" cy="30" r="19" />
+              <text class="n" x="30" y="38" text-anchor="middle">{f.c}</text>
+            </svg>
+            <div>
+              <span class="kind">{f.kind}</span>
+              <h3>{f.t}</h3>
+            </div>
+            <p>{f.d}</p>
+          </article>
+        ))}
+      </div>
+
+      <div class="oob">
+        <span class="kind">Em paralelo a qualquer frente, para você, líder</span>
+        <h3>Mentoria de Fluência em IA</h3>
+        <p>
+          A IA na sua rotina, antes de qualquer projeto. Sessões um a um em que pegamos as suas tarefas reais e colocamos
+          a IA para trabalhar. Você sente o ganho na pele e a empresa ganha um líder que sabe o que pedir. É daqui que
+          nascem os projetos certos.
+        </p>
+      </div>
+
+      <p class="prose">
+        Em qualquer frente, o método é o mesmo: diagnóstico que prioriza por retorno, implantação em semanas e escala
+        contínua com governança. <b>Você entra pela porta que o seu problema pede, não por uma esteira.</b>
+      </p>
+      <div class="actions"><a class="btn" href="#contato">Agendar uma conversa</a></div>
+    </div>
+  </section>
+
+  <!-- ============ SOLUÇÕES ============ -->
+  <section class="band band-open" id="solucoes">
+    <div class="sheet">
+      <h2>O que construímos para você</h2>
+      <p class="prose">
+        Temos engenharia própria para criar orquestradores, agentes e software com IA por cima dos sistemas que você já
+        usa. Sem trocar o que funciona. É assim que a estratégia vira operação.
+      </p>
+      <div class="grid grid-3">
+        {solucoes.map((s) => (
+          <article class="cell">
+            <span class="kind">{s.kind}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <div class="actions"><a class="btn btn-ghost" href="#contato">Conversar sobre uma solução</a></div>
+    </div>
+  </section>
+
+  <!-- ============ IMPLANTAÇÃO ============ -->
+  <section class="band band-slow" id="programa">
+    <div class="sheet">
+      <h2>Implantação de IA</h2>
+      <p class="prose">
+        Algumas semanas. No fim, um sistema de IA de alta alavancagem operando o trabalho real do seu negócio.{' '}
+        <b>Não é estudo sem fim. Não é apresentação. Não é piloto. É operação viva.</b>
+      </p>
+      <div class="grid grid-2">
+        <article class="cell"><h3>O processo em produção</h3><p>Seu processo de maior alavancagem em produção ao fim da implantação, com um resultado acordado e medido.</p></article>
+        <article class="cell"><h3>Clareza de ferramenta</h3><p>Clareza sobre quais ferramentas de IA o negócio precisa: o que construir, o que comprar, o que evitar.</p></article>
+        <article class="cell"><h3>IA rodando, não um plano</h3><p>Você termina com IA rodando no negócio, não com um plano para depois.</p></article>
+        <article class="cell"><h3>90 dias depois da entrega</h3><p>90 dias de acompanhamento após a entrega: ficamos até funcionar.</p></article>
+      </div>
+      <div class="oob">
+        <span class="kind">Conduzido pelos dois sócios</span>
+        <p>
+          Estratégia com Tossulino: visão, modelo e onde a IA cria valor. Arquitetura com Scheidt: implementação,
+          ferramentas e agentes em produção. A Implantação é como entregamos qualquer frente. Dá para começar direto por
+          ela, ou pelo diagnóstico, que prioriza por retorno. <b>A entrada em operação não é o fim, é o começo.</b>
+        </p>
+      </div>
+      <div class="actions"><a class="btn" href="#contato">Falar sobre a Implantação</a></div>
+    </div>
+  </section>
+
+  <!-- ============ MÉTODO ============ -->
+  <section class="band band-runnable" id="metodo">
+    <div class="sheet">
+      <h2>O Índice de Maturidade em IA e um método em 4 fases</h2>
+      <p class="prose">
+        Método proprietário, ancorado em referências reconhecidas (Gartner AI Maturity, McKinsey Rewired, BCG AI@Scale,
+        Design Sprint) e traduzido para a linguagem de quem decide. Você sai com um índice claro, “sua maturidade de IA é
+        X de 5”, e um plano para subir.
+      </p>
+
+      <div class="profile" style="margin-top:36px">
+        <svg viewBox="0 0 1040 270" role="img" aria-label="Perfil do percurso do método em quatro fases">
+          <path class="ground" d="M0 210q124-48 228-16 124 38 238-42 124-86 258-32 146 58 316-36V270H0Z" />
+          <path class="ridge" d="M0 210q124-48 228-16 124 38 238-42 124-86 258-32 146 58 316-36" />
+          <path class="leg" d="M70 208 L300 218 L530 146 L760 104 L970 72" />
+          <g id="fases">
+            {fases.map((f, i) => (
+              <g data-i={i}>
+                <circle class="ctrl" cx={f.x} cy={f.y} r="14" />
+                <text class="cn" x={f.x} y={f.y - 24} text-anchor="middle">{f.n}</text>
+                <text class="cl" x={f.x} y={f.y + 44} text-anchor="middle">{f.t}</text>
+                <text class="cd" x={f.x} y={f.y + 62} text-anchor="middle">{f.d}</text>
+              </g>
+            ))}
+          </g>
+          <circle class="ctrl" cx="970" cy="72" r="24" style="stroke-dasharray:5 5" />
+          <circle class="ctrl" cx="970" cy="72" r="13" />
+          <text class="cl" x="970" y="126" text-anchor="middle">Nova volta</text>
+        </svg>
+      </div>
+
+      <h3 style="margin-top:38px">Um ciclo que se acelera</h3>
+      <p class="prose" style="margin-top:12px">
+        O método não é uma linha reta, é um ciclo que gira e acelera. A cada volta, o diagnóstico recomeça num nível mais
+        alto: mais casos em produção geram mais dados, que tornam os agentes melhores, que entregam mais valor, que
+        destrava mais adoção. <b>Quanto mais a sua IA roda, mais difícil fica te alcançar.</b>
+      </p>
+      <div class="chain">
+        <span>+ uso</span><b>→</b><span>+ dados</span><b>→</b><span>agentes melhores</span><b>→</b><span>+ valor</span><b>→</b><span>+ adoção</span>
+      </div>
+      <div class="actions"><a class="btn" href="/diagnostico.html">Medir a minha maturidade em IA</a></div>
+      <p class="fine">Autodiagnóstico de 2 minutos. Gratuito e sem cadastro para ver o resultado.</p>
+    </div>
+  </section>
+
+  <!-- ============ PRINCÍPIOS ============ -->
+  <section class="band band-open" id="principios">
+    <div class="sheet">
+      <h2>Seis princípios. Sem exceção.</h2>
+      <p class="prose">O que prometemos em qualquer frente, e o que vai em todo contrato que assinamos.</p>
+      <div class="grid grid-3">
+        {principios.map((p) => (
+          <article class="cell">
+            <span class="kind">{p.n} · {p.kind}</span>
+            <h3>{p.t}</h3>
+            <p>{p.d}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7 PERGUNTAS ============ -->
+  <section class="band band-runnable" id="conselho">
+    <div class="sheet">
+      <h2>7 perguntas que todo líder deveria fazer sobre IA</h2>
+      <p class="prose">
+        Você não precisa dominar a tecnologia para liderar a conversa. Precisa fazer as perguntas certas e cobrar boas
+        respostas. Leve estas para a sua próxima reunião.
+      </p>
+      <ol class="qlist">
+        {perguntasLider.map((q, i) => (
+          <li><span class="qn">{String(i + 1).padStart(2, '0')}</span><span>{q}</span></li>
+        ))}
+      </ol>
+      <div class="actions">
+        <a class="btn btn-ghost" href="/7-perguntas/">Ler o guia completo</a>
+        <a class="btn btn-ghost" href="/Klarea-7-perguntas-IA.pdf">Baixar o PDF para a reunião</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ OPERAÇÃO VIVA ============ -->
+  <section class="band band-open" id="depoimentos">
+    <div class="sheet">
+      <h2>O que já está operando, na prática</h2>
+      <div class="figures">
+        <article class="fig">
+          <div class="v">5 dias</div><div class="u">→ minutos</div>
+          <p>Padronização de dados financeiros que consumia uma semana de um analista, entregue por IA para validação.</p>
+        </article>
+        <article class="fig">
+          <div class="v">2</div><div class="u">propostas</div>
+          <p>Funil de vendas parado, reaquecido em meia hora: contatos reativados, conversas retomadas, propostas geradas.</p>
+        </article>
+        <article class="fig">
+          <div class="v">24/7</div><div class="u">sem trabalho manual</div>
+          <p>Reuniões e sistemas monitorados por agentes, com alertas e CRM atualizado sem trabalho manual.</p>
+        </article>
+      </div>
+      <p class="fine">Casos reais, anonimizados: automações em operação no nosso dia a dia e no de quem conduzimos.</p>
+    </div>
+  </section>
+
+  <!-- ============ QUEM SOMOS ============ -->
+  <section class="band band-runnable" id="quemsomos">
+    <div class="sheet">
+      <h2>Operadores, não consultores de slide</h2>
+      <p class="prose">
+        Não somos consultores que leram sobre IA e montaram uma apresentação. Somos operadores: um{' '}
+        <b>executou estratégia por dentro</b>, como executivo de tecnologia e conselheiro; o outro{' '}
+        <b>construiu e vendeu uma empresa de tecnologia em saúde com IA</b>. Um lê onde a IA acelera a estratégia e
+        defende isso na mesa de decisão. O outro constrói e governa os sistemas que entregam o resultado.{' '}
+        <b>Você tem os dois.</b>
+      </p>
+      <div class="people">
+        <article class="person">
+          <span class="role">O Estrategista</span>
+          <h3>Guilherme Tossulino</h3>
+          <p>
+            Executivo sênior em tecnologia e conselheiro. Especialista em traduzir estratégia em execução: define para
+            onde o negócio vai e conecta as ferramentas, IA inclusive, que fazem a estratégia acontecer. Sócio da
+            Questum, atua em crescimento e criação de valor.
+          </p>
+          <div class="tags"><span>Estratégia</span><span>Execução</span><span>Conselho</span><span>Crescimento</span></div>
+          <p style="margin-top:14px"><a href="https://www.linkedin.com/in/tossulino/" rel="noopener">LinkedIn ↗</a></p>
+        </article>
+        <article class="person">
+          <span class="role">O Arquiteto</span>
+          <h3>Rafael de Faria Scheidt</h3>
+          <p>
+            Executivo de tecnologia com mais de 20 anos construindo produtos digitais com IA. Foi CTO da NETPACS,
+            empresa de tecnologia em saúde que ajudou a construir e vender. Especialista em agentes de IA e em
+            integrá-los aos sistemas que a empresa já usa, e autor de <i>A Nova Engenharia de Software com IA</i>.
+          </p>
+          <div class="tags"><span>Construiu e vendeu</span><span>Agentes de IA</span><span>Arquitetura</span><span>Autor</span></div>
+          <p style="margin-top:14px">
+            <a href="https://www.linkedin.com/in/rafael-scheidt-9b7186164/" rel="noopener">LinkedIn ↗</a>
+            <span style="color:var(--muted)"> · </span>
+            <a href="https://www.novaengenhariadesoftware.com.br" rel="noopener">O livro ↗</a>
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="band band-open" id="faq">
+    <div class="sheet">
+      <h2>Perguntas frequentes</h2>
+      <div class="faq">
+        {faq.map((f) => (
+          <details>
+            <summary>{f.q}</summary>
+            <p>{f.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONTATO ============ -->
+  <section class="band band-dense on-dense" id="contato">
+    <div class="sheet">
+      <h2>Uma conversa reservada sobre a IA da sua empresa</h2>
+      <p class="lede">
+        Agende 30 minutos, sem compromisso e sob total confidencialidade. Você sai com uma leitura clara de onde a IA
+        cria mais valor no seu negócio.
+      </p>
+
+      <form class="form" id="leadForm" action="https://api.web3forms.com/submit" method="POST">
+        <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89" />
+        <input type="hidden" name="subject" value="Novo diagnóstico solicitado · klarea.ai" />
+        <input type="hidden" name="from_name" value="klarea.ai" />
+        <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+        <label><span>Nome</span><input type="text" name="nome" required placeholder="Como te chamamos" autocomplete="name" /></label>
+        <label><span>Empresa</span><input type="text" name="empresa" required placeholder="Razão social ou marca" autocomplete="organization" /></label>
+        <label><span>E-mail corporativo</span><input type="email" name="email" required placeholder="voce@empresa.com.br" autocomplete="email" /></label>
+        <label><span>Cargo</span><input type="text" name="cargo" placeholder="Conselheiro, CEO, diretor" autocomplete="organization-title" /></label>
+        <label>
+          <span>Tamanho da empresa</span>
+          <select name="tamanho">
+            <option>Até 50 colaboradores</option><option>51 a 200</option><option>201 a 500</option>
+            <option>501 a 1.000</option><option>Mais de 1.000</option>
+          </select>
+        </label>
+        <label>
+          <span>Segmento</span>
+          <select name="segmento">
+            <option>Indústria</option><option>Varejo e consumo</option><option>Serviços financeiros</option>
+            <option>Tecnologia / SaaS</option><option>Saúde</option><option>Agronegócio</option>
+            <option>Serviços</option><option>Outro</option>
+          </select>
+        </label>
+        <label class="wide"><span>Contexto</span><textarea name="contexto" placeholder="Conte rapidamente o seu contexto e o que você quer destravar"></textarea></label>
+        <button class="btn submit" type="submit">Agendar diagnóstico</button>
+      </form>
+      <p class="fine">Conversa confidencial · consultoria independente, não vendemos plataforma.</p>
+
+      <div class="actions">
+        <a class="btn btn-ghost" href={WA_G} rel="noopener">Falar com Guilherme</a>
+        <a class="btn btn-ghost" href={WA_R} rel="noopener">Falar com Rafael</a>
+      </div>
+
+      <SiteFooter />
+    </div>
+  </section>
+
+  <script is:inline>
+    // Conversão: preserva o evento de lead e o rótulo do Google Ads do site anterior.
+    (function () {
+      var f = document.getElementById('leadForm');
+      if (f) {
+        f.addEventListener('submit', function () {
+          if (typeof gtag !== 'function') return;
+          gtag('event', 'generate_lead', { origem: 'formulario_contato' });
+          gtag('event', 'conversion', {
+            send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE',
+            value: 1.0,
+            currency: 'BRL',
+          });
+        });
+      }
+
+      // Fase corrente do percurso: travada num relógio, parada fora da tela e sob reduced-motion.
+      var groups = document.querySelectorAll('#fases > g');
+      if (!groups.length) return;
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+      var i = 0, timer = null;
+      function paint() {
+        groups.forEach(function (g, k) {
+          var c = g.querySelector('.ctrl');
+          var n = g.querySelector('.cn');
+          // o numeral fica fora do circulo, entao mantem a cor do percurso sempre;
+          // o preenchimento do controle e o unico sinal de "agora".
+          c.classList.toggle('is-now', k === i);
+        });
+        i = (i + 1) % groups.length;
+      }
+      function start() { if (timer || reduce.matches) return; timer = setInterval(paint, 2600); }
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+      paint();
+      var target = document.querySelector('.profile');
+      if (target && 'IntersectionObserver' in window) {
+        new IntersectionObserver(function (es) {
+          es.forEach(function (e) { e.isIntersecting ? start() : stop(); });
+        }, { threshold: 0.3 }).observe(target);
+      }
+    })();
+  </script>
+</Base>

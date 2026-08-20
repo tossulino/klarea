@@ -5,3 +5,9 @@ Thumbs.db
 
 # Documento interno de handoff — não publicar (o repo é público / GitHub Pages serve tudo)
 CONTEXT.md
+.directions/
+
+# Astro
+node_modules/
+dist/
+.astro/

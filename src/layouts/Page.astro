@@ -1,0 +1,27 @@
+---
+import Base from './Base.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import '../styles/world.css';
+
+const { title, description, canonical, active = '', lede = '', heading, robots = '' } = Astro.props;
+---
+<Base title={title} description={description} canonical={canonical} robots={robots}>
+  <SiteHeader active={active} />
+
+  <section class="band band-dense on-dense page-head">
+    <div class="sheet">
+      <h1 class="page-title">{heading}</h1>
+      {lede && <p class="lede">{lede}</p>}
+      <slot name="head-extra" />
+    </div>
+  </section>
+
+  <slot />
+
+  <section class="band band-dense on-dense">
+    <div class="sheet">
+      <SiteFooter />
+    </div>
+  </section>
+</Base>

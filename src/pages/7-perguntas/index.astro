@@ -1,0 +1,264 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const perguntas = [
+  {
+    n: '01',
+    q: 'Onde a IA está criando, ou destruindo, valor no nosso setor, e onde estamos nesse mapa?',
+    tese: 'Decisão de IA sem mapa competitivo é aposta. Quem não sabe onde a IA cria ou destrói valor no setor está decidindo no escuro.',
+    contexto: [
+      'Antes de qualquer decisão de investimento ou política interna, a liderança precisa de uma leitura clara do mapa competitivo de IA no seu setor. Quais players já usam IA para reduzir custo, acelerar ciclos ou criar produtos novos? Onde ela está corroendo modelos de negócio estabelecidos?',
+      'A pergunta mais desconfortável vem por último: onde a sua empresa está nesse mapa hoje? Entre observar o movimento e liderá-lo existe uma distância que se mede em trimestres, não em anos.',
+    ],
+    alertas: [
+      'A conversa sobre IA na empresa é sobre ferramentas, não sobre o modelo de negócio.',
+      'Ninguém sabe nomear o que os concorrentes fizeram com IA nos últimos 12 meses.',
+      '“Estamos de olho” é a resposta padrão quando o tema aparece.',
+    ],
+    boa: 'Exemplos concretos de concorrentes e análogos de outros setores, e posiciona a empresa num eixo claro entre observadora e nativa em IA. Nomeia onde a IA já mudou a economia do setor, não onde ela poderia mudar um dia.',
+    mesa: 'Se um concorrente nativo em IA entrasse no nosso mercado amanhã, onde ele nos atacaria primeiro?',
+  },
+  {
+    n: '02',
+    q: 'Qual é a nossa maturidade em IA hoje, medida e comparada com a concorrência?',
+    tese: '“Estamos usando IA” não é uma resposta estratégica. Sem medida, não há gestão.',
+    contexto: [
+      'Maturidade em IA é mensurável. Quantos processos críticos dependem de modelos em produção? Qual a qualidade dos dados que os alimentam? Existe governança sobre essas decisões? Há comparação com o setor?',
+      'A diferença entre experimentar e ter capacidade instalada não está no entusiasmo do time. Está no que você consegue medir e repetir. O resto é piloto disfarçado de estratégia.',
+    ],
+    alertas: [
+      'A maturidade em IA é descrita por anedotas, não por números.',
+      'Não há nenhuma comparação com o que o setor já faz.',
+      'O progresso é medido pela quantidade de ferramentas contratadas.',
+    ],
+    boa: 'Um índice ou score de maturidade com metodologia reconhecida, comparação setorial e um roadmap para subir de nível. Se não há medição, esse é o ponto de partida, e admiti-lo já é meio caminho.',
+    mesa: 'Qual é o nosso score de maturidade em IA, e quem o mediu?',
+  },
+  {
+    n: '03',
+    q: 'Quem, na gestão, responde pela estratégia de IA, e com quais metas?',
+    tese: 'IA sem dono é piloto eterno. Responsabilidade difusa produz movimento, não resultado.',
+    contexto: [
+      'A pergunta não é quem usa IA no dia a dia. É quem, na liderança, tem responsabilidade formal pela estratégia, pelo orçamento e pelos resultados. Chief AI Officer, CTO, CDO: o título importa menos do que a accountability e as metas atreladas.',
+      'Onde a responsabilidade é de todos, ela não é de ninguém. E o que não tem dono não tem prioridade quando o trimestre aperta.',
+    ],
+    alertas: [
+      'A resposta para “quem responde por IA” é “todos” ou “o time de TI”.',
+      'Não existem metas quantificadas atreladas à IA.',
+      'O orçamento de IA está pulverizado entre áreas, sem dono único.',
+    ],
+    boa: 'Nomeia uma pessoa, descreve o seu mandato e lista metas quantificadas: receita gerada, custo reduzido, processos automatizados. Accountability clara é o que separa estratégia de intenção.',
+    mesa: 'Quem nesta empresa responde pessoalmente se a estratégia de IA não entregar este ano?',
+  },
+  {
+    n: '04',
+    q: 'Que dados sensíveis estão saindo da empresa por uso de IA sem política?',
+    tese: 'É o risco que quase ninguém mede, e que cresce todos os dias: o shadow AI.',
+    contexto: [
+      'Quando colaboradores usam ChatGPT, Copilot ou qualquer LLM externo sem diretrizes claras, dados de clientes, contratos, estratégias e propriedade intelectual podem alimentar modelos de terceiros. O vazamento não é um ataque. É o uso bem-intencionado, sem regra.',
+      'LGPD e EU AI Act transformam esse ponto em obrigação concreta, com responsabilidade que sobe até o conselho. Desconhecer o risco não isenta de respondê-lo.',
+    ],
+    alertas: [
+      'Não há política de uso de IA aprovada pela liderança.',
+      'Ninguém sabe quais ferramentas de IA estão de fato em uso na empresa.',
+      'A resposta para “nossos dados estão seguros nesse uso?” é o silêncio.',
+    ],
+    boa: 'Uma política de uso de IA aprovada pela liderança, uma lista de ferramentas autorizadas e mecanismos de auditoria. Clareza sobre o que pode entrar nesses modelos e o que jamais deveria.',
+    mesa: 'Que dado nosso eu não gostaria de ver treinando o modelo de um concorrente?',
+  },
+  {
+    n: '05',
+    q: 'Quais decisões já dependem de modelos, e quem responde por elas?',
+    tese: 'A IA já decide dentro da sua empresa. A pergunta é se alguém está olhando.',
+    contexto: [
+      'Modelos de IA já participam de decisões de crédito, triagem de candidatos, precificação dinâmica e diagnóstico. Quando um modelo erra, quem responde? Existe humano no loop? Existe trilha de auditoria?',
+      'A delegação a algoritmos costuma acontecer por conveniência, sem decisão consciente. Um dia ninguém aprovava; no outro, o modelo já decide por padrão. O risco mora exatamente nesse ponto cego.',
+    ],
+    alertas: [
+      'A empresa não tem inventário das decisões mediadas por IA.',
+      'Decisões automatizadas de alto impacto não têm responsável humano nomeado.',
+      'Não existe trilha de auditoria para o que o modelo decidiu e por quê.',
+    ],
+    boa: 'Lista as decisões críticas mediadas por IA, o grau de autonomia de cada modelo e o responsável humano por cada uma. Decisões de alto impacto sem supervisão são risco regulatório e reputacional.',
+    mesa: 'Qual decisão automatizada nos colocaria no jornal se desse errado, e quem a aprovou?',
+  },
+  {
+    n: '06',
+    q: 'Como a IA muda o nosso modelo de negócio e a nossa vantagem competitiva?',
+    tese: 'IA não é só eficiência operacional. Ela redesenha onde está a vantagem nos próximos anos.',
+    contexto: [
+      'Reduzir custo é o uso óbvio, e o menos defensável. A pergunta estratégica é outra: a IA é infraestrutura que compõe vantagem ou só mais um custo de ferramenta que todo concorrente também terá?',
+      'O ponto decisivo são os dados. Quem tem um ativo de dados próprio e difícil de replicar constrói uma vantagem que se acumula a cada ciclo. Quem não tem compete em cima da mesma tecnologia genérica que todos compram.',
+    ],
+    alertas: [
+      'A IA é tratada só como redução de custo, nunca como vantagem competitiva.',
+      'Os dados próprios da empresa não são vistos como ativo estratégico.',
+      'Não há uma tese de como a IA muda o negócio nos próximos dois anos.',
+    ],
+    boa: 'Articula como a IA reduz custo operacional, cria receita recorrente ou constrói um ativo de dados difícil de replicar, e como isso vira vantagem competitiva sustentável. Quem não sabe responder deixa valor na mesa.',
+    mesa: 'O que a IA nos permite oferecer que um concorrente não consegue copiar em um ano?',
+  },
+  {
+    n: '07',
+    q: 'Investimos em IA que vira receita e margem, ou em pilotos que não escalam?',
+    tese: 'O cemitério da transformação digital está cheio de pilotos que encantaram e nunca escalaram.',
+    contexto: [
+      'Com IA não é diferente. Demos impressionam na apresentação e não entram em produção. A pergunta certa não é “quantos projetos de IA temos”, mas “quantos geram resultado mensurável no P&L”.',
+      'Sem critério de corte, todo piloto vira eterno. O orçamento se transforma em custo recorrente sem dono, e o discurso de inovação encobre a ausência de resultado.',
+    ],
+    alertas: [
+      'O sucesso em IA é medido por número de pilotos, não por resultado.',
+      'Não existe critério explícito para um piloto “virar” ou ser encerrado.',
+      'Projetos de IA seguem vivos por inércia, sem dono nem métrica.',
+    ],
+    boa: 'Distingue com clareza as iniciativas em produção com resultado medido daquelas ainda em exploração. E define critério explícito para escalar ou descontinuar. Sem esse critério, o orçamento de IA é custo, não investimento.',
+    mesa: 'Quais projetos de IA já apareceram no resultado, e quais deveríamos encerrar hoje?',
+  },
+];
+
+const autoavaliacao = [
+  'Sabemos onde a IA cria e destrói valor no setor, e onde estamos.',
+  'Medimos a nossa maturidade em IA e comparamos com o setor.',
+  'Há um dono formal da estratégia de IA, com metas.',
+  'Temos política de uso de IA e sabemos que dados saem da empresa.',
+  'Conhecemos as decisões mediadas por modelos e quem responde por elas.',
+  'Temos tese de como a IA muda o negócio e a vantagem competitiva.',
+  'Distinguimos IA que vira resultado de pilotos que não escalam.',
+];
+---
+<Page
+  title="7 perguntas que todo líder deveria fazer sobre IA · Klarea"
+  description="Guia de liderança em IA da Klarea: as 7 perguntas que separam líderes que acompanham o assunto dos que governam o uso de IA. Com sinais de alerta, autoavaliação e PDF para levar à reunião."
+  canonical="https://klarea.ai/7-perguntas/"
+  heading="7 perguntas que todo líder deveria fazer sobre IA"
+  lede="Você não precisa dominar a tecnologia para liderar a conversa. Precisa fazer as perguntas certas e cobrar boas respostas."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Líderes que fazem as perguntas certas lideram a conversa.</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          A IA deixou de ser pauta do time de tecnologia. Ela está na agenda do conselho e nas decisões que o seu
+          negócio toma todos os dias, com ou sem a sua supervisão.
+        </p>
+        <p>
+          Este guia não vai transformar você em especialista técnico. Vai te dar as sete perguntas que separam quem
+          apenas acompanha o assunto de quem <b>governa o uso de IA</b> com clareza e responsabilidade.
+        </p>
+        <p>
+          Não é sobre saber as respostas. É sobre reconhecer quando a resposta que você recebe é vaga, defensiva ou
+          inexistente. Aí está o trabalho.
+        </p>
+      </div>
+
+      <div class="grid grid-3" style="margin-top:34px">
+        <article class="cell">
+          <span class="kind">01</span><h3>Leve para a mesa</h3>
+          <p>Use as sete perguntas na próxima reunião de diretoria ou comitê. Uma de cada vez.</p>
+        </article>
+        <article class="cell">
+          <span class="kind">02</span><h3>Ouça a resposta</h3>
+          <p>Cada pergunta traz os sinais de alerta e o que uma boa resposta inclui. Compare.</p>
+        </article>
+        <article class="cell">
+          <span class="kind">03</span><h3>Meça a lacuna</h3>
+          <p>Feche pela autoavaliação no fim. Onde falta resposta, começa o trabalho.</p>
+        </article>
+      </div>
+
+      <div class="actions">
+        <a class="btn" href="/Klarea-7-perguntas-IA.pdf">Baixar o PDF</a>
+      </div>
+    </div>
+  </section>
+
+  {perguntas.map((p, i) => (
+    <section class={i % 2 === 0 ? 'band band-open' : 'band band-runnable'} id={`p${p.n}`}>
+      <div class="sheet">
+        <div style="display:flex;align-items:baseline;gap:16px;flex-wrap:wrap">
+          <span class="qn cond" style="font-size:26px;color:var(--course-ink)">{p.n}</span>
+          <span class="cond" style="font-weight:600;font-size:13.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)">
+            Pergunta {p.n} · {i + 1} de 7
+          </span>
+        </div>
+        <h2 style="margin-top:10px;max-width:24ch">{p.q}</h2>
+        <p class="lede" style="max-width:66ch">{p.tese}</p>
+
+        <div style="display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:40px;margin-top:34px" class="q-grid">
+          <div class="article" style="max-width:none">
+            {p.contexto.map((c) => <p style="margin-top:0;margin-bottom:16px">{c}</p>)}
+          </div>
+          <div>
+            <div class="oob" style="margin-top:0">
+              <span class="kind">Sinais de alerta</span>
+              <ul style="margin:8px 0 0;padding-left:18px;font-size:14.5px;line-height:1.6;color:var(--muted)">
+                {p.alertas.map((a) => <li style="margin:6px 0">{a}</li>)}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid grid-2" style="margin-top:26px">
+          <article class="cell">
+            <span class="kind">Uma resposta boa inclui</span>
+            <p>{p.boa}</p>
+          </article>
+          <article class="cell">
+            <span class="kind">Leve para a mesa</span>
+            <p style="font-size:17px;line-height:1.5;color:var(--ink)">“{p.mesa}”</p>
+          </article>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  <section class="band band-slow">
+    <div class="sheet">
+      <h2>Onde a sua empresa está?</h2>
+      <p class="prose">
+        Para cada pergunta, marque a resposta mais honesta. Não a que soa melhor na reunião, a que você defenderia com
+        dados se alguém pedisse a prova.
+      </p>
+      <ol class="qlist" style="max-width:76ch">
+        {autoavaliacao.map((a, i) => (
+          <li><span class="qn">{String(i + 1).padStart(2, '0')}</span><span>{a}</span></li>
+        ))}
+      </ol>
+      <div class="oob">
+        <span class="kind">Mais de três respostas em “não sei” ou “parcial”?</span>
+        <p>
+          <b style="color:var(--ink);font-weight:600">Há mais lacuna do que cobertura.</b> Não é um problema de
+          tecnologia. É de leitura estratégica e governança, e é exatamente onde um diagnóstico começa.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Essas perguntas revelaram lacunas?</h2>
+      <p class="prose">
+        Agende um diagnóstico de 30 minutos com a Klarea. Sem deck de vendas. Uma leitura objetiva de onde está o maior
+        valor de IA no seu negócio, e do que fazer primeiro.
+      </p>
+      <p class="fine">Advisory independente · Sem conflito com fornecedores · Confidencial</p>
+      <div class="actions">
+        <a class="btn" href="/#contato">Agendar um diagnóstico</a>
+        <a class="btn btn-ghost" href="/diagnostico.html">Medir minha maturidade · 2 min</a>
+      </div>
+
+      <div class="people">
+        <article class="person">
+          <span class="role">O Estrategista</span>
+          <h3>Guilherme Tossulino</h3>
+          <p>Estratégia e decisão. Traduz o problema de negócio em onde a IA cria valor, e em que ordem atacar.</p>
+        </article>
+        <article class="person">
+          <span class="role">O Arquiteto</span>
+          <h3>Rafael Scheidt</h3>
+          <p>Arquitetura de IA. Tira a IA do slide e coloca em produção, com segurança e governança.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+</Page>

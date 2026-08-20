@@ -1,0 +1,85 @@
+---
+// Terreno do bloco de abertura: curvas de nível em três pesos sobre o navy,
+// mancha de brejo hachurada, e o percurso da Klarea por cima de tudo.
+// A camada terreno nunca usa a cor do percurso; o percurso nunca vira textura.
+---
+<svg class="terrain" viewBox="0 0 1400 860" preserveAspectRatio="xMaxYMid slice" aria-hidden="true">
+  <defs>
+    <pattern id="marsh-dark" width="18" height="11" patternUnits="userSpaceOnUse">
+      <path d="M0 3h10M0 8.5h10" stroke="#8FB4FF" stroke-opacity=".26" stroke-width="1" />
+    </pattern>
+    <pattern id="thicket-dark" width="12" height="12" patternUnits="userSpaceOnUse">
+      <circle cx="2.5" cy="2.5" r="1.1" fill="#FFFFFF" fill-opacity=".07" />
+      <circle cx="8.5" cy="8.5" r="1.1" fill="#FFFFFF" fill-opacity=".07" />
+    </pattern>
+  </defs>
+
+  <!-- manchas de terreno -->
+  <path class="t-marsh" d="M880 -40h560v330q-190 52-350-26-150-72-200-200Z" />
+  <path class="t-thicket" d="M-40 560q250-84 470 14 200 88 400 30 190-56 610 22V900H-40Z" />
+
+  <!-- curvas de nível: mestra a cada cinco, intermediárias entre elas -->
+  <g class="c-index">
+    <path d="M-40 130q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 470q280-72 560 18 290 92 550 26 170-44 330-8" />
+    <path d="M-40 800q270-66 540 18 300 92 560 24 160-40 340-6" />
+  </g>
+  <g class="c-mid">
+    <path d="M-40 198q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 334q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 606q280-72 560 18 290 92 550 26 170-44 330-8" />
+    <path d="M-40 736q270-66 540 18 300 92 560 24 160-40 340-6" />
+  </g>
+  <g class="c-hair">
+    <path d="M-40 164q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 266q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 402q300-84 600 24 290 100 560 30 160-42 320-10" />
+    <path d="M-40 538q280-72 560 18 290 92 550 26 170-44 330-8" />
+    <path d="M-40 672q270-66 540 18 300 92 560 24 160-40 340-6" />
+  </g>
+
+  <!-- percurso: partida, três controles, chegada -->
+  <path class="leg" d="M986 806 Q1022 664 1108 596 T1214 428 Q1244 322 1330 250" />
+
+  <g class="mark">
+    <!-- partida: triângulo -->
+    <path d="M986 782 L1010 822 L962 822 Z" />
+    <text x="944" y="812" text-anchor="end">Diagnóstico</text>
+  </g>
+  <g class="mark">
+    <circle cx="1108" cy="596" r="21" />
+    <text x="1074" y="592" text-anchor="end">1</text>
+  </g>
+  <g class="mark">
+    <circle cx="1214" cy="428" r="21" />
+    <text x="1180" y="424" text-anchor="end">2</text>
+  </g>
+  <g class="mark">
+    <!-- chegada: círculo duplo -->
+    <circle cx="1330" cy="250" r="26" />
+    <circle cx="1330" cy="250" r="16" />
+    <text x="1292" y="246" text-anchor="end">Operação</text>
+  </g>
+</svg>
+
+<style>
+  .terrain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+  .t-marsh{fill:url(#marsh-dark)}
+  .t-thicket{fill:url(#thicket-dark)}
+  .c-index path{fill:none;stroke:rgba(255,255,255,.20);stroke-width:1.6}
+  .c-mid path{fill:none;stroke:rgba(255,255,255,.12);stroke-width:1.1}
+  .c-hair path{fill:none;stroke:rgba(255,255,255,.07);stroke-width:.8}
+  .leg{fill:none;stroke:#7FA6FF;stroke-width:3.5;stroke-dasharray:13 10;stroke-linecap:round}
+  .mark circle,.mark path{fill:none;stroke:#7FA6FF;stroke-width:3}
+  .mark text{
+    font-family:"Barlow Condensed",Inter,sans-serif;font-weight:700;font-size:23px;
+    fill:#A9C5FF;letter-spacing:.04em;text-transform:uppercase;
+  }
+  /* Em tela estreita o recorte ancorado a direita joga o percurso por cima do
+     texto e amplia a hachura ate virar ruido. Ali o terreno fica so com as
+     curvas de nivel: a legenda e a copia carregam o argumento. */
+  @media(max-width:900px){
+    .leg,.mark,.t-marsh{display:none}
+    .c-hair path{stroke-opacity:.5}
+  }
+</style>
