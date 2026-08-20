@@ -138,7 +138,8 @@ descrição de controle, a mesma da home).
 **Roteamento e URLs.** `build.format: 'preserve'` no `astro.config.mjs` não é preferência de estilo: `'file'`
 achataria `/guia/` em `/guia.html` e `'directory'` transformaria `/privacidade.html` em `/privacidade/`.
 Há campanha ativa no Google Ads apontando para estas páginas. `scripts/check-urls.sh` compara a saída do build
-com `scripts/urls-baseline.txt` e falha se qualquer caminho mudar. Rode antes de todo deploy.
+com `scripts/urls-baseline.txt` e falha se qualquer caminho mudar. Roda no CI a cada push na `main`, e a
+publicação para se ele falhar.
 
 ## Dívidas registradas
 

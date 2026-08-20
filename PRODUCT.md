@@ -8,11 +8,18 @@ web
 
 ## Stack
 
-Hoje: HTML/CSS estático em arquivo único (`index.html`, 750 linhas), sem build, deploy por push na `main` (Cloudflare Pages, Framework None, output `/`).
+Hoje: **GitHub Pages** servindo arquivos estáticos do repositório `tossulino/klarea`, branch `main`.
+Verificado em 2026-08-20 pelos cabeçalhos (`server: GitHub.com`) e pelo DNS (185.199.108-111.153, `www` em
+`tossulino.github.io`). O `CONTEXT.md` afirmava Cloudflare Pages: **estava errado**.
 
-Decisão do usuário (ago/2026) para a nova versão: **build aceito** (Astro ou equivalente), para ganhar componentes reutilizáveis entre `index`, `diagnostico.html`, `guia/` e `artigos/`. Consequência registrada: o deploy deixa de ser apenas um push — a Cloudflare passa a precisar de build command.
+Decisão do usuário (ago/2026): build aceito. O site passou a ser **Astro**, com `src/pages/` gerando as 10
+páginas e `public/` guardando os ativos. Consequência: o GitHub Pages não roda `npm run build`, então a
+publicação passa a depender de `.github/workflows/deploy.yml` (GitHub Actions) e da opção
+**Settings → Pages → Source: GitHub Actions** no repositório.
 
-Nota de sequência: a exploração de direções visuais é construída como HTML estático solto para comparação lado a lado. O build entra apenas na direção escolhida.
+`build.format: 'preserve'` é obrigatório: `'file'` achataria `/guia/` em `/guia.html` e `'directory'`
+transformaria `/privacidade.html` em `/privacidade/`. Há campanha ativa no Ads sobre essas URLs, e
+`scripts/check-urls.sh` roda no CI para impedir a regressão.
 
 ## Users
 
