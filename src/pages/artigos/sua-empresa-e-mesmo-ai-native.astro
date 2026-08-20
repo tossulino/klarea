@@ -1,0 +1,123 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const dimensoes = [
+  { t: 'Estratégia', p: 'A IA está amarrada a objetivos do negócio ou é pauta solta em reunião?' },
+  { t: 'Patrocínio', p: 'Quem puxa o tema tem mandato e orçamento, ou é entusiasmo isolado?' },
+  { t: 'Casos em produção', p: 'O que roda de verdade, todos os dias, fora da demo?' },
+  { t: 'Dados', p: 'O insumo está organizado e acessível, ou espalhado em planilhas?' },
+  { t: 'Governança', p: 'Existe política, guardrails e um responsável, ou cada um usa como quer?' },
+  { t: 'Letramento', p: 'A liderança sabe o que pedir e o que cobrar?' },
+  { t: 'Resultado', p: 'Há impacto medido em eficiência, receita ou margem?' },
+  { t: 'Adoção', p: 'A IA é parte de como o trabalho é feito, ou território de poucos entusiastas?' },
+];
+---
+<Page
+  title="Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria · Klarea"
+  description="Toda semana uma empresa se declara AI-native. Um número médio não diz nada: o que define a maturidade é o perfil em 8 dimensões. Por Guilherme Tossulino, sócio da Klarea."
+  canonical="https://klarea.ai/artigos/sua-empresa-e-mesmo-ai-native.html"
+  heading="Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria"
+  lede="Por Guilherme Tossulino · Sócio da Klarea · 5 de julho de 2026 · 5 min de leitura"
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <div class="article">
+        <p>
+          Toda semana uma empresa se declara AI-native. No discurso, todas são. Na prática, a maioria colou IA por cima
+          do que já existia e trocou o rótulo.
+        </p>
+        <p>Existe um teste simples para separar as duas coisas.</p>
+        <blockquote><p>Tire a IA da sua empresa amanhã. O que para?</p></blockquote>
+        <p>
+          Se a resposta é “nada”, você tem ferramenta, não estratégia. Se param processos, decisões e receita, aí sim a
+          conversa é outra. Entre esses dois extremos mora quase todo mundo. E é exatamente aí que um número médio
+          engana.
+        </p>
+
+        <h2>A média esconde o risco</h2>
+        <p>
+          Circulou no LinkedIn um scorecard de sistemas AI-native: cinco dimensões de arquitetura, três níveis cada, e
+          uma conclusão que vale mais que o modelo inteiro. Arquitetura equilibrada compõe. Arquitetura desequilibrada
+          cria atrito.
+        </p>
+        <p>
+          A leitura é de engenharia, mas o insight serve direto para o board. Maturidade em IA não é um número. É um
+          perfil.
+        </p>
+        <p>
+          Passei anos do lado do comprador em processos de M&A, e a lógica da diligência é a mesma. Ninguém paga pela
+          média da empresa. O comprador encontra o ponto fraco, e é ali que o preço se decide. Receita ótima com
+          contabilidade desorganizada não vale a média das duas. Vale o desconto que a desorganização impõe.
+        </p>
+        <blockquote><p>Ninguém precifica a média. O que define o seu valor é o gargalo.</p></blockquote>
+        <p>
+          Com IA, o mesmo raciocínio. Uma empresa nota 5 em pilotos e nota 1 em governança não é uma empresa nota 3. É
+          uma empresa que vai escalar um risco. Uma empresa nota 5 em estratégia e nota 1 em adoção não é nota 3. É um
+          plano bonito que ninguém executa.
+        </p>
+
+        <h2>As 8 dimensões que eu mediria</h2>
+        <p>
+          Na Klarea, medimos maturidade de IA em oito dimensões. Cada uma responde a uma pergunta que o conselho deveria
+          saber responder hoje:
+        </p>
+      </div>
+
+      <ol class="qlist" style="max-width:70ch">
+        {dimensoes.map((d, i) => (
+          <li>
+            <span class="qn">{String(i + 1).padStart(2, '0')}</span>
+            <span><b style="font-weight:600">{d.t}.</b> {d.p}</span>
+          </li>
+        ))}
+      </ol>
+
+      <div class="article">
+        <p>
+          Repare que só duas dimensões são sobre tecnologia. As outras seis são sobre gestão. É por isso que fornecedor
+          de software não resolve esse problema: a ferramenta ataca uma dimensão e deixa as outras sete paradas.
+        </p>
+        <blockquote><p>Equilíbrio compõe. Desequilíbrio cria atrito.</p></blockquote>
+        <p>
+          A dimensão mais fraca define o teto das outras. Casos em produção sem governança viram passivo. Estratégia sem
+          letramento vira slide. Dados organizados sem patrocínio viram custo de armazenagem.
+        </p>
+
+        <h2>Nem toda empresa precisa ser AI-native</h2>
+        <p>
+          Aqui vai a parte que pouca gente do mercado de IA admite: ser AI-native em tudo não é meta universal.
+        </p>
+        <p>
+          Existe operação em que a IA é o core do negócio. Existe operação em que ela é alavanca de margem em três
+          processos e ponto final. As duas escolhas são legítimas. O que não é legítimo é não saber qual é a sua.
+        </p>
+        <p>
+          A decisão não é “quanta IA”. É onde. E decidir onde exige mapa: saber o seu perfil nas oito dimensões,
+          comparar com o setor e escolher em qual delas o próximo real investido rende mais.
+        </p>
+
+        <h2>O que fazer com isso</h2>
+        <p>Esqueça a pergunta “somos AI-native?”. Ela rende manchete, não decisão.</p>
+        <p>Troque por três perguntas que rendem:</p>
+        <ol>
+          <li>Qual é a nossa dimensão mais fraca, e quanto ela está custando?</li>
+          <li>Se tirássemos a IA amanhã, o que pararia? A resposta condiz com o que investimos?</li>
+          <li>Onde o negócio precisa ser AI-native, e onde basta ser bem servido por ferramenta?</li>
+        </ol>
+        <p>
+          Quem responde às três com dados tem um plano. Quem responde com impressões tem uma aposta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Qual é o seu perfil nas 8 dimensões?</h2>
+      <p class="prose">
+        O Índice de Maturidade em IA mede as oito em 2 minutos e mostra onde está a sua dimensão mais fraca. Gratuito.
+      </p>
+      <div class="actions"><a class="btn" href="/diagnostico.html">Medir minha maturidade em IA</a></div>
+    </div>
+  </section>
+</Page>

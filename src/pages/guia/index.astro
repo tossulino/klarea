@@ -1,0 +1,181 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const dimensoes = [
+  { n: '01', t: 'Estratégia', d: 'Onde a IA está: fora do radar, em conversa informal ou no centro do modelo de negócio.' },
+  { n: '02', t: 'Patrocínio', d: 'Quem puxa. Sem mandato e orçamento, IA vira hobby de quem se interessa.' },
+  { n: '03', t: 'Casos em operação', d: 'Quantos processos relevantes rodam de verdade. Demo não conta.' },
+  { n: '04', t: 'Dados', d: 'Do arquivo espalhado ao dado estruturado com governança.' },
+  { n: '05', t: 'Governança', d: 'Política de uso, LGPD e limites de segurança: do nada formal à auditoria.' },
+  { n: '06', t: 'Fluência', d: 'Se a liderança sabe o que pedir. Sem repertório, não se cobra resultado.' },
+  { n: '07', t: 'Resultado', d: 'De economia de tempo pontual a receita e margem atribuíveis à IA.' },
+  { n: '08', t: 'Adoção', d: 'Do entusiasta isolado à IA como parte de como o trabalho é feito.' },
+];
+
+const entregas = [
+  'As 8 dimensões, com os 5 estágios descritos em linguagem de negócio',
+  'Os 5 níveis de maturidade e o que trava a empresa em cada um',
+  'Folha de autoavaliação para pontuar a sua empresa em 10 minutos',
+  'O próximo passo recomendado por nível, sem receita genérica',
+];
+---
+<Page
+  title="Guia: as 8 dimensões da maturidade em IA · Klarea"
+  description="Guia gratuito da Klarea: as 8 dimensões que separam quem opera IA de quem só testa, os 5 níveis de maturidade e o próximo passo de cada nível. PDF para baixar."
+  canonical="https://klarea.ai/guia/"
+  heading="Todo mundo testa IA. Quase ninguém opera."
+  lede="O que separa os dois grupos não é o modelo. É o que está ao redor dele. Este guia abre as 8 dimensões que determinam a maturidade em IA de uma empresa, os 5 níveis de cada uma e o próximo passo concreto de cada nível."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start" class="guia-grid">
+        <div>
+          <h2>O que tem dentro</h2>
+          <ol class="qlist" style="margin-top:24px">
+            {entregas.map((e, i) => (
+              <li><span class="qn">{String(i + 1).padStart(2, '0')}</span><span>{e}</span></li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="oob" style="margin-top:0">
+          <div id="formWrap">
+            <span class="kind">Guia gratuito · PDF</span>
+            <h3>Receba o guia em PDF</h3>
+            <p style="margin-top:8px">Enviamos o link na hora e uma cópia no seu e-mail.</p>
+
+            <form class="form form-light" id="leadForm" action="https://api.web3forms.com/submit" method="POST" style="grid-template-columns:1fr">
+              <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89" />
+              <input type="hidden" name="subject" value="Novo lead do Guia de Maturidade (klarea.ai/guia)" />
+              <input type="hidden" name="from_name" value="Guia de Maturidade Klarea.ai" />
+              <input type="hidden" name="Origem" value="LP /guia" />
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+              <label><span>Nome</span><input type="text" name="Nome" required placeholder="Como te chamamos" autocomplete="name" /></label>
+              <label><span>E-mail corporativo</span><input type="email" name="E-mail" required placeholder="voce@empresa.com.br" autocomplete="email" /></label>
+              <label><span>Empresa</span><input type="text" name="Empresa" placeholder="Razão social ou marca" autocomplete="organization" /></label>
+              <label><span>Cargo</span><input type="text" name="Cargo" placeholder="Conselheiro, CEO, diretor" autocomplete="organization-title" /></label>
+              <label><span>WhatsApp</span><input type="tel" name="WhatsApp" placeholder="(48) 90000-0000" autocomplete="tel" /></label>
+              <label>
+                <span>Tamanho da empresa</span>
+                <select name="Tamanho da empresa">
+                  <option>Até 50 funcionários</option><option>51 a 200</option>
+                  <option>201 a 1.000</option><option>1.001 a 5.000</option><option>Mais de 5.000</option>
+                </select>
+              </label>
+              <button class="btn submit" type="submit">Quero o guia</button>
+            </form>
+            <p class="status" id="formStatus"></p>
+            <p class="fine">
+              Sem spam. Você recebe o guia e, no máximo, um convite para conversar.{' '}
+              <a href="/privacidade.html" style="color:var(--course-ink)">Privacidade</a>.
+            </p>
+          </div>
+
+          <div id="done" style="display:none">
+            <span class="kind">Confirmado</span>
+            <h3>Pronto. O guia é seu.</h3>
+            <p style="margin-top:8px">Também mandamos o link para o seu e-mail.</p>
+            <div class="actions" style="margin-top:20px">
+              <a class="btn" id="dlBtn" href="/Klarea-Guia-Maturidade-IA.pdf" target="_blank" rel="noopener">Baixar o PDF</a>
+            </div>
+            <p class="fine">
+              Quer a sua nota nas 8 dimensões em 2 minutos?{' '}
+              <a href="/diagnostico.html" style="color:var(--course-ink)">Fazer o Índice de Maturidade</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Oito dimensões. Nenhuma delas é o modelo.</h2>
+      <p class="prose">
+        A tecnologia virou commodity. O que decide o resultado é o entorno: quem patrocina, que dados alimentam, que
+        regra governa, quem sabe pedir e o que é medido. O guia descreve cada dimensão em cinco estágios, do “fora do
+        radar” ao “parte de como o trabalho é feito”.
+      </p>
+      <div class="grid grid-4">
+        {dimensoes.map((d) => (
+          <article class="cell">
+            <span class="kind">{d.n}</span>
+            <h3>{d.t}</h3>
+            <p>{d.d}</p>
+          </article>
+        ))}
+      </div>
+      <div class="oob">
+        <span class="kind">A pergunta que o guia responde</span>
+        <p>
+          Se você tirasse a IA da sua empresa amanhã, o que pararia? Se a resposta é “nada”, você tem ferramenta, não
+          estratégia. <b style="color:var(--ink);font-weight:600">E ferramenta ninguém precisa comprar duas vezes.</b>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Estratégia e engenharia na mesma mesa.</h2>
+      <div class="people">
+        <article class="person">
+          <span class="role">O Estrategista</span>
+          <h3>Guilherme Tossulino</h3>
+          <p>Estratégia e execução. Leva IA ao nível da decisão e prioriza por retorno, não por moda.</p>
+        </article>
+        <article class="person">
+          <span class="role">O Arquiteto</span>
+          <h3>Rafael “Foka” Scheidt</h3>
+          <p>Engenharia de software e IA. CTO com exit na NETPACS e autor de “A Nova Engenharia de Software com IA”.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      function track(n, p) { if (typeof gtag === 'function') { gtag('event', n, p || {}); } }
+      track('view_lp_guia');
+
+      var form = document.getElementById('leadForm');
+      var status = document.getElementById('formStatus');
+      var btn = form.querySelector('button[type="submit"]');
+      var btnText = btn.textContent;
+      var started = false;
+
+      form.addEventListener('input', function () {
+        if (!started) { started = true; track('lp_guia_form_started'); }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        status.style.display = 'none';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d.success) {
+              track('generate_lead', { origem: 'guia_maturidade' });
+              track('conversion', { send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE', value: 1.0, currency: 'BRL' });
+              document.getElementById('formWrap').style.display = 'none';
+              document.getElementById('done').style.display = 'block';
+              try { window.open('/Klarea-Guia-Maturidade-IA.pdf', '_blank'); } catch (err) {}
+            } else {
+              throw new Error(d.message || 'falhou');
+            }
+          })
+          .catch(function () {
+            btn.disabled = false; btn.textContent = btnText;
+            status.style.display = 'block';
+            status.style.color = '#A32718';
+            status.textContent = 'Não consegui enviar agora. Tente de novo ou escreva para contato@klarea.ai.';
+            track('lp_guia_form_error');
+          });
+      });
+
+      document.getElementById('dlBtn').addEventListener('click', function () { track('lp_guia_pdf_download'); });
+    })();
+  </script>
+</Page>

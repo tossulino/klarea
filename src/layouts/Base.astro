@@ -1,0 +1,96 @@
+---
+const {
+  title = 'Klarea · IA que executa a sua estratégia',
+  description = 'Klarea é a consultoria de IA para donos de empresa, diretores, gestores e executivos. Da leitura estratégica à operação: agentes e automações rodando no negócio, com governança e resultado medido em eficiência, receita e margem.',
+  canonical = 'https://klarea.ai/',
+  robots = '',
+} = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Klarea',
+  alternateName: 'Klarea — Consultoria de IA para quem decide',
+  url: 'https://klarea.ai/',
+  logo: 'https://klarea.ai/favicon.png',
+  image: 'https://klarea.ai/og.png',
+  description:
+    'Consultoria de IA para donos de empresa, diretores, gestores e executivos. Da leitura estratégica à IA operando no negócio, com governança e resultado medido. Não é escola de IA nem software house.',
+  areaServed: 'BR',
+  knowsAbout: [
+    'Inteligência Artificial', 'Estratégia de IA', 'IA generativa', 'Governança de IA',
+    'Agentes de IA', 'Integração com ERP e CRM', 'Automação de processos',
+    'Execução de estratégia', 'Produtividade com IA', 'Transformação digital', 'Maturidade em IA',
+  ],
+  founder: [
+    { '@type': 'Person', name: 'Guilherme Tossulino', jobTitle: 'Sócio · Estratégia e Execução', sameAs: 'https://www.linkedin.com/in/tossulino/' },
+    { '@type': 'Person', name: 'Rafael Scheidt', jobTitle: 'Sócio · Engenharia de Software e IA', sameAs: 'https://www.linkedin.com/in/rafael-scheidt-9b7186164/' },
+  ],
+  sameAs: [
+    'https://www.linkedin.com/in/tossulino/',
+    'https://www.linkedin.com/in/rafael-scheidt-9b7186164/',
+  ],
+  contactPoint: {
+    '@type': 'ContactPoint', contactType: 'Comercial',
+    telephone: '+55-48-98401-5857', availableLanguage: ['Portuguese'],
+  },
+};
+---
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonical} />
+  {robots && <meta name="robots" content={robots} />}
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Klarea" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:url" content="https://klarea.ai/" />
+  <meta property="og:title" content="Klarea — IA que executa a sua estratégia" />
+  <meta property="og:description" content="Consultoria de IA para quem decide. Da leitura estratégica à IA operando no seu negócio, com governança e resultado medido." />
+  <meta property="og:image" content="https://klarea.ai/og.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Klarea — IA que executa a sua estratégia" />
+  <meta name="twitter:description" content="Consultoria de IA para quem decide. Da leitura estratégica à IA operando no seu negócio, com governança e resultado medido." />
+  <meta name="twitter:image" content="https://klarea.ai/og.png" />
+
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="apple-touch-icon" href="/favicon.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BY0EFHP73W"></script>
+  <script is:inline>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BY0EFHP73W');
+    gtag('config', 'AW-18391505425');
+  </script>
+
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+<!--
+THESIS: O terreno é da empresa do visitante e não se redesenha; o que a Klarea entrega é o percurso traçado por cima dele. A página separa as duas camadas literalmente e recusa o hero navy com constelação neural que toda consultoria de IA publica.
+OWN-WORLD: Linguagem fixa de carta. Curvas de nível em três pesos (.09/.14/.22 de opacidade sobre navy), brejo hachurado, mata em retícula de pontos, faixas alternando #FFFFFF, #F3F6FB, #E9F0FE e o navy #0E2340. O azul #3D7BFF é a cor do percurso e não aparece em mais nada; #2E63D6 quando vira texto ou botão. Barlow Condensed em caixa alta para display e numerais de controle, Inter no corpo, nunca o contrário.
+STORY: O visitante reconhece o próprio terreno, entende que a Klarea não vai trocá-lo, e agenda para receber o traçado.
+FIRST VIEWPORT: Bloco navy ocupando a tela com curvas de nível claras por cima. Título em caixa alta a 102px à esquerda. Percurso tracejado atravessando a metade direita, do triângulo de partida ao círculo duplo de chegada, com controles numerados. Dois botões e a legenda de três entradas ancorando o pé.
+FORM: carta de orientação ISOM, challenger fundido; escolhido pelo usuário contra a direção atribuída; seed a8b3246d.
+RAISE (colcha): cada frente carrega código de controle visível.
+RAISE (sol de intempérie): nenhuma cor fora do sistema terreno/percurso.
+RAISE (step row): o perfil do percurso marca a fase corrente, travada num relógio.
+RAISE (sessão dupla): rodapé de créditos denso em quatro colunas.
+FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
+-->
+  <slot />
+</body>
+</html>
