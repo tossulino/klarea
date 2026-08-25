@@ -43,6 +43,8 @@ Donos de empresa, diretores, gestores, executivos, conselheiros e investidores d
 
 - Site principal: https://klarea.ai/
 - Índice de Maturidade em IA (autodiagnóstico, ex-AI-Native Score): https://klarea.ai/diagnostico.html
+- Guia das 8 dimensões da maturidade em IA (LP + PDF): https://klarea.ai/guia/
+- Guia de skills do Claude, do zero à operação (LP + PDF): https://klarea.ai/skills/
 - Conteúdos (artigos e materiais): https://klarea.ai/conteudos.html
   - Artigo "IA não é estratégia. É meio.": https://klarea.ai/artigos/ia-nao-e-estrategia-e-meio.html
   - Artigo "Sua empresa é mesmo AI-native? As 8 dimensões que eu mediria": https://klarea.ai/artigos/sua-empresa-e-mesmo-ai-native.html

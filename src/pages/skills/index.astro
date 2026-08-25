@@ -1,0 +1,182 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const entregas = [
+  'O que é uma skill, em formato de arquivo, sem abstração',
+  'Como instalar nas três superfícies: Claude Chat, Cowork e Claude Code',
+  'A diferença entre Chat e Cowork, e quando cada um vale a pena',
+  'Uma skill completa comentada, pronta para copiar',
+  'Os quatro erros que fazem uma skill nunca disparar',
+  'As cinco primeiras skills que a sua empresa deveria escrever',
+];
+
+const superficies = [
+  { k: 'Claude Chat', t: 'Você transporta', d: 'A IA produz, você copia a saída para onde ela precisa ir.' },
+  { k: 'Claude Cowork', t: 'Ela entrega', d: 'A IA trabalha nas pastas e ferramentas que você autorizou, e devolve o arquivo pronto.' },
+  { k: 'Claude Code', t: 'Ela constrói', d: 'A superfície de quem escreve software, com a regra versionada junto com o código.' },
+];
+---
+<Page
+  title="Guia gratuito: skills do Claude, do zero à operação · Klarea"
+  description="Guia gratuito da Klarea: o que é uma skill do Claude, como instalar no Chat, no Cowork e no Claude Code, e o que muda quando o jeito da casa vira instrução executável. PDF para baixar."
+  canonical="https://klarea.ai/skills/"
+  heading="Todo mundo prompta. Quase ninguém padroniza."
+  lede="O melhor prompt da sua empresa está no histórico de conversa de uma pessoa só. Quando ela sai de férias, o padrão vai junto. Este guia mostra como transformar o jeito da casa em algo que a IA segue sozinha, em toda execução e para todo mundo."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start" class="guia-grid">
+        <div>
+          <h2>O que tem dentro</h2>
+          <ol class="qlist" style="margin-top:24px">
+            {entregas.map((e, i) => (
+              <li><span class="qn">{String(i + 1).padStart(2, '0')}</span><span>{e}</span></li>
+            ))}
+          </ol>
+        </div>
+
+        <div class="oob" style="margin-top:0">
+          <div id="formWrap">
+            <span class="kind">Guia gratuito · PDF</span>
+            <h3>Receba o guia em PDF</h3>
+            <p style="margin-top:8px">Enviamos o link na hora e uma cópia no seu e-mail.</p>
+
+            <form class="form form-light" id="leadForm" action="https://api.web3forms.com/submit" method="POST" style="grid-template-columns:1fr">
+              <input type="hidden" name="access_key" value="7be18a69-c2bc-4c31-bcb8-e776a1959b89" />
+              <input type="hidden" name="subject" value="Novo lead do Guia de Skills (klarea.ai/skills)" />
+              <input type="hidden" name="from_name" value="Guia de Skills Klarea.ai" />
+              <input type="hidden" name="Origem" value="LP /skills" />
+              <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" />
+
+              <label><span>Nome</span><input type="text" name="Nome" required placeholder="Como te chamamos" autocomplete="name" /></label>
+              <label><span>E-mail corporativo</span><input type="email" name="E-mail" required placeholder="voce@empresa.com.br" autocomplete="email" /></label>
+              <label><span>Empresa</span><input type="text" name="Empresa" placeholder="Razão social ou marca" autocomplete="organization" /></label>
+              <label><span>Cargo</span><input type="text" name="Cargo" placeholder="Conselheiro, CEO, diretor" autocomplete="organization-title" /></label>
+              <label><span>WhatsApp</span><input type="tel" name="WhatsApp" placeholder="(48) 90000-0000" autocomplete="tel" /></label>
+              <label>
+                <span>Tamanho da empresa</span>
+                <select name="Tamanho da empresa">
+                  <option>Até 50 funcionários</option><option>51 a 200</option>
+                  <option>201 a 1.000</option><option>1.001 a 5.000</option><option>Mais de 5.000</option>
+                </select>
+              </label>
+              <button class="btn submit" type="submit">Quero o guia</button>
+            </form>
+            <p class="status" id="formStatus"></p>
+            <p class="fine">
+              Sem spam. Você recebe o guia e, no máximo, um convite para conversar.{' '}
+              <a href="/privacidade.html" style="color:var(--course-ink)">Privacidade</a>.
+            </p>
+          </div>
+
+          <div id="done" style="display:none">
+            <span class="kind">Confirmado</span>
+            <h3>Pronto. O guia é seu.</h3>
+            <p style="margin-top:8px">Também mandamos o link para o seu e-mail.</p>
+            <div class="actions" style="margin-top:20px">
+              <a class="btn" id="dlBtn" href="/Klarea-Guia-Skills-Claude.pdf" target="_blank" rel="noopener">Baixar o PDF</a>
+            </div>
+            <p class="fine">
+              Quer saber em que estágio a sua empresa está?{' '}
+              <a href="/diagnostico.html" style="color:var(--course-ink)">Fazer o Índice de Maturidade</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Prompt é conversa. Skill é procedimento.</h2>
+      <p class="prose">
+        Um morre quando a aba fecha. O outro fica, com dono, versão e histórico. Uma skill é uma pasta com um arquivo de
+        texto: um cabeçalho que diz quando usar, e o corpo que diz o que fazer. O Claude carrega sozinho quando o assunto
+        aparece, e ignora quando não tem nada a ver.
+      </p>
+      <div class="grid grid-3">
+        {superficies.map((s) => (
+          <article class="cell">
+            <span class="kind">{s.k}</span>
+            <h3>{s.t}</h3>
+            <p>{s.d}</p>
+          </article>
+        ))}
+      </div>
+      <div class="oob">
+        <span class="kind">O teste que o guia propõe</span>
+        <p>
+          Escolha o processo mais crítico da sua empresa e tente escrever a skill dele em uma página.
+          <b style="color:var(--ink);font-weight:600"> Se você não consegue escrever, é porque o processo não existe. A IA só expôs isso mais cedo.</b>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Estratégia e engenharia na mesma mesa.</h2>
+      <div class="people">
+        <article class="person">
+          <span class="role">O Estrategista</span>
+          <h3>Guilherme Tossulino</h3>
+          <p>Estratégia e execução. Leva IA ao nível da decisão e prioriza por retorno, não por moda.</p>
+        </article>
+        <article class="person">
+          <span class="role">O Arquiteto</span>
+          <h3>Rafael “Foka” Scheidt</h3>
+          <p>Engenharia de software e IA. CTO com exit na NETPACS e autor de “A Nova Engenharia de Software com IA”.</p>
+        </article>
+      </div>
+      <p class="fine" style="margin-top:24px">
+        A Klarea não revende software e não tem acordo comercial com a Anthropic. O guia trata de Claude porque é onde o
+        mecanismo de skills está mais maduro hoje.
+      </p>
+    </div>
+  </section>
+
+  <script is:inline>
+    (function () {
+      function track(n, p) { if (typeof gtag === 'function') { gtag('event', n, p || {}); } }
+      track('view_lp_skills');
+
+      var form = document.getElementById('leadForm');
+      var status = document.getElementById('formStatus');
+      var btn = form.querySelector('button[type="submit"]');
+      var btnText = btn.textContent;
+      var started = false;
+
+      form.addEventListener('input', function () {
+        if (!started) { started = true; track('lp_skills_form_started'); }
+      });
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        btn.disabled = true; btn.textContent = 'Enviando...';
+        status.style.display = 'none';
+        fetch(form.action, { method: 'POST', headers: { Accept: 'application/json' }, body: new FormData(form) })
+          .then(function (r) { return r.json(); })
+          .then(function (d) {
+            if (d.success) {
+              track('generate_lead', { origem: 'guia_skills' });
+              track('conversion', { send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE', value: 1.0, currency: 'BRL' });
+              document.getElementById('formWrap').style.display = 'none';
+              document.getElementById('done').style.display = 'block';
+              try { window.open('/Klarea-Guia-Skills-Claude.pdf', '_blank'); } catch (err) {}
+            } else {
+              throw new Error(d.message || 'falhou');
+            }
+          })
+          .catch(function () {
+            btn.disabled = false; btn.textContent = btnText;
+            status.style.display = 'block';
+            status.style.color = '#A32718';
+            status.textContent = 'Não consegui enviar agora. Tente de novo ou escreva para contato@klarea.ai.';
+            track('lp_skills_form_error');
+          });
+      });
+
+      document.getElementById('dlBtn').addEventListener('click', function () { track('lp_skills_pdf_download'); });
+    })();
+  </script>
+</Page>

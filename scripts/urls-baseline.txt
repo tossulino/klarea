@@ -2,6 +2,7 @@
 CNAME
 Klarea-7-perguntas-IA.pdf
 Klarea-Guia-Maturidade-IA.pdf
+Klarea-Guia-Skills-Claude.pdf
 artigos/ia-nao-e-estrategia-e-meio.html
 artigos/sua-empresa-e-mesmo-ai-native.html
 conteudos.html
@@ -14,4 +15,5 @@ privacidade.html
 robots.txt
 sitemap.xml
 skills/ebook.html
+skills/index.html
 termos.html
