@@ -611,10 +611,10 @@ Regras:
   .pg {
     max-width: 165mm;
     margin: 0 auto;
-    padding: 0 6mm 18mm;
-    break-after: page;
+    padding: 0 6mm 14mm;
+    break-before: page;
   }
-  .pg:last-of-type { break-after: auto }
+  .pg:first-of-type { break-before: auto }
 
   /* ===== Capa ========================================================= */
   .capa {
@@ -623,7 +623,7 @@ Regras:
     padding: 22mm 20mm;
     background: var(--t-dense);
     color: #fff;
-    min-height: 259mm;
+    min-height: 297mm;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -786,8 +786,8 @@ Regras:
 
   /* ===== Página final ================================================= */
   .fim {
-    max-width: none; margin: 0; padding: 24mm 20mm;
-    background: var(--t-dense); color: #fff; min-height: 259mm;
+    max-width: none; margin: -16mm 0 -18mm; padding: 34mm 20mm;
+    background: var(--t-dense); color: #fff; min-height: 297mm;
   }
   .marca-fim { margin-bottom: 22mm }
   .fim-tit {
@@ -802,7 +802,7 @@ Regras:
     font-size: 12.4px; line-height: 1.62; color: rgba(255,255,255,.80);
   }
   .fim-grid .rot { color: #7FA6FF }
-  .fim-grid i { font-style: normal; color: rgba(255,255,255,.55) }
+  .fim-grid i { font-style: normal; color: rgba(255,255,255,.68) }
   .fim-nota {
     margin-top: 24px; padding: 16px 18px;
     border: 1px solid rgba(255,255,255,.22); border-left: 3px solid #3D7BFF;
