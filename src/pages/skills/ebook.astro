@@ -611,10 +611,13 @@ Regras:
   .pg {
     max-width: 165mm;
     margin: 0 auto;
-    padding: 0 6mm 14mm;
-    break-before: page;
+    padding: 0 6mm;
   }
-  .pg:first-of-type { break-before: auto }
+  /* so a capa e a pagina final ocupam folha propria */
+  .pg.capa, .pg.fim { break-before: page }
+  .pg.capa:first-of-type { break-before: auto }
+  /* respiro entre secoes, sem forcar folha nova */
+  .pg + .pg { margin-top: 16mm }
 
   /* ===== Capa ========================================================= */
   .capa {
@@ -821,6 +824,7 @@ Regras:
     display: flex; align-items: baseline; gap: 10px;
     padding-bottom: 7px; margin-bottom: 22px;
     border-bottom: 1.5px solid var(--course);
+    break-after: avoid; break-inside: avoid;
   }
   .pg-marca-logo {
     font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
