@@ -178,6 +178,8 @@ const artigos = [
             if (d.success) {
               if (typeof gtag === 'function') {
                 gtag('event', 'material_download', { material: document.getElementById('dlMaterial').value });
+                gtag('event', 'generate_lead', { origem: 'material_download' });
+                gtag('event', 'conversion', { send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE', value: 1.0, currency: 'BRL' });
               }
               show('Pronto! O download vai começar. Enviamos uma cópia para o seu e-mail.', true);
               triggerDownload(file);

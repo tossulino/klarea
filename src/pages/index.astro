@@ -432,13 +432,26 @@ const fases = [
     (function () {
       var f = document.getElementById('leadForm');
       if (f) {
-        f.addEventListener('submit', function () {
-          if (typeof gtag !== 'function') return;
+        // este formulario faz POST nativo: a pagina descarrega no mesmo instante do submit.
+        // sem segurar a navegacao, o beacon da conversao corre contra o unload e se perde.
+        // entao seguramos o envio ate o gtag confirmar (event_callback), com teto de 1s.
+        f.addEventListener('submit', function (e) {
+          e.preventDefault();
+          var went = false;
+          function go() {
+            if (went) return;
+            went = true;
+            f.submit();
+          }
+          setTimeout(go, 1200);
+          if (typeof gtag !== 'function') return go();
           gtag('event', 'generate_lead', { origem: 'formulario_contato' });
           gtag('event', 'conversion', {
             send_to: 'AW-18391505425/VOoYCNnUmOIcEJG04MFE',
             value: 1.0,
             currency: 'BRL',
+            event_callback: go,
+            event_timeout: 1000,
           });
         });
       }

@@ -237,6 +237,11 @@ import Page from '../layouts/Page.astro';
         quiz.style.display = 'none';
         gate.style.display = 'block';
         track('gate_view', { level: R.L.name });
+        // conversao secundaria no Ads: respondeu as 8 perguntas e chegou ao pedido de e-mail.
+        // serve de sinal de qualidade do trafego mesmo quando o lead nao vem.
+        if (typeof gtag === 'function') {
+          gtag('event', 'conversion', { send_to: 'AW-18391505425/TudmCOqnjOYcEJG04MFE' });
+        }
         progBar.style.width = '100%';
         document.getElementById('panel').scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
