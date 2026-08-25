@@ -568,7 +568,7 @@ Regras:
 
 <style is:global>
   /* ===== Documento paginado =========================================== */
-  @page { size: A4; margin: 18mm 0 16mm }
+  @page { size: A4; margin: 18mm 0 24mm }
   @page :first { margin: 0 }
 
   body { background: #fff }
@@ -653,7 +653,7 @@ Regras:
   .secao-tit {
     font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
     font-weight: 700; text-transform: uppercase;
-    font-size: 33px; line-height: 1.02; letter-spacing: .005em;
+    font-size: 29px; line-height: 1.04; letter-spacing: .005em;
     color: var(--ink); margin: 0 0 18px;
     padding-bottom: 12px; border-bottom: 2px solid var(--line-strong);
     break-after: avoid;
@@ -785,8 +785,9 @@ Regras:
   @media print {
     .pdf-marca {
       display: flex; align-items: center; gap: 9px;
-      position: fixed; left: 0; right: 0; bottom: 0;
+      position: fixed; left: 0; right: 0; bottom: -17mm;
       padding: 5px 20mm 0;
+      height: 8mm;
       border-top: 1.5px solid var(--course);
       background: #fff;
       font-size: 8pt; line-height: 1;
