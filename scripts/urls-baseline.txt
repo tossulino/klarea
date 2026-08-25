@@ -13,4 +13,5 @@ llms.txt
 privacidade.html
 robots.txt
 sitemap.xml
+skills/ebook.html
 termos.html

@@ -1,0 +1,476 @@
+---
+import Page from '../../layouts/Page.astro';
+
+const superficies = [
+  {
+    n: '01',
+    t: 'Claude Chat',
+    sub: 'A conversa',
+    d: 'Você pergunta, ele responde, você copia a resposta para onde ela precisa ir. O trabalho de levar a saída até o destino continua sendo seu.',
+    skill: 'A skill entra como conhecimento: ele responde já dentro do padrão da casa, sem você repetir o briefing.',
+  },
+  {
+    n: '02',
+    t: 'Claude Cowork',
+    sub: 'A sessão de trabalho',
+    d: 'Você entrega a tarefa. Ele abre as pastas e as ferramentas que você autorizou, executa e devolve o arquivo pronto para revisão. Roda no desktop, na web e na nuvem, inclusive em horário agendado, sem você na frente.',
+    skill: 'A skill entra como procedimento: ele executa do jeito certo na primeira vez, e o resultado não depende de quem pediu.',
+  },
+  {
+    n: '03',
+    t: 'Claude Code',
+    sub: 'O terminal',
+    d: 'A superfície de quem constrói software. Mesma lógica do Cowork, com acesso direto ao repositório, aos testes e ao deploy.',
+    skill: 'A skill entra versionada junto com o código: a regra de arquitetura vive no repositório, não na cabeça do time.',
+  },
+];
+
+const instalacao = [
+  {
+    n: '01',
+    t: 'No Claude (chat e Cowork)',
+    passos: [
+      'Em Settings, seção Capabilities, ligue "Code execution and file creation". Sem isso as skills não aparecem.',
+      'Vá em Customize, aba Skills. Ative as skills prontas da Anthropic e envie as suas.',
+      'Uma skill sua é uma pasta compactada em .zip com o SKILL.md dentro.',
+    ],
+    nota: 'Em conta individual, a skill que você envia fica privada. Em Team e Enterprise, a ativação é em Organization settings e o administrador distribui para a empresa inteira.',
+  },
+  {
+    n: '02',
+    t: 'No Claude Code',
+    passos: [
+      'Skill pessoal: crie a pasta em ~/.claude/skills/nome-da-skill/ e escreva o SKILL.md dentro.',
+      'Skill de projeto: crie em .claude/skills/nome-da-skill/, dentro do repositório, e versione junto com o código.',
+      'O nome da pasta vira o comando. Uma pasta chamada revisao-contrato responde por /revisao-contrato.',
+    ],
+    nota: 'Skill de projeto viaja no git. Quem clonar o repositório recebe a regra junto, sem depender de alguém lembrar de avisar.',
+  },
+  {
+    n: '03',
+    t: 'Na empresa inteira',
+    passos: [
+      'Em Team e Enterprise, o administrador provisiona skills para toda a organização.',
+      'A mesma skill passa a valer para todo mundo, com uma versão só e um dono só.',
+    ],
+    nota: 'É aqui que a skill deixa de ser produtividade pessoal e vira ativo da empresa.',
+  },
+];
+
+const beneficios = [
+  {
+    t: 'O padrão para de depender de quem executou',
+    d: 'Sem skill, a qualidade da saída é a qualidade do prompt de quem pediu. Duas pessoas com a mesma ferramenta entregam coisas diferentes. Com a skill, o padrão está escrito uma vez e vale para todos.',
+  },
+  {
+    t: 'O conhecimento para de ir embora com a pessoa',
+    d: 'O melhor prompt da sua empresa hoje está no histórico de conversa de alguém. Quando essa pessoa sai, ele sai junto. Skill é conhecimento tácito virado arquivo, com dono, versão e histórico.',
+  },
+  {
+    t: 'O onboarding encolhe',
+    d: 'Quem entra amanhã não precisa aprender o jeito da casa por osmose. A regra já está carregada na ferramenta que a pessoa usa no primeiro dia.',
+  },
+  {
+    t: 'A governança sai do PDF',
+    d: 'Política de uso que vive num documento é lida uma vez, na integração. Regra dentro da skill é aplicada em toda execução, sem depender de alguém lembrar.',
+  },
+  {
+    t: 'O custo de contexto não explode',
+    d: 'Skill não é manual anexado em toda conversa. O Claude lê apenas a descrição de cada skill disponível e carrega o conteúdo completo só quando o assunto aparece. Você pode ter cinquenta skills instaladas sem pesar nas quarenta e nove que não têm nada a ver com o pedido.',
+  },
+];
+
+const erros = [
+  {
+    t: 'Descrição vaga',
+    d: 'A descrição é o único texto que o Claude lê antes de decidir carregar a skill. "Ajuda com documentos" não diz quando usar. Escreva o gatilho: que pedido, que palavras, que situação.',
+    fix: 'Teste pedindo com as palavras que uma pessoa real usaria. Se não disparar, o problema está na descrição, não no conteúdo.',
+  },
+  {
+    t: 'Skill enciclopédica',
+    d: 'Uma skill de quarenta páginas cobrindo tudo dispara para tudo e acerta pouco. Depois de carregada, ela ocupa contexto em todas as respostas seguintes.',
+    fix: 'Uma skill, um procedimento. Prefira cinco skills afiadas a uma skill genérica.',
+  },
+  {
+    t: 'Skill que narra em vez de mandar',
+    d: 'Texto explicando por que a regra existe consome espaço e não muda a saída. O Claude não precisa ser convencido.',
+    fix: 'Escreva o que fazer, na ordem. O porquê só entra quando muda a decisão.',
+  },
+  {
+    t: 'Skill sem dono',
+    d: 'A regra muda, a skill não. Em três meses ela está ensinando o processo antigo com a autoridade de estar dentro da ferramenta.',
+    fix: 'Toda skill tem um responsável nomeado e uma data de revisão. Skill desatualizada é pior que skill inexistente.',
+  },
+];
+
+const primeiras = [
+  {
+    n: '01',
+    t: 'A que padroniza o documento que sai para fora',
+    d: 'Proposta, relatório, apresentação ao conselho. É onde a inconsistência custa mais caro e aparece para quem não deveria ver.',
+  },
+  {
+    n: '02',
+    t: 'A que carrega a política de uso',
+    d: 'O que não pode ser colado numa IA, que dado é sensível, o que exige revisão humana antes de sair. LGPD deixa de ser treinamento anual e vira comportamento padrão.',
+  },
+  {
+    n: '03',
+    t: 'A que descreve a análise recorrente',
+    d: 'O fechamento mensal, a leitura de indicador, a preparação da reunião de resultados. Se alguém faz isso toda semana do mesmo jeito, é candidata natural.',
+  },
+  {
+    n: '04',
+    t: 'A que guarda a voz da empresa',
+    d: 'Como a marca escreve, o que ela nunca diz, o vocabulário do setor. É o que impede o texto genérico de sair com o seu logo em cima.',
+  },
+  {
+    n: '05',
+    t: 'A que ensina o processo que ninguém documentou',
+    d: 'Aquele procedimento que mora com uma pessoa só. Escrever a skill obriga a explicitar o processo, e esse trabalho vale mesmo que a IA nunca use.',
+  },
+];
+---
+<Page
+  title="Guia: skills do Claude, do zero à operação · Klarea"
+  description="O que é uma skill, como instalar no Claude Chat, no Cowork e no Claude Code, e o que muda quando o jeito da casa vira instrução executável."
+  canonical="https://klarea.ai/skills/ebook.html"
+  robots="noindex,follow"
+  heading="Todo mundo prompta. Quase ninguém padroniza."
+  lede="O que separa quem tira resultado de IA de quem tira demonstração não é o modelo, e também não é o prompt. É ter o jeito da casa escrito de um jeito que a máquina consiga seguir. Isso tem nome, formato e lugar para morar."
+>
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>O prompt morre no fim da conversa</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Existe uma cena que se repete em toda empresa que adotou IA nos últimos dois anos. Alguém descobre um jeito muito
+          bom de pedir. A saída sai redonda, no tom certo, com a estrutura certa. A pessoa comemora, manda o print no grupo,
+          e todo mundo acha ótimo.
+        </p>
+        <p>
+          Duas semanas depois, ninguém encontra mais aquele prompt. Ele está enterrado no histórico de conversa de uma pessoa
+          só. Quando essa pessoa entra de férias, o padrão vai junto.
+        </p>
+        <p>
+          Esse é o teto de vidro da IA na maioria das empresas. Não é falta de ferramenta: a licença está paga e todo mundo
+          tem acesso. É que nada do que se aprendeu ficou. Cada pessoa recomeça do zero, e a qualidade da entrega vira função
+          de quem pediu, não de como a empresa trabalha.
+        </p>
+        <blockquote>
+          <p>Prompt é conversa. Skill é procedimento. Um morre quando a aba fecha. O outro fica.</p>
+        </blockquote>
+        <p>
+          Skill é o mecanismo que a Anthropic criou para resolver exatamente isso. E o motivo de ela merecer a atenção de quem
+          decide não é técnico. É que ela transforma conhecimento que hoje está na cabeça das pessoas em ativo da empresa.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>O que é uma skill, sem rodeio</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Uma skill é uma pasta com um arquivo de texto dentro. O arquivo se chama <code>SKILL.md</code> e tem duas partes:
+          um cabeçalho que diz <b>quando</b> usar, e o corpo que diz <b>o que fazer</b>. Só isso.
+        </p>
+        <p>
+          O cabeçalho é a parte que decide tudo. Nele vai o nome e uma descrição. Essa descrição é o único texto que o Claude
+          lê antes de decidir se aquela skill interessa ao pedido que acabou de chegar. É um índice, não um resumo.
+        </p>
+        <p>
+          O corpo é o procedimento: os passos, as regras, os limites, os exemplos. Pode ter arquivos de apoio na mesma pasta,
+          como uma planilha modelo ou um manual de marca, que o Claude abre quando precisa.
+        </p>
+      </div>
+
+      <div class="grid grid-2" style="margin-top:34px">
+        <article class="cell">
+          <span class="kind">O mecanismo</span>
+          <h3>Divulgação progressiva</h3>
+          <p>
+            O Claude carrega a lista de descrições de todas as skills disponíveis, e só isso. Quando o seu pedido casa com
+            uma delas, ele abre o conteúdo completo daquela. As outras continuam fechadas, custando quase nada.
+          </p>
+          <p style="margin-top:10px">
+            É por isso que ter muitas skills instaladas não pesa. O custo é proporcional ao que foi usado, não ao que existe.
+          </p>
+        </article>
+        <article class="cell">
+          <span class="kind">O padrão</span>
+          <h3>Não é formato proprietário</h3>
+          <p>
+            Skills seguem o Agent Skills, um padrão aberto publicado em agentskills.io. O mesmo arquivo funciona em mais de
+            uma ferramenta de IA.
+          </p>
+          <p style="margin-top:10px">
+            Isso importa para quem decide: o esforço de escrever o jeito da casa não fica preso a um fornecedor. É um dos
+            poucos investimentos em IA que não vira refém de plataforma.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Chat, Cowork e Code: onde a mesma skill roda</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          A confusão mais comum de quem está começando é achar que Claude é um produto só. São superfícies diferentes para
+          momentos diferentes de trabalho, e a mesma skill atravessa as três.
+        </p>
+      </div>
+
+      {superficies.map((s) => (
+        <div style="margin-top:36px;border-top:2px solid var(--line-strong);padding-top:20px">
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+            <span class="qn cond" style="font-size:24px;color:var(--course-ink)">{s.n}</span>
+            <h3>{s.t}</h3>
+            <span class="kind">{s.sub}</span>
+          </div>
+          <p class="prose" style="margin-top:10px;max-width:72ch">{s.d}</p>
+          <p class="prose" style="margin-top:8px;max-width:72ch;color:var(--course-ink)"><b>Com skill:</b> {s.skill}</p>
+        </div>
+      ))}
+
+      <div class="article" style="max-width:68ch;margin-top:40px">
+        <p>
+          A diferença que mais muda o dia a dia é entre as duas primeiras. No Chat, a IA produz e você transporta. No Cowork,
+          ela produz dentro das pastas e ferramentas que você autorizou, e devolve o arquivo no lugar certo. Você acompanha a
+          execução e redireciona quando quiser, e nada é apagado sem a sua aprovação.
+        </p>
+        <blockquote>
+          <p>Chat é onde você pensa junto. Cowork é onde o trabalho sai feito.</p>
+        </blockquote>
+        <p>
+          Quem só conhece o Chat costuma subestimar o ganho da IA em uma escala inteira. A diferença entre receber um texto
+          para copiar e receber o documento salvo na pasta certa não é conforto. É a diferença entre uma ferramenta de apoio
+          e uma etapa do processo.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>Como instalar</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          São três caminhos, do mais simples ao que vale para a empresa inteira. Informação verificada na documentação da
+          Anthropic em agosto de 2026, e essa é uma área que muda rápido.
+        </p>
+      </div>
+
+      {instalacao.map((i) => (
+        <div style="margin-top:36px;border-top:2px solid var(--line-strong);padding-top:20px">
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+            <span class="qn cond" style="font-size:24px;color:var(--course-ink)">{i.n}</span>
+            <h3>{i.t}</h3>
+          </div>
+          <ol class="qlist" style="max-width:72ch;margin-top:16px">
+            {i.passos.map((p, k) => (
+              <li><span class="qn">{String(k + 1).padStart(2, '0')}</span><span>{p}</span></li>
+            ))}
+          </ol>
+          <p class="prose" style="margin-top:14px;max-width:72ch;color:var(--muted)">{i.nota}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Anatomia de uma skill</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Abaixo, uma skill inteira. Não é um trecho: é o arquivo completo de uma skill funcional, do tipo que qualquer
+          empresa poderia usar na segunda-feira.
+        </p>
+      </div>
+
+      <pre class="snippet"><code>{`---
+name: ata-de-reuniao
+description: Transforma anotações de reunião na ata padrão da empresa.
+  Use quando o pedido envolver ata, resumo de reunião, follow-up de
+  call ou registro de decisões.
+---
+
+Ao montar a ata, siga esta ordem:
+
+1. Decisões tomadas. Uma linha por decisão, com o responsável.
+2. Pendências, com dono e prazo. Sem dono, não é pendência: é desejo.
+3. Riscos levantados que ficaram sem encaminhamento.
+4. Contexto, no máximo dois parágrafos, e só se mudar a leitura.
+
+Regras:
+- Nunca invente um responsável. Se a anotação não diz quem, escreva
+  "sem dono definido" e sinalize.
+- Não registre opinião como decisão.
+- Se a reunião não gerou decisão nem pendência, diga isso na primeira
+  linha em vez de preencher a estrutura.`}</code></pre>
+
+      <div class="grid grid-2" style="margin-top:34px">
+        <article class="cell">
+          <span class="kind">Repare</span>
+          <h3>A descrição lista gatilhos</h3>
+          <p>
+            Ela não diz "skill de reuniões". Ela lista as palavras que uma pessoa real usaria: ata, resumo de reunião,
+            follow-up, registro de decisões. É assim que a skill dispara sozinha.
+          </p>
+        </article>
+        <article class="cell">
+          <span class="kind">Repare</span>
+          <h3>As regras carregam critério</h3>
+          <p>
+            "Sem dono, não é pendência" e "não registre opinião como decisão" não são formatação. São o critério de quem
+            sabe fazer aquilo bem. Esse é o conteúdo que vale a pena escrever.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>O que muda no negócio</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Skill não é atalho de produtividade individual. O ganho relevante aparece quando a mesma regra vale para todo mundo.
+        </p>
+      </div>
+      {beneficios.map((b, i) => (
+        <div style="margin-top:30px;border-top:1px solid var(--line);padding-top:18px">
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+            <span class="qn cond" style="font-size:22px;color:var(--course-ink)">{String(i + 1).padStart(2, '0')}</span>
+            <h3>{b.t}</h3>
+          </div>
+          <p class="prose" style="margin-top:8px;max-width:72ch">{b.d}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Onde as skills falham</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Quatro erros respondem pela maioria das skills que não pegam. Todos são de escrita, nenhum é de tecnologia.
+        </p>
+      </div>
+      <div class="grid grid-2" style="margin-top:30px">
+        {erros.map((e) => (
+          <article class="cell">
+            <span class="kind">Erro</span>
+            <h3>{e.t}</h3>
+            <p>{e.d}</p>
+            <p style="margin-top:12px;color:var(--course-ink)"><b>Correção:</b> {e.fix}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-open">
+    <div class="sheet">
+      <h2>As cinco primeiras skills que a sua empresa deveria escrever</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Não comece pelo caso mais sofisticado. Comece pelo que se repete e pelo que dói quando sai errado.
+        </p>
+      </div>
+      {primeiras.map((p) => (
+        <div style="margin-top:30px;border-top:1px solid var(--line);padding-top:18px">
+          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
+            <span class="qn cond" style="font-size:22px;color:var(--course-ink)">{p.n}</span>
+            <h3>{p.t}</h3>
+          </div>
+          <p class="prose" style="margin-top:8px;max-width:72ch">{p.d}</p>
+        </div>
+      ))}
+
+      <div class="article" style="max-width:68ch;margin-top:40px">
+        <blockquote>
+          <p>Se você não consegue escrever a skill, é porque o processo não existe. A IA só expôs isso mais cedo.</p>
+        </blockquote>
+        <p>
+          Esse é o efeito colateral mais útil do exercício. Toda vez que uma empresa tenta escrever a skill de um processo
+          crítico, descobre que o processo tinha três versões e nenhum dono. O trabalho de escrever paga sozinho, mesmo
+          antes da IA entrar.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-runnable">
+    <div class="sheet">
+      <h2>Uma nota sobre independência</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Este guia fala de Claude porque é onde o mecanismo de skills está mais maduro hoje. A Klarea não revende software e
+          não tem acordo comercial com a Anthropic. Recomendamos a ferramenta que resolve o problema, e a recomendação muda
+          quando o cenário muda.
+        </p>
+        <p>
+          O formato ajuda nessa conversa: como o Agent Skills é padrão aberto, o que a sua empresa escrever hoje não vira
+          refém de uma assinatura. Foi um dos motivos de a gente ter escolhido este tema para o guia.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-dense on-dense">
+    <div class="sheet">
+      <h2>Onde isso entra na maturidade da sua empresa</h2>
+      <div class="article" style="max-width:68ch">
+        <p>
+          Skill resolve uma dimensão específica: a distância entre saber usar IA e ter a IA operando do mesmo jeito em toda a
+          empresa. Não resolve dado bagunçado, não resolve falta de patrocínio, não resolve processo que ninguém quis decidir.
+        </p>
+        <p>
+          Se a sua empresa ainda não sabe em que estágio está, escrever skills é começar pelo meio. Antes disso vem a pergunta
+          mais simples e mais desconfortável: o que pararia de funcionar amanhã se a IA fosse desligada hoje?
+        </p>
+        <blockquote>
+          <p>Skill é como a IA aprende o jeito da casa. Antes, alguém precisa decidir qual é o jeito da casa.</p>
+        </blockquote>
+        <p>
+          Se a resposta a essa pergunta ainda é "nada pararia", o próximo passo não é escrever skill. É medir onde a sua
+          empresa está nas oito dimensões que decidem se a IA vira resultado ou vira demonstração.
+        </p>
+      </div>
+      <div class="actions" style="margin-top:28px">
+        <a class="btn" href="/diagnostico.html">Medir a maturidade em IA</a>
+        <a class="btn btn-ghost" href="/guia/">Baixar o guia das 8 dimensões</a>
+      </div>
+    </div>
+  </section>
+</Page>
+
+<style>
+  .snippet {
+    margin-top: 24px;
+    background: var(--t-open);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--course);
+    border-radius: 2px;
+    padding: 22px 24px;
+    overflow-x: auto;
+    max-width: 72ch;
+  }
+  .snippet code {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 13px;
+    line-height: 1.66;
+    color: var(--body);
+    white-space: pre;
+  }
+  /* o bloco e referencia: no PDF ele nao pode quebrar no meio */
+  @media print {
+    .snippet { break-inside: avoid; overflow-x: visible; }
+    .snippet code { font-size: 11px; white-space: pre-wrap; }
+  }
+</style>
