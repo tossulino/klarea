@@ -193,6 +193,10 @@ const primeiras = [
 
   <!-- ============ SUMÁRIO ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">Sumário</span>
     <h2 class="secao-tit">O que tem dentro</h2>
     <ol class="sumario">
@@ -214,6 +218,10 @@ const primeiras = [
 
   <!-- ============ 01 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">01</span>
     <h2 class="secao-tit">O prompt morre no fim da conversa</h2>
     <div class="corpo">
@@ -243,6 +251,10 @@ const primeiras = [
 
   <!-- ============ 02 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">02</span>
     <h2 class="secao-tit">O que é uma skill, sem rodeio</h2>
     <div class="corpo">
@@ -287,6 +299,10 @@ const primeiras = [
 
   <!-- ============ 03 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">03</span>
     <h2 class="secao-tit">Chat, Cowork e Code: onde a mesma skill roda</h2>
     <div class="corpo">
@@ -327,6 +343,10 @@ const primeiras = [
 
   <!-- ============ 04 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">04</span>
     <h2 class="secao-tit">Como instalar</h2>
     <div class="corpo">
@@ -354,6 +374,10 @@ const primeiras = [
 
   <!-- ============ 05 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">05</span>
     <h2 class="secao-tit">Anatomia de uma skill</h2>
     <div class="corpo">
@@ -406,6 +430,10 @@ Regras:
 
   <!-- ============ 06 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">06</span>
     <h2 class="secao-tit">O que muda no negócio</h2>
     <div class="corpo">
@@ -424,6 +452,10 @@ Regras:
 
   <!-- ============ 07 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">07</span>
     <h2 class="secao-tit">Onde as skills falham</h2>
     <div class="corpo">
@@ -443,6 +475,10 @@ Regras:
 
   <!-- ============ 08 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">08</span>
     <h2 class="secao-tit">As cinco primeiras skills que a sua empresa deveria escrever</h2>
     <div class="corpo">
@@ -471,6 +507,10 @@ Regras:
 
   <!-- ============ 09 ============ -->
   <section class="pg">
+      <div class="pg-marca" aria-hidden="true">
+        <span class="pg-marca-logo">klarea<span>.ai</span></span>
+        <span class="pg-marca-txt">Skills do Claude, do zero à operação</span>
+      </div>
     <span class="secao-rot">09</span>
     <h2 class="secao-tit">Onde isso entra na maturidade da sua empresa</h2>
     <div class="corpo">
@@ -559,16 +599,11 @@ Regras:
     <p class="fim-base">© 2026 Klarea. Consultoria de IA independente. Guia de skills do Claude, edição de agosto de 2026.</p>
   </section>
 
-  <div class="pdf-marca" aria-hidden="true">
-    <span class="pdf-marca-logo">klarea<span>.ai</span></span>
-    <span class="pdf-marca-sep"></span>
-    <span class="pdf-marca-txt">Skills do Claude, do zero à operação</span>
-  </div>
 </Base>
 
 <style is:global>
   /* ===== Documento paginado =========================================== */
-  @page { size: A4; margin: 18mm 0 24mm }
+  @page { size: A4; margin: 16mm 0 18mm }
   @page :first { margin: 0 }
 
   body { background: #fff }
@@ -779,27 +814,24 @@ Regras:
     font-size: 11px; color: rgba(255,255,255,.5);
   }
 
-  /* ===== Rodapé de marca, repetido em toda página impressa ============ */
-  .pdf-marca { display: none }
-
-  @media print {
-    .pdf-marca {
-      display: flex; align-items: center; gap: 9px;
-      position: fixed; left: 0; right: 0; bottom: -17mm;
-      padding: 5px 20mm 0;
-      height: 8mm;
-      border-top: 1.5px solid var(--course);
-      background: #fff;
-      font-size: 8pt; line-height: 1;
-    }
-    .pdf-marca-logo {
-      font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
-      font-weight: 700; font-size: 11pt; letter-spacing: .04em; text-transform: uppercase;
-      color: var(--ink);
-    }
-    .pdf-marca-logo span { color: var(--course-ink) }
-    .pdf-marca-sep { width: 1px; height: 10px; background: var(--line) }
-    .pdf-marca-txt { color: var(--muted); letter-spacing: .02em }
+  /* ===== Marca no topo de cada seção ================================== */
+  /* position:fixed no Chrome impresso nao cai no rodape da pagina: ele foi
+     desenhado no meio do texto. Marca como conteudo normal e previsivel. */
+  .pg-marca {
+    display: flex; align-items: baseline; gap: 10px;
+    padding-bottom: 7px; margin-bottom: 22px;
+    border-bottom: 1.5px solid var(--course);
+  }
+  .pg-marca-logo {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 15px; letter-spacing: .05em; text-transform: uppercase;
+    color: var(--ink); line-height: 1;
+  }
+  .pg-marca-logo span { color: var(--course-ink) }
+  .pg-marca-txt {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 500; font-size: 12px; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--muted); line-height: 1;
   }
 
   /* ===== Leitura em tela ============================================== */
