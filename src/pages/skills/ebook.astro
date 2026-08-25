@@ -1,5 +1,21 @@
 ---
-import Page from '../../layouts/Page.astro';
+// Este arquivo existe para virar PDF. Por isso nao usa Page.astro: a barra de
+// navegacao e o rodape do site nao fazem sentido em papel, e a capa precisa da
+// pagina inteira. O layout e paginado (@page), com quebra controlada por secao.
+import Base from '../../layouts/Base.astro';
+import '../../styles/world.css';
+
+const sumario = [
+  { n: '01', t: 'O prompt morre no fim da conversa', d: 'Por que o conhecimento de IA da sua empresa evapora' },
+  { n: '02', t: 'O que é uma skill, sem rodeio', d: 'O arquivo, o cabeçalho e a divulgação progressiva' },
+  { n: '03', t: 'Chat, Cowork e Code', d: 'As três superfícies e o que muda em cada uma' },
+  { n: '04', t: 'Como instalar', d: 'Os três caminhos, do individual à empresa inteira' },
+  { n: '05', t: 'Anatomia de uma skill', d: 'Um arquivo completo, comentado' },
+  { n: '06', t: 'O que muda no negócio', d: 'Cinco efeitos que aparecem no resultado' },
+  { n: '07', t: 'Onde as skills falham', d: 'Os quatro erros que impedem uma skill de disparar' },
+  { n: '08', t: 'As cinco primeiras skills', d: 'Por onde começar na segunda-feira' },
+  { n: '09', t: 'Onde isso entra na maturidade', d: 'O que skill resolve e o que ela não resolve' },
+];
 
 const superficies = [
   {
@@ -131,167 +147,223 @@ const primeiras = [
   },
 ];
 ---
-<Page
+<Base
   title="Guia: skills do Claude, do zero à operação · Klarea"
   description="O que é uma skill, como instalar no Claude Chat, no Cowork e no Claude Code, e o que muda quando o jeito da casa vira instrução executável."
   canonical="https://klarea.ai/skills/ebook.html"
   robots="noindex,follow"
-  heading="Todo mundo prompta. Quase ninguém padroniza."
-  lede="O que separa quem tira resultado de IA de quem tira demonstração não é o modelo, e também não é o prompt. É ter o jeito da casa escrito de um jeito que a máquina consiga seguir. Isso tem nome, formato e lugar para morar."
 >
-  <section class="band band-runnable">
-    <div class="sheet">
-      <h2>O prompt morre no fim da conversa</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Existe uma cena que se repete em toda empresa que adotou IA nos últimos dois anos. Alguém descobre um jeito muito
-          bom de pedir. A saída sai redonda, no tom certo, com a estrutura certa. A pessoa comemora, manda o print no grupo,
-          e todo mundo acha ótimo.
-        </p>
-        <p>
-          Duas semanas depois, ninguém encontra mais aquele prompt. Ele está enterrado no histórico de conversa de uma pessoa
-          só. Quando essa pessoa entra de férias, o padrão vai junto.
-        </p>
-        <p>
-          Esse é o teto de vidro da IA na maioria das empresas. Não é falta de ferramenta: a licença está paga e todo mundo
-          tem acesso. É que nada do que se aprendeu ficou. Cada pessoa recomeça do zero, e a qualidade da entrega vira função
-          de quem pediu, não de como a empresa trabalha.
-        </p>
-        <blockquote>
-          <p>Prompt é conversa. Skill é procedimento. Um morre quando a aba fecha. O outro fica.</p>
-        </blockquote>
-        <p>
-          Skill é o mecanismo que a Anthropic criou para resolver exatamente isso. E o motivo de ela merecer a atenção de quem
-          decide não é técnico. É que ela transforma conhecimento que hoje está na cabeça das pessoas em ativo da empresa.
-        </p>
+  <!-- ============ CAPA ============ -->
+  <section class="pg capa">
+    <div class="capa-topo">
+      <span class="marca">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M5 2v20" stroke="#FFFFFF" stroke-width="3" />
+          <path d="M19 3 8 12l11 9" stroke="#3D7BFF" stroke-width="3" stroke-linejoin="round" />
+        </svg>
+        <span class="marca-txt">klarea<i>.ai</i></span>
+      </span>
+      <span class="capa-kind">Guia prático · 2026</span>
+    </div>
+
+    <div class="capa-meio">
+      <h1>Todo mundo prompta.<br />Quase ninguém padroniza.</h1>
+      <p class="capa-lede">
+        O que separa quem tira resultado de IA de quem tira demonstração não é o modelo, e também não é o prompt.
+        É ter o jeito da casa escrito de um jeito que a máquina consiga seguir.
+      </p>
+      <p class="capa-sub">Skills do Claude, do zero à operação</p>
+    </div>
+
+    <div class="capa-pe">
+      <div>
+        <span class="rot">Publicado por</span>
+        Klarea · Advisory de IA executiva
+      </div>
+      <div>
+        <span class="rot">Site</span>
+        klarea.ai
+      </div>
+      <div>
+        <span class="rot">Edição</span>
+        Agosto de 2026
       </div>
     </div>
   </section>
 
-  <section class="band band-open">
-    <div class="sheet">
-      <h2>O que é uma skill, sem rodeio</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Uma skill é uma pasta com um arquivo de texto dentro. O arquivo se chama <code>SKILL.md</code> e tem duas partes:
-          um cabeçalho que diz <b>quando</b> usar, e o corpo que diz <b>o que fazer</b>. Só isso.
-        </p>
-        <p>
-          O cabeçalho é a parte que decide tudo. Nele vai o nome e uma descrição. Essa descrição é o único texto que o Claude
-          lê antes de decidir se aquela skill interessa ao pedido que acabou de chegar. É um índice, não um resumo.
-        </p>
-        <p>
-          O corpo é o procedimento: os passos, as regras, os limites, os exemplos. Pode ter arquivos de apoio na mesma pasta,
-          como uma planilha modelo ou um manual de marca, que o Claude abre quando precisa.
-        </p>
-      </div>
-
-      <div class="grid grid-2" style="margin-top:34px">
-        <article class="cell">
-          <span class="kind">O mecanismo</span>
-          <h3>Divulgação progressiva</h3>
-          <p>
-            O Claude carrega a lista de descrições de todas as skills disponíveis, e só isso. Quando o seu pedido casa com
-            uma delas, ele abre o conteúdo completo daquela. As outras continuam fechadas, custando quase nada.
-          </p>
-          <p style="margin-top:10px">
-            É por isso que ter muitas skills instaladas não pesa. O custo é proporcional ao que foi usado, não ao que existe.
-          </p>
-        </article>
-        <article class="cell">
-          <span class="kind">O padrão</span>
-          <h3>Não é formato proprietário</h3>
-          <p>
-            Skills seguem o Agent Skills, um padrão aberto publicado em agentskills.io. O mesmo arquivo funciona em mais de
-            uma ferramenta de IA.
-          </p>
-          <p style="margin-top:10px">
-            Isso importa para quem decide: o esforço de escrever o jeito da casa não fica preso a um fornecedor. É um dos
-            poucos investimentos em IA que não vira refém de plataforma.
-          </p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="band band-runnable">
-    <div class="sheet">
-      <h2>Chat, Cowork e Code: onde a mesma skill roda</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          A confusão mais comum de quem está começando é achar que Claude é um produto só. São superfícies diferentes para
-          momentos diferentes de trabalho, e a mesma skill atravessa as três.
-        </p>
-      </div>
-
-      {superficies.map((s) => (
-        <div style="margin-top:36px;border-top:2px solid var(--line-strong);padding-top:20px">
-          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-            <span class="qn cond" style="font-size:24px;color:var(--course-ink)">{s.n}</span>
-            <h3>{s.t}</h3>
-            <span class="kind">{s.sub}</span>
-          </div>
-          <p class="prose" style="margin-top:10px;max-width:72ch">{s.d}</p>
-          <p class="prose" style="margin-top:8px;max-width:72ch;color:var(--course-ink)"><b>Com skill:</b> {s.skill}</p>
-        </div>
+  <!-- ============ SUMÁRIO ============ -->
+  <section class="pg">
+    <span class="secao-rot">Sumário</span>
+    <h2 class="secao-tit">O que tem dentro</h2>
+    <ol class="sumario">
+      {sumario.map((s) => (
+        <li>
+          <span class="sum-n">{s.n}</span>
+          <span class="sum-txt"><b>{s.t}</b><span class="sum-d">{s.d}</span></span>
+        </li>
       ))}
-
-      <div class="article" style="max-width:68ch;margin-top:40px">
-        <p>
-          A diferença que mais muda o dia a dia é entre as duas primeiras. No Chat, a IA produz e você transporta. No Cowork,
-          ela produz dentro das pastas e ferramentas que você autorizou, e devolve o arquivo no lugar certo. Você acompanha a
-          execução e redireciona quando quiser, e nada é apagado sem a sua aprovação.
-        </p>
-        <blockquote>
-          <p>Chat é onde você pensa junto. Cowork é onde o trabalho sai feito.</p>
-        </blockquote>
-        <p>
-          Quem só conhece o Chat costuma subestimar o ganho da IA em uma escala inteira. A diferença entre receber um texto
-          para copiar e receber o documento salvo na pasta certa não é conforto. É a diferença entre uma ferramenta de apoio
-          e uma etapa do processo.
-        </p>
-      </div>
+    </ol>
+    <div class="nota-caixa">
+      <span class="rot">Como ler</span>
+      <p>
+        As seções 01 a 03 são para quem decide: o que é, por que importa e onde roda. As seções 04 e 05 são a
+        mão na massa. As seções 06 a 09 voltam para a mesa de decisão. Se você tem quinze minutos, leia 01, 06 e 09.
+      </p>
     </div>
   </section>
 
-  <section class="band band-open">
-    <div class="sheet">
-      <h2>Como instalar</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          São três caminhos, do mais simples ao que vale para a empresa inteira. Informação verificada na documentação da
-          Anthropic em agosto de 2026, e essa é uma área que muda rápido.
-        </p>
-      </div>
+  <!-- ============ 01 ============ -->
+  <section class="pg">
+    <span class="secao-rot">01</span>
+    <h2 class="secao-tit">O prompt morre no fim da conversa</h2>
+    <div class="corpo">
+      <p>
+        Existe uma cena que se repete em toda empresa que adotou IA nos últimos dois anos. Alguém descobre um jeito muito
+        bom de pedir. A saída sai redonda, no tom certo, com a estrutura certa. A pessoa comemora, manda o print no grupo,
+        e todo mundo acha ótimo.
+      </p>
+      <p>
+        Duas semanas depois, ninguém encontra mais aquele prompt. Ele está enterrado no histórico de conversa de uma pessoa
+        só. Quando essa pessoa entra de férias, o padrão vai junto.
+      </p>
+      <p>
+        Esse é o teto de vidro da IA na maioria das empresas. Não é falta de ferramenta: a licença está paga e todo mundo
+        tem acesso. É que nada do que se aprendeu ficou. Cada pessoa recomeça do zero, e a qualidade da entrega vira função
+        de quem pediu, não de como a empresa trabalha.
+      </p>
+      <blockquote>
+        <p>Prompt é conversa. Skill é procedimento. Um morre quando a aba fecha. O outro fica.</p>
+      </blockquote>
+      <p>
+        Skill é o mecanismo que a Anthropic criou para resolver exatamente isso. E o motivo de ela merecer a atenção de quem
+        decide não é técnico. É que ela transforma conhecimento que hoje está na cabeça das pessoas em ativo da empresa.
+      </p>
+    </div>
+  </section>
 
-      {instalacao.map((i) => (
-        <div style="margin-top:36px;border-top:2px solid var(--line-strong);padding-top:20px">
-          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-            <span class="qn cond" style="font-size:24px;color:var(--course-ink)">{i.n}</span>
-            <h3>{i.t}</h3>
-          </div>
-          <ol class="qlist" style="max-width:72ch;margin-top:16px">
-            {i.passos.map((p, k) => (
-              <li><span class="qn">{String(k + 1).padStart(2, '0')}</span><span>{p}</span></li>
-            ))}
-          </ol>
-          <p class="prose" style="margin-top:14px;max-width:72ch;color:var(--muted)">{i.nota}</p>
+  <!-- ============ 02 ============ -->
+  <section class="pg">
+    <span class="secao-rot">02</span>
+    <h2 class="secao-tit">O que é uma skill, sem rodeio</h2>
+    <div class="corpo">
+      <p>
+        Uma skill é uma pasta com um arquivo de texto dentro. O arquivo se chama <code>SKILL.md</code> e tem duas partes:
+        um cabeçalho que diz <b>quando</b> usar, e o corpo que diz <b>o que fazer</b>. Só isso.
+      </p>
+      <p>
+        O cabeçalho é a parte que decide tudo. Nele vai o nome e uma descrição. Essa descrição é o único texto que o Claude
+        lê antes de decidir se aquela skill interessa ao pedido que acabou de chegar. É um índice, não um resumo.
+      </p>
+      <p>
+        O corpo é o procedimento: os passos, as regras, os limites, os exemplos. Pode ter arquivos de apoio na mesma pasta,
+        como uma planilha modelo ou um manual de marca, que o Claude abre quando precisa.
+      </p>
+    </div>
+
+    <div class="duo">
+      <article>
+        <span class="rot">O mecanismo</span>
+        <h3>Divulgação progressiva</h3>
+        <p>
+          O Claude carrega a lista de descrições de todas as skills disponíveis, e só isso. Quando o seu pedido casa com
+          uma delas, ele abre o conteúdo completo daquela. As outras continuam fechadas, custando quase nada.
+        </p>
+        <p>É por isso que ter muitas skills instaladas não pesa. O custo é proporcional ao que foi usado, não ao que existe.</p>
+      </article>
+      <article>
+        <span class="rot">O padrão</span>
+        <h3>Não é formato proprietário</h3>
+        <p>
+          Skills seguem o Agent Skills, um padrão aberto publicado em agentskills.io. O mesmo arquivo funciona em mais de
+          uma ferramenta de IA.
+        </p>
+        <p>
+          Isso importa para quem decide: o esforço de escrever o jeito da casa não fica preso a um fornecedor. É um dos
+          poucos investimentos em IA que não vira refém de plataforma.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section class="pg">
+    <span class="secao-rot">03</span>
+    <h2 class="secao-tit">Chat, Cowork e Code: onde a mesma skill roda</h2>
+    <div class="corpo">
+      <p>
+        A confusão mais comum de quem está começando é achar que Claude é um produto só. São superfícies diferentes para
+        momentos diferentes de trabalho, e a mesma skill atravessa as três.
+      </p>
+    </div>
+
+    {superficies.map((s) => (
+      <div class="item">
+        <div class="item-cab">
+          <span class="item-n">{s.n}</span>
+          <h3>{s.t}</h3>
+          <span class="rot rot-inline">{s.sub}</span>
         </div>
-      ))}
+        <p class="item-d">{s.d}</p>
+        <p class="item-skill"><b>Com skill:</b> {s.skill}</p>
+      </div>
+    ))}
+
+    <div class="corpo">
+      <blockquote>
+        <p>Chat é onde você pensa junto. Cowork é onde o trabalho sai feito.</p>
+      </blockquote>
+      <p>
+        A diferença que mais muda o dia a dia é entre as duas primeiras. No Chat, a IA produz e você transporta. No Cowork,
+        ela produz dentro das pastas e ferramentas que você autorizou, e devolve o arquivo no lugar certo. Você acompanha a
+        execução e redireciona quando quiser, e nada é apagado sem a sua aprovação.
+      </p>
+      <p>
+        Quem só conhece o Chat costuma subestimar o ganho da IA em uma escala inteira. A diferença entre receber um texto
+        para copiar e receber o documento salvo na pasta certa não é conforto. É a diferença entre uma ferramenta de apoio
+        e uma etapa do processo.
+      </p>
     </div>
   </section>
 
-  <section class="band band-runnable">
-    <div class="sheet">
-      <h2>Anatomia de uma skill</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Abaixo, uma skill inteira. Não é um trecho: é o arquivo completo de uma skill funcional, do tipo que qualquer
-          empresa poderia usar na segunda-feira.
-        </p>
-      </div>
+  <!-- ============ 04 ============ -->
+  <section class="pg">
+    <span class="secao-rot">04</span>
+    <h2 class="secao-tit">Como instalar</h2>
+    <div class="corpo">
+      <p>
+        São três caminhos, do mais simples ao que vale para a empresa inteira. Informação verificada na documentação da
+        Anthropic em agosto de 2026, e essa é uma área que muda rápido.
+      </p>
+    </div>
 
-      <pre class="snippet"><code>{`---
+    {instalacao.map((i) => (
+      <div class="item">
+        <div class="item-cab">
+          <span class="item-n">{i.n}</span>
+          <h3>{i.t}</h3>
+        </div>
+        <ol class="passos">
+          {i.passos.map((p, k) => (
+            <li><span class="passo-n">{String(k + 1).padStart(2, '0')}</span><span>{p}</span></li>
+          ))}
+        </ol>
+        <p class="item-nota">{i.nota}</p>
+      </div>
+    ))}
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section class="pg">
+    <span class="secao-rot">05</span>
+    <h2 class="secao-tit">Anatomia de uma skill</h2>
+    <div class="corpo">
+      <p>
+        Abaixo, uma skill inteira. Não é um trecho: é o arquivo completo de uma skill funcional, do tipo que qualquer
+        empresa poderia usar na segunda-feira.
+      </p>
+    </div>
+
+    <pre class="snippet"><code>{`---
 name: ata-de-reuniao
 description: Transforma anotações de reunião na ata padrão da empresa.
   Use quando o pedido envolver ata, resumo de reunião, follow-up de
@@ -312,214 +384,430 @@ Regras:
 - Se a reunião não gerou decisão nem pendência, diga isso na primeira
   linha em vez de preencher a estrutura.`}</code></pre>
 
-      <div class="grid grid-2" style="margin-top:34px">
-        <article class="cell">
-          <span class="kind">Repare</span>
-          <h3>A descrição lista gatilhos</h3>
-          <p>
-            Ela não diz "skill de reuniões". Ela lista as palavras que uma pessoa real usaria: ata, resumo de reunião,
-            follow-up, registro de decisões. É assim que a skill dispara sozinha.
-          </p>
-        </article>
-        <article class="cell">
-          <span class="kind">Repare</span>
-          <h3>As regras carregam critério</h3>
-          <p>
-            "Sem dono, não é pendência" e "não registre opinião como decisão" não são formatação. São o critério de quem
-            sabe fazer aquilo bem. Esse é o conteúdo que vale a pena escrever.
-          </p>
-        </article>
-      </div>
+    <div class="duo">
+      <article>
+        <span class="rot">Repare</span>
+        <h3>A descrição lista gatilhos</h3>
+        <p>
+          Ela não diz "skill de reuniões". Ela lista as palavras que uma pessoa real usaria: ata, resumo de reunião,
+          follow-up, registro de decisões. É assim que a skill dispara sozinha.
+        </p>
+      </article>
+      <article>
+        <span class="rot">Repare</span>
+        <h3>As regras carregam critério</h3>
+        <p>
+          "Sem dono, não é pendência" e "não registre opinião como decisão" não são formatação. São o critério de quem
+          sabe fazer aquilo bem. Esse é o conteúdo que vale a pena escrever.
+        </p>
+      </article>
     </div>
   </section>
 
-  <section class="band band-open">
-    <div class="sheet">
-      <h2>O que muda no negócio</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Skill não é atalho de produtividade individual. O ganho relevante aparece quando a mesma regra vale para todo mundo.
-        </p>
-      </div>
-      {beneficios.map((b, i) => (
-        <div style="margin-top:30px;border-top:1px solid var(--line);padding-top:18px">
-          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-            <span class="qn cond" style="font-size:22px;color:var(--course-ink)">{String(i + 1).padStart(2, '0')}</span>
-            <h3>{b.t}</h3>
-          </div>
-          <p class="prose" style="margin-top:8px;max-width:72ch">{b.d}</p>
+  <!-- ============ 06 ============ -->
+  <section class="pg">
+    <span class="secao-rot">06</span>
+    <h2 class="secao-tit">O que muda no negócio</h2>
+    <div class="corpo">
+      <p>Skill não é atalho de produtividade individual. O ganho relevante aparece quando a mesma regra vale para todo mundo.</p>
+    </div>
+    {beneficios.map((b, i) => (
+      <div class="linha">
+        <span class="linha-n">{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <h3>{b.t}</h3>
+          <p>{b.d}</p>
         </div>
+      </div>
+    ))}
+  </section>
+
+  <!-- ============ 07 ============ -->
+  <section class="pg">
+    <span class="secao-rot">07</span>
+    <h2 class="secao-tit">Onde as skills falham</h2>
+    <div class="corpo">
+      <p>Quatro erros respondem pela maioria das skills que não pegam. Todos são de escrita, nenhum é de tecnologia.</p>
+    </div>
+    <div class="duo">
+      {erros.map((e) => (
+        <article>
+          <span class="rot">Erro</span>
+          <h3>{e.t}</h3>
+          <p>{e.d}</p>
+          <p class="fix"><b>Correção:</b> {e.fix}</p>
+        </article>
       ))}
     </div>
   </section>
 
-  <section class="band band-runnable">
-    <div class="sheet">
-      <h2>Onde as skills falham</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Quatro erros respondem pela maioria das skills que não pegam. Todos são de escrita, nenhum é de tecnologia.
-        </p>
-      </div>
-      <div class="grid grid-2" style="margin-top:30px">
-        {erros.map((e) => (
-          <article class="cell">
-            <span class="kind">Erro</span>
-            <h3>{e.t}</h3>
-            <p>{e.d}</p>
-            <p style="margin-top:12px;color:var(--course-ink)"><b>Correção:</b> {e.fix}</p>
-          </article>
-        ))}
-      </div>
+  <!-- ============ 08 ============ -->
+  <section class="pg">
+    <span class="secao-rot">08</span>
+    <h2 class="secao-tit">As cinco primeiras skills que a sua empresa deveria escrever</h2>
+    <div class="corpo">
+      <p>Não comece pelo caso mais sofisticado. Comece pelo que se repete e pelo que dói quando sai errado.</p>
     </div>
-  </section>
-
-  <section class="band band-open">
-    <div class="sheet">
-      <h2>As cinco primeiras skills que a sua empresa deveria escrever</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Não comece pelo caso mais sofisticado. Comece pelo que se repete e pelo que dói quando sai errado.
-        </p>
-      </div>
-      {primeiras.map((p) => (
-        <div style="margin-top:30px;border-top:1px solid var(--line);padding-top:18px">
-          <div style="display:flex;align-items:baseline;gap:14px;flex-wrap:wrap">
-            <span class="qn cond" style="font-size:22px;color:var(--course-ink)">{p.n}</span>
-            <h3>{p.t}</h3>
-          </div>
-          <p class="prose" style="margin-top:8px;max-width:72ch">{p.d}</p>
+    {primeiras.map((p) => (
+      <div class="linha">
+        <span class="linha-n">{p.n}</span>
+        <div>
+          <h3>{p.t}</h3>
+          <p>{p.d}</p>
         </div>
-      ))}
-
-      <div class="article" style="max-width:68ch;margin-top:40px">
-        <blockquote>
-          <p>Se você não consegue escrever a skill, é porque o processo não existe. A IA só expôs isso mais cedo.</p>
-        </blockquote>
-        <p>
-          Esse é o efeito colateral mais útil do exercício. Toda vez que uma empresa tenta escrever a skill de um processo
-          crítico, descobre que o processo tinha três versões e nenhum dono. O trabalho de escrever paga sozinho, mesmo
-          antes da IA entrar.
-        </p>
       </div>
+    ))}
+    <div class="corpo">
+      <blockquote>
+        <p>Se você não consegue escrever a skill, é porque o processo não existe. A IA só expôs isso mais cedo.</p>
+      </blockquote>
+      <p>
+        Esse é o efeito colateral mais útil do exercício. Toda vez que uma empresa tenta escrever a skill de um processo
+        crítico, descobre que o processo tinha três versões e nenhum dono. O trabalho de escrever paga sozinho, mesmo
+        antes da IA entrar.
+      </p>
     </div>
   </section>
 
-  <section class="band band-runnable">
-    <div class="sheet">
-      <h2>Uma nota sobre independência</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Este guia fala de Claude porque é onde o mecanismo de skills está mais maduro hoje. A Klarea não revende software e
-          não tem acordo comercial com a Anthropic. Recomendamos a ferramenta que resolve o problema, e a recomendação muda
-          quando o cenário muda.
-        </p>
-        <p>
-          O formato ajuda nessa conversa: como o Agent Skills é padrão aberto, o que a sua empresa escrever hoje não vira
-          refém de uma assinatura. Foi um dos motivos de a gente ter escolhido este tema para o guia.
-        </p>
-      </div>
+  <!-- ============ 09 ============ -->
+  <section class="pg">
+    <span class="secao-rot">09</span>
+    <h2 class="secao-tit">Onde isso entra na maturidade da sua empresa</h2>
+    <div class="corpo">
+      <p>
+        Skill resolve uma dimensão específica: a distância entre saber usar IA e ter a IA operando do mesmo jeito em toda a
+        empresa. Não resolve dado bagunçado, não resolve falta de patrocínio, não resolve processo que ninguém quis decidir.
+      </p>
+      <p>
+        Se a sua empresa ainda não sabe em que estágio está, escrever skills é começar pelo meio. Antes disso vem a pergunta
+        mais simples e mais desconfortável: o que pararia de funcionar amanhã se a IA fosse desligada hoje?
+      </p>
+      <blockquote>
+        <p>Skill é como a IA aprende o jeito da casa. Antes, alguém precisa decidir qual é o jeito da casa.</p>
+      </blockquote>
+      <p>
+        Se a resposta a essa pergunta ainda é "nada pararia", o próximo passo não é escrever skill. É medir onde a sua
+        empresa está nas oito dimensões que decidem se a IA vira resultado ou vira demonstração.
+      </p>
+    </div>
+
+    <div class="nota-caixa">
+      <span class="rot">Próximo passo</span>
+      <p>
+        <b>Índice de Maturidade em IA</b> · 8 dimensões, 5 níveis, resultado na hora, gratuito e em 2 minutos.
+        Disponível em <b>klarea.ai/diagnostico.html</b>
+      </p>
     </div>
   </section>
 
-  <section class="band band-dense on-dense">
-    <div class="sheet">
-      <h2>Onde isso entra na maturidade da sua empresa</h2>
-      <div class="article" style="max-width:68ch">
-        <p>
-          Skill resolve uma dimensão específica: a distância entre saber usar IA e ter a IA operando do mesmo jeito em toda a
-          empresa. Não resolve dado bagunçado, não resolve falta de patrocínio, não resolve processo que ninguém quis decidir.
-        </p>
-        <p>
-          Se a sua empresa ainda não sabe em que estágio está, escrever skills é começar pelo meio. Antes disso vem a pergunta
-          mais simples e mais desconfortável: o que pararia de funcionar amanhã se a IA fosse desligada hoje?
-        </p>
-        <blockquote>
-          <p>Skill é como a IA aprende o jeito da casa. Antes, alguém precisa decidir qual é o jeito da casa.</p>
-        </blockquote>
-        <p>
-          Se a resposta a essa pergunta ainda é "nada pararia", o próximo passo não é escrever skill. É medir onde a sua
-          empresa está nas oito dimensões que decidem se a IA vira resultado ou vira demonstração.
-        </p>
+  <!-- ============ QUEM PUBLICA ============ -->
+  <section class="pg fim">
+    <span class="marca marca-fim">
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <path d="M5 2v20" stroke="#FFFFFF" stroke-width="3" />
+        <path d="M19 3 8 12l11 9" stroke="#3D7BFF" stroke-width="3" stroke-linejoin="round" />
+      </svg>
+      <span class="marca-txt">klarea<i>.ai</i></span>
+    </span>
+
+    <h2 class="fim-tit">IA que executa a sua estratégia.</h2>
+    <p class="fim-lede">
+      A Klarea é uma consultoria de IA para quem decide: donos de empresa, diretores, conselheiros e investidores.
+      Da leitura estratégica à operação, com governança e resultado medido. Não é escola de IA, não é software house.
+    </p>
+
+    <div class="fim-grid">
+      <div>
+        <span class="rot">O que executamos</span>
+        Produto novo com IA no núcleo<br />
+        Eficiência da operação<br />
+        Integração ao que já existe<br />
+        Mentoria de Fluência em IA
       </div>
-      <div class="actions" style="margin-top:28px">
-        <a class="btn" href="/diagnostico.html">Medir a maturidade em IA</a>
-        <a class="btn btn-ghost" href="/guia/">Baixar o guia das 8 dimensões</a>
+      <div>
+        <span class="rot">Como conduzimos</span>
+        Diagnóstico · Índice de Maturidade<br />
+        Direção · priorização por retorno<br />
+        Construção · operação em semanas<br />
+        Escala · governança contínua
+      </div>
+      <div>
+        <span class="rot">Quem assina</span>
+        Guilherme Tossulino<br />
+        <i>estratégia e execução</i><br />
+        Rafael Scheidt<br />
+        <i>engenharia de software e IA</i>
+      </div>
+      <div>
+        <span class="rot">Onde nos achar</span>
+        klarea.ai<br />
+        contato@klarea.ai<br />
+        linkedin.com/company/klarea-ai<br />
+        instagram.com/ai.klarea
       </div>
     </div>
+
+    <div class="fim-nota">
+      <span class="rot">Independência</span>
+      <p>
+        Este guia trata de Claude porque é onde o mecanismo de skills está mais maduro hoje. A Klarea não revende
+        software e não tem acordo comercial com a Anthropic. Recomendamos a ferramenta que resolve o problema, e a
+        recomendação muda quando o cenário muda.
+      </p>
+    </div>
+
+    <p class="fim-base">© 2026 Klarea. Consultoria de IA independente. Guia de skills do Claude, edição de agosto de 2026.</p>
   </section>
+
   <div class="pdf-marca" aria-hidden="true">
     <span class="pdf-marca-logo">klarea<span>.ai</span></span>
     <span class="pdf-marca-sep"></span>
-    <span class="pdf-marca-txt">Guia de skills do Claude</span>
+    <span class="pdf-marca-txt">Skills do Claude, do zero à operação</span>
   </div>
-</Page>
+</Base>
 
 <style is:global>
+  /* ===== Documento paginado =========================================== */
+  @page { size: A4; margin: 18mm 0 16mm }
+  @page :first { margin: 0 }
+
+  body { background: #fff }
+
+  .pg {
+    max-width: 165mm;
+    margin: 0 auto;
+    padding: 0 6mm 18mm;
+    break-after: page;
+  }
+  .pg:last-of-type { break-after: auto }
+
+  /* ===== Capa ========================================================= */
+  .capa {
+    max-width: none;
+    margin: 0;
+    padding: 22mm 20mm;
+    background: var(--t-dense);
+    color: #fff;
+    min-height: 259mm;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .capa-topo { display: flex; align-items: center; justify-content: space-between }
+
+  .marca { display: inline-flex; align-items: center; gap: 10px }
+  .marca svg { width: 26px; height: 26px; flex: none }
+  .marca-txt {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 24px; letter-spacing: .04em;
+    text-transform: uppercase; color: #fff; line-height: 1;
+  }
+  .marca-txt i { font-style: normal; color: #7FA6FF }
+
+  .capa-kind {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 13px; letter-spacing: .16em; text-transform: uppercase;
+    color: #7FA6FF; border: 1px solid rgba(127,166,255,.5); padding: 5px 12px; border-radius: 2px;
+  }
+
+  .capa-meio { padding: 14mm 0 }
+  .capa h1 {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; text-transform: uppercase;
+    font-size: 62px; line-height: .95; letter-spacing: .005em;
+    color: #fff; margin: 0;
+  }
+  .capa-lede {
+    margin: 22px 0 0; max-width: 58ch;
+    font-size: 15.5px; line-height: 1.62; color: rgba(255,255,255,.80);
+  }
+  .capa-sub {
+    margin: 26px 0 0; padding-top: 18px;
+    border-top: 2px solid #3D7BFF;
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 21px; letter-spacing: .1em; text-transform: uppercase;
+    color: #7FA6FF;
+  }
+
+  .capa-pe {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 20px;
+    border-top: 1px solid rgba(255,255,255,.22); padding-top: 14px;
+    font-size: 12.5px; line-height: 1.5; color: rgba(255,255,255,.82);
+  }
+  .rot {
+    display: block;
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--course-ink); margin-bottom: 5px;
+  }
+  .rot-inline { display: inline-block; margin-bottom: 0 }
+  .capa-pe .rot { color: #7FA6FF }
+
+  /* ===== Cabeçalho de seção =========================================== */
+  .secao-rot {
+    display: block;
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 34px; letter-spacing: .02em;
+    color: var(--course); line-height: 1; margin-bottom: 6px;
+  }
+  .secao-tit {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; text-transform: uppercase;
+    font-size: 33px; line-height: 1.02; letter-spacing: .005em;
+    color: var(--ink); margin: 0 0 18px;
+    padding-bottom: 12px; border-bottom: 2px solid var(--line-strong);
+    break-after: avoid;
+  }
+
+  /* ===== Corpo ======================================================== */
+  .corpo { max-width: 64ch }
+  .corpo p { margin: 13px 0 0; font-size: 14.2px; line-height: 1.66; color: var(--body) }
+  .corpo code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: .92em; color: var(--course-ink);
+  }
+  .corpo blockquote {
+    margin: 20px 0 4px; padding: 14px 18px;
+    background: var(--t-open); border: 0; border-left: 3px solid var(--course);
+  }
+  .corpo blockquote p {
+    margin: 0; font-size: 15px; line-height: 1.55; color: var(--ink); font-weight: 500;
+  }
+
+  /* ===== Sumário ====================================================== */
+  .sumario { list-style: none; margin: 0; padding: 0 }
+  .sumario li {
+    display: flex; gap: 16px; align-items: baseline;
+    padding: 11px 0; border-bottom: 1px solid var(--line);
+  }
+  .sum-n {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 19px; color: var(--course); flex: none; width: 32px;
+  }
+  .sum-txt { display: block }
+  .sum-txt b {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 18px; text-transform: uppercase; letter-spacing: .01em;
+    color: var(--ink); display: block;
+  }
+  .sum-d { display: block; font-size: 13px; line-height: 1.5; color: var(--muted); margin-top: 2px }
+
+  .nota-caixa {
+    margin-top: 24px; padding: 16px 18px;
+    background: var(--t-open); border: 1px solid var(--line);
+    break-inside: avoid;
+  }
+  .nota-caixa p { margin: 0; font-size: 13.6px; line-height: 1.6; color: var(--body) }
+
+  /* ===== Itens numerados ============================================== */
+  .item { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); break-inside: avoid }
+  .item-cab { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap }
+  .item-n {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 21px; color: var(--course);
+  }
+  .item h3, .duo h3, .linha h3 {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 19px; text-transform: uppercase; letter-spacing: .01em;
+    color: var(--ink); margin: 0;
+  }
+  .item-d { margin: 9px 0 0; max-width: 66ch; font-size: 14px; line-height: 1.62; color: var(--body) }
+  .item-skill { margin: 7px 0 0; max-width: 66ch; font-size: 13.6px; line-height: 1.55; color: var(--course-ink) }
+  .item-nota { margin: 11px 0 0; max-width: 66ch; font-size: 12.8px; line-height: 1.55; color: var(--muted) }
+
+  .passos { list-style: none; margin: 12px 0 0; padding: 0; max-width: 66ch }
+  .passos li { display: flex; gap: 12px; margin-top: 7px; font-size: 13.8px; line-height: 1.58; color: var(--body) }
+  .passo-n {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 14px; color: var(--course); flex: none;
+  }
+
+  /* ===== Duplas e linhas ============================================== */
+  .duo { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 20px }
+  .duo article {
+    padding: 15px 17px; background: var(--t-open); border: 1px solid var(--line);
+    break-inside: avoid;
+  }
+  .duo p { margin: 8px 0 0; font-size: 13.2px; line-height: 1.58; color: var(--body) }
+  .duo .fix { color: var(--course-ink) }
+
+  .linha { display: flex; gap: 16px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); break-inside: avoid }
+  .linha-n {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; font-size: 20px; color: var(--course); flex: none; width: 30px;
+  }
+  .linha p { margin: 6px 0 0; max-width: 62ch; font-size: 13.8px; line-height: 1.62; color: var(--body) }
+
+  /* ===== Bloco de código ============================================== */
   .snippet {
-    margin-top: 24px;
-    background: var(--t-open);
-    border: 1px solid var(--line);
-    border-left: 3px solid var(--course);
-    border-radius: 2px;
-    padding: 22px 24px;
-    overflow-x: auto;
-    max-width: 72ch;
+    margin: 18px 0 0; padding: 16px 18px;
+    background: var(--t-open); border: 1px solid var(--line); border-left: 3px solid var(--course);
+    break-inside: avoid; overflow: visible;
   }
   .snippet code {
-    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
-    font-size: 13px;
-    line-height: 1.66;
-    color: var(--body);
-    white-space: pre;
-  }
-  /* o bloco e referencia: no PDF ele nao pode quebrar no meio */
-  @media print {
-    .snippet { break-inside: avoid; overflow-x: visible; }
-    .snippet code { font-size: 11px; white-space: pre-wrap; }
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 11px; line-height: 1.62; color: var(--body); white-space: pre-wrap;
   }
 
-  /* --- Identidade no PDF ---------------------------------------------------
-     O rodape e position:fixed, entao o Chrome o repete em TODA pagina impressa.
-     Fica escondido na tela: quem le no navegador ja tem a barra da marca. */
+  /* ===== Página final ================================================= */
+  .fim {
+    max-width: none; margin: 0; padding: 24mm 20mm;
+    background: var(--t-dense); color: #fff; min-height: 259mm;
+  }
+  .marca-fim { margin-bottom: 22mm }
+  .fim-tit {
+    font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700; text-transform: uppercase; font-size: 42px; line-height: 1;
+    color: #fff; margin: 0;
+  }
+  .fim-lede { margin: 16px 0 0; max-width: 62ch; font-size: 14.5px; line-height: 1.64; color: rgba(255,255,255,.80) }
+  .fim-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px;
+    margin-top: 26px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.22);
+    font-size: 12.4px; line-height: 1.62; color: rgba(255,255,255,.80);
+  }
+  .fim-grid .rot { color: #7FA6FF }
+  .fim-grid i { font-style: normal; color: rgba(255,255,255,.55) }
+  .fim-nota {
+    margin-top: 24px; padding: 16px 18px;
+    border: 1px solid rgba(255,255,255,.22); border-left: 3px solid #3D7BFF;
+  }
+  .fim-nota .rot { color: #7FA6FF }
+  .fim-nota p { margin: 0; font-size: 12.8px; line-height: 1.6; color: rgba(255,255,255,.80) }
+  .fim-base {
+    margin: 22px 0 0; padding-top: 14px; border-top: 1px solid rgba(255,255,255,.16);
+    font-size: 11px; color: rgba(255,255,255,.5);
+  }
+
+  /* ===== Rodapé de marca, repetido em toda página impressa ============ */
   .pdf-marca { display: none }
-
-  @page { margin: 14mm 0 16mm }
 
   @media print {
     .pdf-marca {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: fixed;
-      left: 0; right: 0; bottom: 0;
-      padding: 6px 14mm 0;
+      display: flex; align-items: center; gap: 9px;
+      position: fixed; left: 0; right: 0; bottom: 0;
+      padding: 5px 20mm 0;
       border-top: 1.5px solid var(--course);
       background: #fff;
-      font-size: 8.5pt;
-      line-height: 1;
+      font-size: 8pt; line-height: 1;
     }
     .pdf-marca-logo {
-      font-family: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
-      font-weight: 700;
-      font-size: 12pt;
-      letter-spacing: .04em;
-      text-transform: uppercase;
+      font-family: 'Barlow Condensed', ui-sans-serif, system-ui, sans-serif;
+      font-weight: 700; font-size: 11pt; letter-spacing: .04em; text-transform: uppercase;
       color: var(--ink);
     }
     .pdf-marca-logo span { color: var(--course-ink) }
-    .pdf-marca-sep {
-      width: 1px; height: 11px;
-      background: var(--line);
-    }
+    .pdf-marca-sep { width: 1px; height: 10px; background: var(--line) }
     .pdf-marca-txt { color: var(--muted); letter-spacing: .02em }
+  }
 
-    /* a navegacao do site nao existe em papel */
-    .site-header, .foot { display: none !important }
-
-    /* nada de fundo navy sangrando pagina inteira na impressao */
-    .band { break-inside: auto }
-    h2, h3 { break-after: avoid }
-    blockquote, .cell, .oob { break-inside: avoid }
+  /* ===== Leitura em tela ============================================== */
+  @media screen {
+    body { background: #E9EDF3; padding: 24px 0 }
+    .pg {
+      background: #fff; box-shadow: 0 1px 3px rgba(14,35,64,.12);
+      margin: 0 auto 22px; padding: 28px 34px 34px; max-width: 780px;
+    }
+    .capa, .fim { padding: 46px 44px; max-width: 780px; min-height: 0 }
   }
 </style>
