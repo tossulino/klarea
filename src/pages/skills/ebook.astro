@@ -448,9 +448,14 @@ Regras:
       </div>
     </div>
   </section>
+  <div class="pdf-marca" aria-hidden="true">
+    <span class="pdf-marca-logo">klarea<span>.ai</span></span>
+    <span class="pdf-marca-sep"></span>
+    <span class="pdf-marca-txt">Guia de skills do Claude</span>
+  </div>
 </Page>
 
-<style>
+<style is:global>
   .snippet {
     margin-top: 24px;
     background: var(--t-open);
@@ -472,5 +477,49 @@ Regras:
   @media print {
     .snippet { break-inside: avoid; overflow-x: visible; }
     .snippet code { font-size: 11px; white-space: pre-wrap; }
+  }
+
+  /* --- Identidade no PDF ---------------------------------------------------
+     O rodape e position:fixed, entao o Chrome o repete em TODA pagina impressa.
+     Fica escondido na tela: quem le no navegador ja tem a barra da marca. */
+  .pdf-marca { display: none }
+
+  @page { margin: 14mm 0 16mm }
+
+  @media print {
+    .pdf-marca {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      padding: 6px 14mm 0;
+      border-top: 1.5px solid var(--course);
+      background: #fff;
+      font-size: 8.5pt;
+      line-height: 1;
+    }
+    .pdf-marca-logo {
+      font-family: "Barlow Condensed", ui-sans-serif, system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 12pt;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .pdf-marca-logo span { color: var(--course-ink) }
+    .pdf-marca-sep {
+      width: 1px; height: 11px;
+      background: var(--line);
+    }
+    .pdf-marca-txt { color: var(--muted); letter-spacing: .02em }
+
+    /* a navegacao do site nao existe em papel */
+    .site-header, .foot { display: none !important }
+
+    /* nada de fundo navy sangrando pagina inteira na impressao */
+    .band { break-inside: auto }
+    h2, h3 { break-after: avoid }
+    blockquote, .cell, .oob { break-inside: avoid }
   }
 </style>
